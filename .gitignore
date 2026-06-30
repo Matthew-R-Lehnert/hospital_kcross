@@ -1,0 +1,36 @@
+# Data and results are large / derived — never committed
+data/
+output/
+!data/.gitkeep
+!output/.gitkeep
+
+# Manuscript build artifacts (rendered from source)
+manuscript/*.pdf
+manuscript/*.docx
+manuscript/*.html
+manuscript/_build/
+# CSL styles are fetched on demand (make styles), not committed
+manuscript/csl/*.csl
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# Local credentials / secrets
+.env
+*.pem

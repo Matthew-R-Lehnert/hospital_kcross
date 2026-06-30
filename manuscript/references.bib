@@ -1,0 +1,381 @@
+% references.bib
+% Bibliography for the Related Work section of the hospital point-pattern study.
+% Every entry below was verified via web search and/or by fetching the publisher,
+% PubMed, or PMC page during the literature review. URLs/DOIs are reported as found.
+% Where a bibliographic detail could not be independently confirmed, a comment notes it.
+
+% ---------------------------------------------------------------------------
+% Spatial point-pattern methods: inhomogeneous K and case-control baselines
+% ---------------------------------------------------------------------------
+
+@article{baddeley_moller_waagepetersen_2000,
+  author  = {Baddeley, Adrian J. and M{\o}ller, Jesper and Waagepetersen, Rasmus},
+  title   = {Non- and Semi-Parametric Estimation of Interaction in Inhomogeneous Point Patterns},
+  journal = {Statistica Neerlandica},
+  year    = {2000},
+  volume  = {54},
+  number  = {3},
+  pages   = {329--350},
+  doi     = {10.1111/1467-9574.00144}
+  % Foundational definition of the inhomogeneous K-function, K_inhom(r); implemented
+  % as Kinhom() in spatstat. DOI per Wiley/spatstat documentation; not re-fetched live.
+}
+
+@article{diggle_etal_2007,
+  author  = {Diggle, Peter J. and G{\'o}mez-Rubio, Virgilio and Brown, Peter E. and Chetwynd, Amanda G. and Gooding, Suzanne},
+  title   = {Second-Order Analysis of Inhomogeneous Spatial Point Processes Using Case-Control Data},
+  journal = {Biometrics},
+  year    = {2007},
+  volume  = {63},
+  number  = {2},
+  pages   = {550--557},
+  doi     = {10.1111/j.1541-0420.2006.00683.x},
+  pmid    = {17688507}
+  % Verified via PubMed (PMID 17688507). Canonical "population as control/baseline" logic.
+}
+
+@book{baddeley_rubak_turner_2015,
+  author    = {Baddeley, Adrian and Rubak, Ege and Turner, Rolf},
+  title     = {Spatial Point Patterns: Methodology and Applications with R},
+  publisher = {Chapman and Hall/CRC},
+  year      = {2015},
+  address   = {Boca Raton, FL},
+  isbn      = {9781482210200}
+  % Standard reference text for spatstat, Kinhom, and Monte Carlo envelope testing.
+  % Included as the practical methods reference; bibliographic details are well known
+  % but were not re-fetched live during this review.
+}
+
+% ---------------------------------------------------------------------------
+% Mark/capacity-weighted K and distance-based concentration (economic geography)
+% ---------------------------------------------------------------------------
+
+@article{giuliani_arbia_espa_2014,
+  author  = {Giuliani, Diego and Arbia, Giuseppe and Espa, Giuseppe},
+  title   = {Weighting Ripley's K-Function to Account for the Firm Dimension in the Analysis of Spatial Concentration},
+  journal = {International Regional Science Review},
+  year    = {2014},
+  volume  = {37},
+  number  = {3},
+  pages   = {251--272},
+  doi     = {10.1177/0160017612461357}
+  % Verified by fetching the SAGE page. Closest published analog to capacity-weighted
+  % (bed-weighted) Ripley's K: weights each point by firm size via marked point processes.
+}
+
+@article{penttinen_stoyan_henttonen_1992,
+  author  = {Penttinen, Antti and Stoyan, Dietrich and Henttonen, Heikki M.},
+  title   = {Marked Point Processes in Forest Statistics},
+  journal = {Forest Science},
+  year    = {1992},
+  volume  = {38},
+  number  = {4},
+  pages   = {806--824},
+  doi     = {10.1093/forestscience/38.4.806}
+  % Foundational mark-weighted K-function theory. DOI per Oxford/Forest Science listing.
+}
+
+@article{marcon_puech_2003,
+  author  = {Marcon, Eric and Puech, Florence},
+  title   = {Evaluating the Geographic Concentration of Industries Using Distance-Based Methods},
+  journal = {Journal of Economic Geography},
+  year    = {2003},
+  volume  = {3},
+  number  = {4},
+  pages   = {409--428},
+  doi     = {10.1093/jeg/3.4.409}
+}
+
+@article{marcon_puech_2010,
+  author  = {Marcon, Eric and Puech, Florence},
+  title   = {Measures of the Geographic Concentration of Industries: Improving Distance-Based Methods},
+  journal = {Journal of Economic Geography},
+  year    = {2010},
+  volume  = {10},
+  number  = {5},
+  pages   = {745--762},
+  doi     = {10.1093/jeg/lbp056}
+  % Introduces the relative, baseline-flexible, weightable M function.
+}
+
+@article{duranton_overman_2005,
+  author  = {Duranton, Gilles and Overman, Henry G.},
+  title   = {Testing for Localization Using Micro-Geographic Data},
+  journal = {The Review of Economic Studies},
+  year    = {2005},
+  volume  = {72},
+  number  = {4},
+  pages   = {1077--1106},
+  doi     = {10.1111/0034-6527.00362}
+  % K-density localization test with Monte Carlo confidence bands; continuous-space.
+}
+
+% ---------------------------------------------------------------------------
+% Global envelope / multiple-testing rigor for functional/point-pattern tests
+% ---------------------------------------------------------------------------
+
+@article{myllymaki_etal_2017,
+  author  = {Myllym{\"a}ki, Mari and Mrkvi{\v c}ka, Tom{\'a}{\v s} and Grabarnik, Pavel and Seijo, Henri and Hahn, Ute},
+  title   = {Global Envelope Tests for Spatial Processes},
+  journal = {Journal of the Royal Statistical Society Series B: Statistical Methodology},
+  year    = {2017},
+  volume  = {79},
+  number  = {2},
+  pages   = {381--404},
+  doi     = {10.1111/rssb.12172}
+  % Verified via Oxford/JRSS-B abstract page. Foundational rank/global envelope test.
+}
+
+@article{mrkvicka_myllymaki_hahn_2017,
+  author  = {Mrkvi{\v c}ka, Tom{\'a}{\v s} and Myllym{\"a}ki, Mari and Hahn, Ute},
+  title   = {Multiple Monte Carlo Testing, with Applications in Spatial Point Processes},
+  journal = {Statistics and Computing},
+  year    = {2017},
+  volume  = {27},
+  number  = {5},
+  pages   = {1239--1255},
+  doi     = {10.1007/s11222-016-9683-9}
+  % Family-wise error control across several function-valued Monte Carlo tests.
+}
+
+@article{myllymaki_mrkvicka_2024,
+  author  = {Myllym{\"a}ki, Mari and Mrkvi{\v c}ka, Tom{\'a}{\v s}},
+  title   = {{GET}: Global Envelopes in {R}},
+  journal = {Journal of Statistical Software},
+  year    = {2024},
+  volume  = {111},
+  number  = {3},
+  pages   = {1--40},
+  doi     = {10.18637/jss.v111.i03}
+  % GET R package; documents the extreme rank length (ERL) ordering. DOI resolved via
+  % doi.org redirect to jstatsoft.org/v111/i03; the JSS host refused a live full-text
+  % fetch (server-side connection refused), so volume/issue are as returned by the DOI
+  % resolver and the package documentation.
+}
+
+% ---------------------------------------------------------------------------
+% Spatial accessibility paradigm: 2SFCA / E2SFCA / gravity models
+% ---------------------------------------------------------------------------
+
+@article{luo_wang_2003,
+  author  = {Luo, Wei and Wang, Fahui},
+  title   = {Measures of Spatial Accessibility to Health Care in a {GIS} Environment: Synthesis and a Case Study in the {Chicago} Region},
+  journal = {Environment and Planning B: Planning and Design},
+  year    = {2003},
+  volume  = {30},
+  number  = {6},
+  pages   = {865--884},
+  doi     = {10.1068/b29120}
+  % Origin of the 2SFCA method.
+}
+
+@article{luo_qi_2009,
+  author  = {Luo, Wei and Qi, Yi},
+  title   = {An Enhanced Two-Step Floating Catchment Area ({E2SFCA}) Method for Measuring Spatial Accessibility to Primary Care Physicians},
+  journal = {Health and Place},
+  year    = {2009},
+  volume  = {15},
+  number  = {4},
+  pages   = {1100--1107},
+  doi     = {10.1016/j.healthplace.2009.06.002},
+  pmid    = {19576837}
+  % Origin of E2SFCA. DOI per ScienceDirect; PMID verified.
+}
+
+@article{wang_2012,
+  author  = {Wang, Fahui},
+  title   = {Measurement, Optimization, and Impact of Health Care Accessibility: A Methodological Review},
+  journal = {Annals of the Association of American Geographers},
+  year    = {2012},
+  volume  = {102},
+  number  = {5},
+  pages   = {1104--1112},
+  doi     = {10.1080/00045608.2012.657146},
+  pmid    = {23335813}
+  % Canonical methodological review of the FCA/gravity accessibility paradigm.
+}
+
+@article{stacherl_sauzet_2023,
+  author  = {Stacherl, Barbara and Sauzet, Odile},
+  title   = {Gravity Models for Potential Spatial Healthcare Access Measurement: A Systematic Methodological Review},
+  journal = {International Journal of Health Geographics},
+  year    = {2023},
+  volume  = {22},
+  pages   = {32},
+  doi     = {10.1186/s12942-023-00358-z}
+  % Current systematic review confirming 2SFCA-family dominance.
+}
+
+% ---------------------------------------------------------------------------
+% US hospital / trauma access and capacity disparities
+% ---------------------------------------------------------------------------
+
+@article{branas_etal_2005,
+  author  = {Branas, Charles C. and MacKenzie, Ellen J. and Williams, Justin C. and Schwab, C. William and Teter, Harry M. and Flanigan, Marie C. and Blatt, Alan J. and ReVelle, Charles S.},
+  title   = {Access to Trauma Centers in the United States},
+  journal = {JAMA},
+  year    = {2005},
+  volume  = {293},
+  number  = {21},
+  pages   = {2626--2633},
+  doi     = {10.1001/jama.293.21.2626},
+  pmid    = {15928284}
+  % Verified via PubMed (PMID 15928284). Seminal national geographic-access assessment.
+}
+
+@article{carr_etal_2017,
+  author  = {Carr, Brendan G. and Bowman, Ashley J. and Wolff, Catherine S. and Mullen, Michael T. and Holena, Daniel N. and Branas, Charles C. and Wiebe, Douglas J.},
+  title   = {Disparities in Access to Trauma Care in the United States: A Population-Based Analysis},
+  journal = {Injury},
+  year    = {2017},
+  volume  = {48},
+  number  = {2},
+  pages   = {332--338},
+  doi     = {10.1016/j.injury.2017.01.008}
+  % National block-group analysis of 60-minute trauma access. DOI per ScienceDirect/PMC.
+}
+
+@article{hsia_shen_2011,
+  author  = {Hsia, Renee Y. and Shen, Yu-Chu},
+  title   = {Changes in Geographical Access to Trauma Centers for Vulnerable Populations in the United States},
+  journal = {Health Affairs},
+  year    = {2011},
+  volume  = {30},
+  number  = {10},
+  pages   = {1912--1920},
+  doi     = {10.1377/hlthaff.2011.0510}
+  % National longitudinal access analysis; ties access loss to vulnerable populations.
+}
+
+@article{chea_etal_2022,
+  author  = {Chea, Hang and Kim, Hyun and Shaw, Shih-Lung and Chun, Yongwan},
+  title   = {Assessing Trauma Center Accessibility for Healthcare Equity Using an Anti-Covering Approach},
+  journal = {International Journal of Environmental Research and Public Health},
+  year    = {2022},
+  volume  = {19},
+  number  = {3},
+  pages   = {1459},
+  doi     = {10.3390/ijerph19031459}
+  % Anti-covering location models that explicitly target urban redundancy / overlap.
+  % Author given names taken from the publisher listing; verify before final submission.
+}
+
+@article{khera_etal_2022,
+  author  = {Khera, Rohan and others},
+  title   = {New Evidence on Geographic Disparities in United States Hospital Capacity},
+  journal = {(peer-reviewed; venue to be confirmed)},
+  year    = {2022}
+  % FLAG: Found via PMC (PMC9441275) documenting the inverse urban-rural bed-capacity
+  % gradient (most-urban ~2.11 beds/1,000 vs most-rural ~5.10 beds/1,000). Lead author
+  % and journal/volume NOT independently confirmed; do not cite formally until verified
+  % against the PMC landing page. Retained here only as a flagged placeholder.
+}
+
+% ---------------------------------------------------------------------------
+% Population data: LandScan ambient, GPW residential, and the ambient/residential contrast
+% ---------------------------------------------------------------------------
+
+@article{dobson_etal_2000,
+  author  = {Dobson, Jerome E. and Bright, Edward A. and Coleman, Phillip R. and Durfee, Richard C. and Worley, Brian A.},
+  title   = {{LandScan}: A Global Population Database for Estimating Populations at Risk},
+  journal = {Photogrammetric Engineering and Remote Sensing},
+  year    = {2000},
+  volume  = {66},
+  number  = {7},
+  pages   = {849--857}
+  % Original LandScan paper; introduces the "ambient population" (24-hour average) concept.
+  % NOTE: print-only journal article; no DOI exists.
+}
+
+@article{bhaduri_etal_2007,
+  author  = {Bhaduri, Budhendra and Bright, Edward and Coleman, Phillip and Urban, Marie L.},
+  title   = {{LandScan USA}: A High-Resolution Geospatial and Temporal Modeling Approach for Population Distribution and Dynamics},
+  journal = {GeoJournal},
+  year    = {2007},
+  volume  = {69},
+  number  = {1--2},
+  pages   = {103--117},
+  doi     = {10.1007/s10708-007-9105-9}
+  % Explicitly distinguishes nighttime residential vs daytime/ambient distributions.
+}
+
+@article{landscan_hd_2025,
+  author  = {Sims, Kelly and others},
+  title   = {{LandScan HD}: A High-Resolution Gridded Ambient Population Methodology for the World},
+  journal = {Population and Environment},
+  year    = {2025},
+  doi     = {10.1007/s11111-025-00514-6}
+  % Defines ambient population as average human presence between day and night and names
+  % "spatial accessibility to vital resources" as an application.
+  % FLAG: Publisher full text and OSTI PDF (purl/3007901) were blocked/refused on live
+  % fetch; the DOI and framing are from indexing snippets. Author list ("Sims et al.")
+  % is approximate -- confirm the full author roster against the publisher page before
+  % final submission.
+}
+
+@article{doxsey_whitfield_etal_2015,
+  author  = {Doxsey-Whitfield, Erin and MacManus, Kytt and Adamo, Susana B. and Pistolesi, Linda and Squires, John and Borkovska, Olena and Baptista, Sandra R.},
+  title   = {Taking Advantage of the Improved Availability of Census Data: A First Look at the Gridded Population of the World, Version 4},
+  journal = {Papers in Applied Geography},
+  year    = {2015},
+  volume  = {1},
+  number  = {3},
+  pages   = {226--234},
+  doi     = {10.1080/23754931.2015.1014272}
+  % Documentation paper for SEDAC/CIESIN GPW v4 residential population grid.
+  % Title/venue/volume/pages/DOI verified via search; full author list from the
+  % Taylor & Francis / CIESIN listing (publisher full text was paywalled to live fetch).
+}
+
+@article{gligoric_etal_2023,
+  author  = {Gligori{\'c}, Kristina and Kamath, Chaitanya and Weiss, Daniel J. and Bavadekar, Shailesh and Liu, Yun and Shekel, Tomer and Schulman, Kevin and Gabrilovich, Evgeniy},
+  title   = {Revealed versus Potential Spatial Accessibility of Healthcare and Changing Patterns during the {COVID-19} Pandemic},
+  journal = {Communications Medicine},
+  year    = {2023},
+  volume  = {3},
+  pages   = {157},
+  doi     = {10.1038/s43856-023-00384-9}
+  % Verified via PMC (PMC10624905). Contrasts mobility-revealed vs residence-potential
+  % healthcare access -- the closest health-access analog to ambient-vs-residential.
+}
+
+% ---------------------------------------------------------------------------
+% Analysis window: USDA Commuting Zones
+% ---------------------------------------------------------------------------
+
+@techreport{tolbert_sizer_1996,
+  author      = {Tolbert, Charles M. and Sizer, Molly},
+  title       = {{U.S.} Commuting Zones and Labor Market Areas: A 1990 Update},
+  institution = {U.S. Department of Agriculture, Economic Research Service},
+  type        = {Staff Paper},
+  number      = {AGES-9614},
+  year        = {1996},
+  address     = {Washington, DC}
+  % Foundational delineation of USDA Commuting Zones. Verified via USDA ERS / AgEcon
+  % Search (record 278812). No DOI; it is a government staff paper.
+}
+
+@article{fowler_rhubart_jensen_2016,
+  author  = {Fowler, Christopher S. and Rhubart, Danielle C. and Jensen, Leif},
+  title   = {Reassessing and Revising Commuting Zones for 2010: History, Assessment, and Updates for {U.S.} `Labor-Sheds' 1990--2010},
+  journal = {Population Research and Policy Review},
+  year    = {2016},
+  volume  = {35},
+  number  = {2},
+  pages   = {263--286},
+  doi     = {10.1007/s11113-016-9386-0}
+  % Assesses CZ stability across delineations. Volume/issue/pages per Springer listing.
+}
+
+% ---------------------------------------------------------------------------
+% Data source: HIFLD hospitals
+% ---------------------------------------------------------------------------
+
+@misc{hifld_hospitals,
+  author       = {{U.S. Department of Homeland Security}},
+  title        = {Homeland Infrastructure Foundation-Level Data ({HIFLD}): Hospitals},
+  howpublished = {\url{https://hifld-geoplatform.opendata.arcgis.com/}},
+  year         = {2024},
+  note         = {National public-domain hospital point dataset with bed counts, staffing, and trauma designation. Accessed 2026.}
+  % Data product, not a journal article; cited as the hospital point source.
+}

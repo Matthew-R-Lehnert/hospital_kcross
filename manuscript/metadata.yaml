@@ -1,0 +1,21 @@
+---
+title: "Are Hospitals Where the People Are? A National Inhomogeneous K-Function Test of U.S. Hospital Distribution Against Ambient Population"
+shorttitle: "Hospitals vs. Ambient Population"
+author:
+  - name: Matthew R. Lehnert
+    affiliation: Axle Informatics
+    email: Matthew.Lehnert@axleinfo.com
+date: 2026
+keywords:
+  - spatial point patterns
+  - inhomogeneous K-function
+  - healthcare access
+  - ambient population
+  - LandScan
+  - hospital deserts
+abstract: >
+  (Abstract lives in 00_abstract.md so it renders in body order; this field is
+  a fallback for formats that key on document metadata.)
+link-citations: true
+linkReferences: true
+---
