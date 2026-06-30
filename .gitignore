@@ -25,6 +25,11 @@ __pycache__/
 venv/
 .ipynb_checkpoints/
 
+# Nextflow
+work/
+.nextflow/
+.nextflow.log*
+
 # OS / editor
 .DS_Store
 *.swp
