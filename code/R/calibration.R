@@ -27,7 +27,13 @@ cz <- sf::st_read(file.path(root, "data", "commuting_zones.gpkg"), quiet = TRUE)
 h  <- sf::st_read(file.path(root, "data", "hospitals.gpkg"), quiet = TRUE)
 w  <- cz[cz[["name"]] == zone, ]; epsg <- utm_epsg_for(w)
 wU <- sf::st_transform(sf::st_union(w), epsg); win <- spatstat.geom::as.owin(wU)
-h  <- sf::st_transform(h, epsg); h <- h[sf::st_within(h, wU, sparse = FALSE)[, 1], ]
+h_all <- sf::st_transform(h, epsg)
+buf_poly <- sf::st_buffer(wU, 50000); Wbuf <- spatstat.geom::as.owin(buf_poly)
+in_mask <- sf::st_within(h_all, wU, sparse = FALSE)[, 1]
+in_buf  <- sf::st_within(h_all, buf_poly, sparse = FALSE)[, 1]
+h  <- h_all[in_mask, ]; nb <- h_all[in_buf & !in_mask, ]
+nbx <- if (nrow(nb)) sf::st_coordinates(nb)[, 1] else numeric(0)
+nby <- if (nrow(nb)) sf::st_coordinates(nb)[, 2] else numeric(0)
 n  <- nrow(h); beds <- h$beds; bm <- stats::median(beds, na.rm = TRUE)
 beds[is.na(beds) | beds < 1] <- bm
 
@@ -36,14 +42,16 @@ lam_all <- lambda_im(pim, n)$im; g_im <- lambda_im(pim, 1)$im
 ix <- which(is.finite(pim$v) & pim$v > 0, arr.ind = TRUE)
 cx <- pim$xcol[ix[, 2]]; cy <- pim$yrow[ix[, 1]]; wv <- pim$v[ix]
 ins <- spatstat.geom::inside.owin(cx, cy, win)
-cells <- spatstat.geom::ppp(cx[ins], cy[ins], window = win, checkdup = FALSE); cellw <- wv[ins]
+cells <- spatstat.geom::ppp(cx[ins], cy[ins], window = Wbuf, checkdup = FALSE); cellw <- wv[ins]
 
 bb <- spatstat.geom::as.rectangle(win)
 r <- seq(0, min(50000, 0.25 * min(diff(bb$xrange), diff(bb$yrange))), by = 1000)
 cov_d <- seq(0, min(100000, max(diff(bb$xrange), diff(bb$yrange))), by = 2000)
 KI  <- function(P, lam) spatstat.explore::Kinhom(P, lambda = lam, r = r, correction = "Ripley", renormalise = TRUE)$iso
 gat <- function(P) as.numeric(g_im[P, drop = FALSE])
-covf <- function(P) { d <- spatstat.geom::nncross(cells, P, what = "dist")
+covf <- function(P) {                                 # in-zone draw + FIXED buffer neighbours
+  H <- spatstat.geom::ppp(c(P$x, nbx), c(P$y, nby), window = Wbuf, checkdup = FALSE)
+  d <- spatstat.geom::nncross(cells, H, what = "dist")
   vapply(cov_d, function(dd) sum(cellw[d > dd]) / sum(cellw), numeric(1)) }
 
 # M iid null draws -> three curve matrices

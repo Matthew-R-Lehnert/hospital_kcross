@@ -21,6 +21,7 @@ year      <- if (length(args) >= 2) as.integer(args[2]) else 2020L
 pop_kind  <- if (length(args) >= 3) args[3] else "ambient"
 r_focus   <- if (length(args) >= 4) as.numeric(args[4]) else 10000
 desert_km <- if (length(args) >= 5) as.numeric(args[5]) else 25
+buffer_km <- if (length(args) >= 6) as.numeric(args[6]) else 50
 out_dir   <- file.path(root, "output", pop_kind); dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
 tag <- sprintf("%s_%s", gsub("[^A-Za-z0-9]+", "_", zone), pop_kind)
 raster <- if (pop_kind == "ambient")
@@ -31,16 +32,22 @@ cz <- sf::st_read(file.path(root, "data", "commuting_zones.gpkg"), quiet = TRUE)
 h  <- sf::st_read(file.path(root, "data", "hospitals.gpkg"), quiet = TRUE)
 w  <- cz[cz[["name"]] == zone, ]; epsg <- utm_epsg_for(w)
 wU <- sf::st_transform(sf::st_union(w), epsg); win <- spatstat.geom::as.owin(wU)
-h  <- sf::st_transform(h, epsg); h <- h[sf::st_within(h, wU, sparse = FALSE)[, 1], ]
-hc <- sf::st_coordinates(h); X <- spatstat.geom::ppp(hc[, 1], hc[, 2], window = win, checkdup = FALSE)
+buf_poly <- sf::st_buffer(wU, buffer_km * 1000); Wbuf <- spatstat.geom::as.owin(buf_poly)
+h <- sf::st_transform(h, epsg)
+in_mask <- sf::st_within(h, wU, sparse = FALSE)[, 1]
+in_buf  <- sf::st_within(h, buf_poly, sparse = FALSE)[, 1]
+hc <- sf::st_coordinates(h[in_mask, ])                       # in-zone (concentration)
+X  <- spatstat.geom::ppp(hc[, 1], hc[, 2], window = win, checkdup = FALSE)
+hb <- sf::st_coordinates(h[in_buf, ])                        # in-zone + buffer (coverage)
 wsf <- sf::st_sf(geometry = wU)
 
 pim <- population_im(raster, wU, epsg)
 ix  <- which(is.finite(pim$v) & pim$v > 0, arr.ind = TRUE)
 cx  <- pim$xcol[ix[, 2]]; cy <- pim$yrow[ix[, 1]]; pv <- pim$v[ix]
 ins <- spatstat.geom::inside.owin(cx, cy, win)
-cells <- spatstat.geom::ppp(cx[ins], cy[ins], window = win, checkdup = FALSE)
-dist_km <- spatstat.geom::nncross(cells, X, what = "dist") / 1000
+cells <- spatstat.geom::ppp(cx[ins], cy[ins], window = Wbuf, checkdup = FALSE)
+Hcov  <- spatstat.geom::ppp(hb[, 1], hb[, 2], window = Wbuf, checkdup = FALSE)
+dist_km <- spatstat.geom::nncross(cells, Hcov, what = "dist") / 1000
 cdf <- data.frame(x = cx[ins], y = cy[ins], pop = pv[ins], dist_km = dist_km)
 pop_far <- sum(cdf$pop[cdf$dist_km > desert_km]); pct_far <- 100 * pop_far / sum(cdf$pop)
 
