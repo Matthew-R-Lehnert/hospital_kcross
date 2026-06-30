@@ -3,29 +3,23 @@
 04_gpw.py -- fetch NASA SEDAC GPWv4.11 residential-population raster (one year).
 
 GPW = Gridded Population of the World, v4.11 (CIESIN/Columbia for NASA SEDAC):
-gridded RESIDENTIAL population at 30 arc-seconds (~1 km), the residential
-counterpart to LandScan's ambient surface. Available years: 2000, 2005, 2010,
-2015, 2020.
+gridded RESIDENTIAL population count at 30 arc-seconds (~1 km), the residential
+counterpart to LandScan's ambient surface. Collection short-name:
+CIESIN_SEDAC_GPWv4_POPCOUNT_R11. Target years: 2000, 2005, 2010, 2015, 2020.
 
-SEDAC requires a (free) NASA Earthdata login. Two paths:
+Requires a (free) NASA Earthdata login via ~/.netrc, and `earthaccess`
+(pip install earthaccess).
 
-  (A) earthaccess (recommended) -- programmatic, uses ~/.netrc Earthdata creds:
-        pip install earthaccess
-        python code/acquire/04_gpw.py 2020
-  (B) manual -- download the GeoTIFF from the SEDAC GPWv4.11 "Population Count"
-        collection and drop it at the OUT path printed below.
-
-Output: data/gpw/gpw_v4_<year>.tif  (population count, 30 arc-sec)
+Output: data/gpw/gpw_v4_<year>.tif  (population count, 30 arc-sec, global)
 """
 from __future__ import annotations
 
 import sys
+import zipfile
 from pathlib import Path
 
 OUT_DIR = Path("data/gpw")
-# SEDAC GPWv4.11 Population Count, 30 arc-sec, GeoTIFF. The dataset DOI /
-# collection short-name is documented on SEDAC; confirm and pin before release.
-SEDAC_SHORTNAME = "CIESIN_SEDAC_GPWv411_POPCOUNT"   # TODO: confirm exact id
+SHORT_NAME = "CIESIN_SEDAC_GPWv4_POPCOUNT_R11"
 VALID_YEARS = {2000, 2005, 2010, 2015, 2020}
 
 
@@ -37,32 +31,37 @@ def fetch_year(year: int) -> Path:
     if dst.exists():
         print(f"{dst} exists, skipping")
         return dst
-    try:
-        import earthaccess  # noqa: F401
-    except ImportError:
-        print("earthaccess not installed. Either:\n"
-              "  pip install earthaccess   (then re-run)\n"
-              f"or manually download GPWv4.11 Population Count {year} (30 arc-sec\n"
-              f"GeoTIFF) from NASA SEDAC and save it to {dst}")
-        raise SystemExit(2)
 
     import earthaccess
-    earthaccess.login()                       # uses ~/.netrc Earthdata creds
-    results = earthaccess.search_data(short_name=SEDAC_SHORTNAME,
-                                      temporal=(f"{year}-01-01", f"{year}-12-31"))
-    if not results:
-        raise SystemExit(f"no SEDAC granules for {year}; confirm SEDAC_SHORTNAME")
-    files = earthaccess.download(results, str(OUT_DIR))
-    print(f"downloaded {len(files)} file(s); rename/select the 30-arcsec GeoTIFF "
-          f"to {dst} if needed")
+    earthaccess.login(strategy="netrc")
+    granules = earthaccess.search_data(short_name=SHORT_NAME, count=200)
+    want = f"_{year}_30_sec_tif.zip"
+    target = None
+    for g in granules:
+        for link in g.data_links():
+            if link.endswith(want):
+                target = g
+                break
+        if target:
+            break
+    if target is None:
+        raise SystemExit(f"no 30 arc-sec GeoTIFF granule for {year} in {SHORT_NAME}")
+
+    files = earthaccess.download(target, str(OUT_DIR))
+    zip_path = Path(files[0])
+    with zipfile.ZipFile(zip_path) as zf:
+        tif = next(n for n in zf.namelist() if n.lower().endswith(".tif"))
+        zf.extract(tif, OUT_DIR)
+    (OUT_DIR / tif).rename(dst)
+    zip_path.unlink(missing_ok=True)
+    print(f"  -> {dst} ({dst.stat().st_size/1e6:.0f} MB)")
     return dst
 
 
 def main(argv: list[str]) -> int:
     years = [int(a) for a in argv] or [2020]
     for y in years:
-        p = fetch_year(y)
-        print(f"  -> {p}")
+        fetch_year(y)
     return 0
 
 
