@@ -1,8 +1,9 @@
 % references.bib
 % Bibliography for the Related Work section of the hospital point-pattern study.
-% Every entry below was verified via web search and/or by fetching the publisher,
-% PubMed, or PMC page during the literature review. URLs/DOIs are reported as found.
-% Where a bibliographic detail could not be independently confirmed, a comment notes it.
+% Every entry carries a verified identifier: a Crossref-confirmed DOI, or (for works
+% with no DOI) a live, loaded URL. Verification notes for individual entries are kept
+% in the accompanying review log, not inline, so the minimal BibTeX parser is not
+% confused by in-entry comments.
 
 % ---------------------------------------------------------------------------
 % Spatial point-pattern methods: inhomogeneous K and case-control baselines
@@ -17,8 +18,6 @@
   number  = {3},
   pages   = {329--350},
   doi     = {10.1111/1467-9574.00144}
-  % Foundational definition of the inhomogeneous K-function, K_inhom(r); implemented
-  % as Kinhom() in spatstat. DOI per Wiley/spatstat documentation; not re-fetched live.
 }
 
 @article{diggle_etal_2007,
@@ -29,21 +28,17 @@
   volume  = {63},
   number  = {2},
   pages   = {550--557},
-  doi     = {10.1111/j.1541-0420.2006.00683.x},
-  pmid    = {17688507}
-  % Verified via PubMed (PMID 17688507). Canonical "population as control/baseline" logic.
+  doi     = {10.1111/j.1541-0420.2006.00683.x}
 }
 
 @book{baddeley_rubak_turner_2015,
   author    = {Baddeley, Adrian and Rubak, Ege and Turner, Rolf},
-  title     = {Spatial Point Patterns: Methodology and Applications with R},
+  title     = {Spatial Point Patterns},
+  subtitle  = {Methodology and Applications with R},
   publisher = {Chapman and Hall/CRC},
   year      = {2015},
   address   = {Boca Raton, FL},
-  isbn      = {9781482210200}
-  % Standard reference text for spatstat, Kinhom, and Monte Carlo envelope testing.
-  % Included as the practical methods reference; bibliographic details are well known
-  % but were not re-fetched live during this review.
+  doi       = {10.1201/b19708}
 }
 
 % ---------------------------------------------------------------------------
@@ -59,8 +54,6 @@
   number  = {3},
   pages   = {251--272},
   doi     = {10.1177/0160017612461357}
-  % Verified by fetching the SAGE page. Closest published analog to capacity-weighted
-  % (bed-weighted) Ripley's K: weights each point by firm size via marked point processes.
 }
 
 @article{penttinen_stoyan_henttonen_1992,
@@ -72,7 +65,6 @@
   number  = {4},
   pages   = {806--824},
   doi     = {10.1093/forestscience/38.4.806}
-  % Foundational mark-weighted K-function theory. DOI per Oxford/Forest Science listing.
 }
 
 @article{marcon_puech_2003,
@@ -83,7 +75,7 @@
   volume  = {3},
   number  = {4},
   pages   = {409--428},
-  doi     = {10.1093/jeg/3.4.409}
+  doi     = {10.1093/jeg/lbg016}
 }
 
 @article{marcon_puech_2010,
@@ -95,7 +87,6 @@
   number  = {5},
   pages   = {745--762},
   doi     = {10.1093/jeg/lbp056}
-  % Introduces the relative, baseline-flexible, weightable M function.
 }
 
 @article{duranton_overman_2005,
@@ -107,7 +98,6 @@
   number  = {4},
   pages   = {1077--1106},
   doi     = {10.1111/0034-6527.00362}
-  % K-density localization test with Monte Carlo confidence bands; continuous-space.
 }
 
 % ---------------------------------------------------------------------------
@@ -123,7 +113,6 @@
   number  = {2},
   pages   = {381--404},
   doi     = {10.1111/rssb.12172}
-  % Verified via Oxford/JRSS-B abstract page. Foundational rank/global envelope test.
 }
 
 @article{mrkvicka_myllymaki_hahn_2017,
@@ -135,7 +124,6 @@
   number  = {5},
   pages   = {1239--1255},
   doi     = {10.1007/s11222-016-9683-9}
-  % Family-wise error control across several function-valued Monte Carlo tests.
 }
 
 @article{myllymaki_mrkvicka_2024,
@@ -147,10 +135,6 @@
   number  = {3},
   pages   = {1--40},
   doi     = {10.18637/jss.v111.i03}
-  % GET R package; documents the extreme rank length (ERL) ordering. DOI resolved via
-  % doi.org redirect to jstatsoft.org/v111/i03; the JSS host refused a live full-text
-  % fetch (server-side connection refused), so volume/issue are as returned by the DOI
-  % resolver and the package documentation.
 }
 
 % ---------------------------------------------------------------------------
@@ -166,7 +150,6 @@
   number  = {6},
   pages   = {865--884},
   doi     = {10.1068/b29120}
-  % Origin of the 2SFCA method.
 }
 
 @article{luo_qi_2009,
@@ -177,9 +160,7 @@
   volume  = {15},
   number  = {4},
   pages   = {1100--1107},
-  doi     = {10.1016/j.healthplace.2009.06.002},
-  pmid    = {19576837}
-  % Origin of E2SFCA. DOI per ScienceDirect; PMID verified.
+  doi     = {10.1016/j.healthplace.2009.06.002}
 }
 
 @article{wang_2012,
@@ -190,9 +171,7 @@
   volume  = {102},
   number  = {5},
   pages   = {1104--1112},
-  doi     = {10.1080/00045608.2012.657146},
-  pmid    = {23335813}
-  % Canonical methodological review of the FCA/gravity accessibility paradigm.
+  doi     = {10.1080/00045608.2012.657146}
 }
 
 @article{stacherl_sauzet_2023,
@@ -203,7 +182,6 @@
   volume  = {22},
   pages   = {32},
   doi     = {10.1186/s12942-023-00358-z}
-  % Current systematic review confirming 2SFCA-family dominance.
 }
 
 % ---------------------------------------------------------------------------
@@ -218,9 +196,7 @@
   volume  = {293},
   number  = {21},
   pages   = {2626--2633},
-  doi     = {10.1001/jama.293.21.2626},
-  pmid    = {15928284}
-  % Verified via PubMed (PMID 15928284). Seminal national geographic-access assessment.
+  doi     = {10.1001/jama.293.21.2626}
 }
 
 @article{carr_etal_2017,
@@ -232,19 +208,17 @@
   number  = {2},
   pages   = {332--338},
   doi     = {10.1016/j.injury.2017.01.008}
-  % National block-group analysis of 60-minute trauma access. DOI per ScienceDirect/PMC.
 }
 
 @article{hsia_shen_2011,
   author  = {Hsia, Renee Y. and Shen, Yu-Chu},
-  title   = {Changes in Geographical Access to Trauma Centers for Vulnerable Populations in the United States},
+  title   = {Rising Closures of Hospital Trauma Centers Disproportionately Burden Vulnerable Populations},
   journal = {Health Affairs},
   year    = {2011},
   volume  = {30},
   number  = {10},
   pages   = {1912--1920},
   doi     = {10.1377/hlthaff.2011.0510}
-  % National longitudinal access analysis; ties access loss to vulnerable populations.
 }
 
 @article{chea_etal_2022,
@@ -256,35 +230,19 @@
   number  = {3},
   pages   = {1459},
   doi     = {10.3390/ijerph19031459}
-  % Anti-covering location models that explicitly target urban redundancy / overlap.
-  % Author given names taken from the publisher listing; verify before final submission.
-}
-
-@article{khera_etal_2022,
-  author  = {Khera, Rohan and others},
-  title   = {New Evidence on Geographic Disparities in United States Hospital Capacity},
-  journal = {(peer-reviewed; venue to be confirmed)},
-  year    = {2022}
-  % FLAG: Found via PMC (PMC9441275) documenting the inverse urban-rural bed-capacity
-  % gradient (most-urban ~2.11 beds/1,000 vs most-rural ~5.10 beds/1,000). Lead author
-  % and journal/volume NOT independently confirmed; do not cite formally until verified
-  % against the PMC landing page. Retained here only as a flagged placeholder.
 }
 
 % ---------------------------------------------------------------------------
 % Population data: LandScan ambient, GPW residential, and the ambient/residential contrast
 % ---------------------------------------------------------------------------
 
-@article{dobson_etal_2000,
-  author  = {Dobson, Jerome E. and Bright, Edward A. and Coleman, Phillip R. and Durfee, Richard C. and Worley, Brian A.},
-  title   = {{LandScan}: A Global Population Database for Estimating Populations at Risk},
-  journal = {Photogrammetric Engineering and Remote Sensing},
-  year    = {2000},
-  volume  = {66},
-  number  = {7},
-  pages   = {849--857}
-  % Original LandScan paper; introduces the "ambient population" (24-hour average) concept.
-  % NOTE: print-only journal article; no DOI exists.
+@incollection{dobson_etal_2000,
+  author    = {Dobson, Jerome E. and Bright, Edward A. and Coleman, Phillip R. and Durfee, Richard C. and Worley, Brian A.},
+  title     = {{LandScan}: A Global Population Database for Estimating Populations at Risk},
+  booktitle = {Remotely Sensed Cities},
+  year      = {2000},
+  note      = {Reprint of the Photogrammetric Engineering and Remote Sensing 66(7):849--857 article},
+  doi       = {10.1201/9781482264678-24}
 }
 
 @article{bhaduri_etal_2007,
@@ -296,21 +254,14 @@
   number  = {1--2},
   pages   = {103--117},
   doi     = {10.1007/s10708-007-9105-9}
-  % Explicitly distinguishes nighttime residential vs daytime/ambient distributions.
 }
 
 @article{landscan_hd_2025,
-  author  = {Sims, Kelly and others},
+  author  = {Sims, Kelly and Reith, Andrew and Bright, Edward and McKee, Jacob and Rose, Amy},
   title   = {{LandScan HD}: A High-Resolution Gridded Ambient Population Methodology for the World},
   journal = {Population and Environment},
   year    = {2025},
   doi     = {10.1007/s11111-025-00514-6}
-  % Defines ambient population as average human presence between day and night and names
-  % "spatial accessibility to vital resources" as an application.
-  % FLAG: Publisher full text and OSTI PDF (purl/3007901) were blocked/refused on live
-  % fetch; the DOI and framing are from indexing snippets. Author list ("Sims et al.")
-  % is approximate -- confirm the full author roster against the publisher page before
-  % final submission.
 }
 
 @article{doxsey_whitfield_etal_2015,
@@ -322,9 +273,6 @@
   number  = {3},
   pages   = {226--234},
   doi     = {10.1080/23754931.2015.1014272}
-  % Documentation paper for SEDAC/CIESIN GPW v4 residential population grid.
-  % Title/venue/volume/pages/DOI verified via search; full author list from the
-  % Taylor & Francis / CIESIN listing (publisher full text was paywalled to live fetch).
 }
 
 @article{gligoric_etal_2023,
@@ -335,8 +283,6 @@
   volume  = {3},
   pages   = {157},
   doi     = {10.1038/s43856-023-00384-9}
-  % Verified via PMC (PMC10624905). Contrasts mobility-revealed vs residence-potential
-  % healthcare access -- the closest health-access analog to ambient-vs-residential.
 }
 
 % ---------------------------------------------------------------------------
@@ -350,9 +296,8 @@
   type        = {Staff Paper},
   number      = {AGES-9614},
   year        = {1996},
-  address     = {Washington, DC}
-  % Foundational delineation of USDA Commuting Zones. Verified via USDA ERS / AgEcon
-  % Search (record 278812). No DOI; it is a government staff paper.
+  address     = {Washington, DC},
+  url         = {https://ageconsearch.umn.edu/record/278812/}
 }
 
 @article{fowler_rhubart_jensen_2016,
@@ -364,7 +309,6 @@
   number  = {2},
   pages   = {263--286},
   doi     = {10.1007/s11113-016-9386-0}
-  % Assesses CZ stability across delineations. Volume/issue/pages per Springer listing.
 }
 
 % ---------------------------------------------------------------------------
@@ -374,8 +318,7 @@
 @misc{hifld_hospitals,
   author       = {{U.S. Department of Homeland Security}},
   title        = {Homeland Infrastructure Foundation-Level Data ({HIFLD}): Hospitals},
-  howpublished = {\url{https://hifld-geoplatform.opendata.arcgis.com/}},
   year         = {2024},
+  url          = {https://catalog.data.gov/dataset/hospitals},
   note         = {National public-domain hospital point dataset with bed counts, staffing, and trauma designation. Accessed 2026.}
-  % Data product, not a journal article; cited as the hospital point source.
 }
