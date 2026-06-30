@@ -15,10 +15,11 @@ DataLumos archive (ICPSR project 239108).
   closed facilities are excluded.
 - **Geometry.** Point locations in EPSG:4326 (`lat`/`lon`).
 - **Attributes used.** `BEDS` (staffed beds; the HIFLD `-999` "unknown" bed
-  sentinel is masked to missing before any summation), and `TRAUMA` (a facility
-  is treated as a trauma center when `TRAUMA` is any value other than
-  "NOT AVAILABLE", that is, any level I through V, pediatric, or state
-  TRH/TRF/CTH code).
+  sentinel is masked to missing). Missing beds are uncommon nationally (415 of
+  7,966 hospitals, 5.2%; total known beds 1,087,608, median 70), but are
+  concentrated enough that 9 zones have over half their beds unknown and are
+  flagged where the bed result depends on imputation. The `TRAUMA` designation
+  is recorded but the trauma-subset analysis is deferred to future work.
 - **Vintage.** A single snapshot dated approximately 2024. HIFLD is not a time
   series; hospitals open and close over time, but the snapshot reflects one
   cross-section. We therefore treat the hospital layer as static and analyze

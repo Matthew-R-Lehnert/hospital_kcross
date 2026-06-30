@@ -60,28 +60,39 @@ residential choice a first-class object of study. We run the identical test
 under both demand surfaces and report where the equity verdict changes, which is
 itself an empirical contribution.
 
+## Three axes, not one number
+
+Concentration alone does not capture access. A region can have hospitals
+arranged proportional to population yet leave a remote population stranded, or
+have adequate buildings but capacity concentrated in one center, or simply have
+too few beds for its people. We therefore measure three orthogonal axes:
+**concentration** (is supply clumped beyond population?), **coverage** (are
+people far from care?), and **sufficiency** (is there enough capacity per
+person?). Each answers a distinct question that a single accessibility score
+conflates, and their combination yields a per-zone diagnosis that maps to a
+distinct policy response.
+
 ## Contributions
 
-1. A formal, point-process hypothesis test of whether US hospital locations
-   follow population, applied nationally across all US commuting zones. Unlike
-   metropolitan statistical areas, commuting zones tile the entire country
-   (rural areas included) and are exogenous to hospital locations. The test
-   controls the family-wise error rate across zones with a Myllymäki global
-   envelope test.
-2. The first use, to our knowledge, of ambient population as the point-process
-   null for hospital distribution, with a direct ambient versus residential
-   contrast.
-3. Capacity-aware variants, weighting by staffed beds and restricting to trauma
-   centers, that distinguish access to a building from access to a bed or to
-   emergency care.
-4. A reproducible, dual-engine (R/`spatstat` and an independent Python port)
-   open implementation.
+1. A formal, point-process test of whether US hospital **locations** and **bed
+   capacity** follow population, applied nationally across all US commuting
+   zones, which tile the entire country (rural included) and are exogenous to
+   hospital locations, with family-wise error control within and across zones.
+2. The first use, to our knowledge, of **ambient** population as the
+   point-process null for hospital distribution, with a direct ambient versus
+   residential contrast that we report at the level of changed verdicts.
+3. A **coverage** test of population-weighted distance to care that credits
+   cross-border hospitals, and a **sufficiency** measure of beds per capita,
+   combined with concentration into a **diagnostic typology** (shortage,
+   maldistribution, geographic gap, redundancy) that distinguishes "too few"
+   from "in the wrong place" from "people stranded."
+4. A reproducible, validated (Type-I calibrated), open implementation with a
+   Nextflow pipeline.
 
 ## Roadmap
 
 Section 2 reviews related work and states the gap. Section 3 describes the
-hospital, population (ambient and residential), and commuting-zone boundary
-data. Section 4 develops the inhomogeneous K-function test, the
-population-intensity null, the capacity variants, and the global envelope
-correction. Section 5 reports results. Section 6 concludes with limitations and
-policy implications.
+hospital, population (ambient and residential), and commuting-zone data. Section
+4 develops the three axes, the population-proportional null, the cross-border
+coverage construction, and the global envelope tests. Section 5 reports results.
+Section 6 concludes with limitations and policy implications.

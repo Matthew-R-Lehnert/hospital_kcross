@@ -5,11 +5,11 @@ then limitations and implications. -->
 
 ## Summary
 
-*To be completed after results.* We posed hospital access as a formal
-point-process question, namely whether hospitals are distributed in proportion
-to the population they serve, and answered it nationally with an inhomogeneous
-K-function whose null is population itself, using ambient population as the
-demand surface.
+*To be completed after results.* We characterized hospital supply nationally on
+three orthogonal axes, concentration, coverage, and sufficiency, each against a
+population-proportional null and contrasted between ambient and residential
+population, and combined them into a per-zone diagnosis that separates too-few
+capacity from wrong-place arrangement from stranded populations.
 
 ## Limitations
 
@@ -26,12 +26,20 @@ demand surface.
   WorldPop or LandScan USA day/night robustness check, if run, bounds this.
 - **Window dependence.** Results are conditional on the commuting-zone
   partition. The CBSA re-run quantifies sensitivity to the windowing choice.
-- **Distance, not travel time.** The K-function uses Euclidean distance, whereas
-  real access depends on roads, terrain, and traffic. The method answers a
-  question about spatial distribution that complements, rather than replaces,
-  travel-time accessibility models.
-- **Containment.** A hospital just outside a zone boundary serves nearby in-zone
-  population but is not counted in that zone.
+- **Distance, not travel time.** All distances are Euclidean, whereas real
+  access depends on roads, terrain, and traffic. The method answers a question
+  about spatial distribution that complements, rather than replaces, travel-time
+  accessibility models; the reported distance thresholds (10, 25, 35 miles) are
+  straight-line approximations.
+- **Containment.** The coverage axis credits hospitals within a 50 km buffer
+  across zone boundaries, which removes false edge deserts, but concentration and
+  sufficiency remain in-zone quantities, so a zone whose residents routinely use
+  a neighbor's hospitals may still be mischaracterized on those two axes. The USDA
+  commuting-zone design (built for self-containment) limits this, and the
+  `CZContainment` measure flags the most exposed zones.
+- **Beds missing for some hospitals.** 5.2% of hospitals lack a bed count;
+  sufficiency is therefore a lower bound, and bed-concentration verdicts in the
+  9 zones where most beds are unknown are imputation-driven and flagged.
 
 ## Implications
 

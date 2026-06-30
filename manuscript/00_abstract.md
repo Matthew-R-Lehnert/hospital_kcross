@@ -7,25 +7,30 @@ catchment area) and residential census population. We instead pose the question
 as a formal spatial point-process hypothesis test, and we ask it against
 *ambient* population, meaning where people are over a 24-hour day.
 
-**Methods.** We test whether US hospital locations follow population using an
-**inhomogeneous Ripley's K-function** in which the null intensity is set
-proportional to population, evaluated against a Monte-Carlo envelope of
-inhomogeneous-Poisson simulations. Hospital locations come from HIFLD
+**Methods.** We characterize each US **commuting zone** (county clusters that
+tile the entire country, rural included) on three orthogonal axes:
+**concentration** (is supply clumped beyond population?), measured by an
+**inhomogeneous Ripley's K-function** with a population-proportional null for
+both hospital locations and bed capacity; **coverage** (are people far from
+care?), measured by the population-weighted distance to the nearest hospital
+against the same null, crediting hospitals across zone boundaries; and
+**sufficiency** (is there enough capacity?), measured by beds per 1,000
+population against US and OECD references. Concentration and coverage are tested
+against Monte-Carlo inhomogeneous-Poisson simulations in which population is held
+fixed and hospitals are resampled, with a Myllymäki global envelope test
+controlling error within and across zones. Hospital locations come from HIFLD
 (*n* = 7,966 open facilities). Population is ORNL LandScan Global **ambient**
 (24-hour) population at about 1 km, contrasted against NASA SEDAC GPWv4.11
-**residential** population at the same grid. The analysis is run independently
-within each US **commuting zone**, which are county clusters that tile the
-entire country, rural areas included. A Myllymäki global envelope test
-controls the family-wise error rate across zones. We additionally weight by
-hospital capacity (staffed beds) and restrict to trauma centers.
+**residential** population at the same grid.
 
-**Results.** *(Pending the national run.)* We report the fraction of commuting
-zones in which hospital clustering significantly exceeds what population
-predicts, the geography of over-concentration versus under-served deviation, and
-the extent to which conclusions change when the ambient population null is
-replaced by the residential null.
+**Results.** *(Pending the national run.)* We report the distribution of zones
+across a diagnostic typology that the three axes define (shortage,
+maldistribution, geographic gap, redundancy, well-matched), the geography of
+over-concentration and under-served populations, and the set of zones whose
+diagnosis changes when the ambient population null is replaced by the
+residential null.
 
 **Conclusions.** *(Pending.)*
 
 **Keywords:** inhomogeneous K-function; spatial point patterns; healthcare
-access; ambient population; LandScan; hospital deserts.
+access; hospital capacity; ambient population; LandScan; hospital deserts.
