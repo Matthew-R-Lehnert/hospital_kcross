@@ -8,6 +8,24 @@ $p(u)$ be the population surface (LandScan ambient, or GPW residential)
 evaluated at location $u \in W$. We ask whether $X$ is consistent with a point
 process whose first-order intensity is proportional to population.
 
+## Zone inclusion criterion
+
+The inhomogeneous K-function is a second-order (pairwise) summary, so it requires
+enough hospitals per zone to form enough point pairs to estimate. Below a small
+count the Monte-Carlo envelope is degenerate and the test has no power. We
+therefore compute the test only for zones with at least **8 open hospitals**;
+the threshold is a parameter (`min_hospitals`) and we report a sensitivity check
+at higher values. Of the 597 commuting zones, **261 meet the threshold and 336
+do not**, but the excluded zones contain only **8.9% of ambient population**, so
+the analysis still covers about **91% of where Americans are during the day**.
+Excluded zones are predominantly low-population (12 contain no hospital at all)
+and are reported in full in the supplement. Skipping the clustering test in a
+sparse zone is not the same as ignoring its access: "is supply clustered relative
+to population within the zone" is not well posed with a few points, whereas the
+relevant question there, how far the population sits from the nearest hospital,
+is addressed by the complementary population-weighted coverage metric rather than
+by $K_{\text{inhom}}$.
+
 ## The population-proportional intensity
 
 We define the null intensity as population, rescaled so its integral over the
