@@ -1,8 +1,8 @@
-# Manuscript build — Pandoc + Citation Style Language (CSL)
+# Manuscript build: Pandoc + Citation Style Language (CSL)
 # -----------------------------------------------------------------------------
 # The bibliography (references.bib) is the single, style-AGNOSTIC source of
 # truth. Citation style (APA, Chicago, Vancouver, …) is chosen at BUILD time by
-# swapping a CSL file — the prose never changes. In-text citations use Pandoc
+# swapping a CSL file; the prose never changes. In-text citations use Pandoc
 # syntax: [@key] parenthetical, @key narrative, [@a; @b] multiple.
 #
 # Usage:

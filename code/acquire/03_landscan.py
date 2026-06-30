@@ -31,7 +31,7 @@ def fetch_year(year: int) -> Path:
         print(f"{dst} exists, skipping")
         return dst
     print(f"copying {src}")
-    subprocess.run(["aws", "s3", "cp", src, str(dst)], check=True)
+    subprocess.run(["aws", "s3", "cp", "--no-progress", src, str(dst)], check=True)
     return dst
 
 

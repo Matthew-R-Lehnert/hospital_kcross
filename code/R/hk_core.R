@@ -144,10 +144,18 @@ run_hk <- function(window_name, windows_sf, hospitals_sf, raster_path,
   lambda <- lam$im
 
   # --- radii ---------------------------------------------------------------
-  diam   <- sqrt(spatstat.geom::area(win))
-  r_max  <- if (is.null(r_max))  min(0.25 * diam, 50000) else r_max
-  r_step <- if (is.null(r_step)) r_max / 50 else r_step
-  r_vals <- seq(0, r_max, by = r_step)
+  # Fixed, interpretable grid: 0..50 km in 1 km ticks (hospital access is a
+  # drive-time-scale question; 50 km spans metro access and the trauma "golden
+  # hour" at typical speeds). Each zone's r_max is capped at ~1/4 of the
+  # window's SHORTER side so Ripley edge correction stays reliable; the cap is
+  # recorded (r_capped) so truncated zones can be flagged in the analysis.
+  bb       <- spatstat.geom::as.rectangle(win)
+  mindim   <- min(diff(bb$xrange), diff(bb$yrange))
+  r_cap    <- 0.25 * mindim
+  r_max    <- if (is.null(r_max))  min(50000, r_cap) else r_max
+  r_step   <- if (is.null(r_step)) 1000 else r_step
+  r_vals   <- seq(0, r_max, by = r_step)
+  r_capped <- r_max < 50000
 
   # --- observed K + envelope ----------------------------------------------
   set.seed(seed)
@@ -187,7 +195,7 @@ run_hk <- function(window_name, windows_sf, hospitals_sf, raster_path,
 
   meta <- list(window = window_name, epsg = epsg, pop_kind = pop_kind,
                subset = subset, weight_by = weight_by, n_hospitals = n,
-               nsim = nsim, r_max = r_max, r_step = r_step,
+               nsim = nsim, r_max = r_max, r_step = r_step, r_capped = r_capped,
                correction = correction, res_m = res_m, seed = seed,
                lambda_floor = lam$floor_used, pop_integral = lam$integral_pop,
                r_first_overconc = if (any(above)) min(env_df$r[above]) else NA_real_,

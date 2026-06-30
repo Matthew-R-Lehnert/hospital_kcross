@@ -1,7 +1,7 @@
 # Citation styles (CSL)
 
 Citation Style Language files that control how citations and the reference list
-are formatted. The manuscript's prose and `references.bib` never change — only
+are formatted. The manuscript's prose and `references.bib` never change; only
 the CSL chosen at build time does.
 
 These files are **not committed** (fetch them on demand):

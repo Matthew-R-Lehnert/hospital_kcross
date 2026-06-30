@@ -21,9 +21,9 @@ bibliography. `figures/` holds generated figures.
 
 ## Citations and reference style
 
-Citations use Pandoc syntax — `[@key]` parenthetical, `@key` narrative — and
+Citations use Pandoc syntax (`[@key]` parenthetical, `@key` narrative) and
 resolve from `references.bib`. **The reference style is chosen at build time by
-swapping a CSL file**, so APA ↔ Chicago ↔ Vancouver requires no edits to the
+swapping a CSL file**, so APA, Chicago, or Vancouver requires no edits to the
 prose or the bib:
 
 ```bash
@@ -38,7 +38,7 @@ make docx STYLE=apa               # Word, for co-authors / journal upload
 
 Every entry in `references.bib` must resolve to a real work. The checker
 confirms each against Crossref (by DOI) or a live URL and fails on anything it
-can't verify — guarding against hallucinated or mis-keyed citations:
+can't verify, guarding against hallucinated or mis-keyed citations:
 
 ```bash
 python ../code/scripts/verify_references.py references.bib

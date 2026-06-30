@@ -50,14 +50,14 @@ def main() -> int:
     gdf = gdf[open_mask].copy()
     print(f"{len(gdf)} open facilities")
 
+    gdf = gdf.to_crs("EPSG:4326")
     beds = gdf["BEDS"].astype(float)
-    beds = beds.mask(beds <= -999, np.nan)        # -999 = unknown
-    is_trauma = gdf["TRAUMA"].astype(str).str.upper().str.strip() != "NOT AVAILABLE"
+    gdf["beds"] = beds.mask(beds <= -999, np.nan)        # -999 = unknown
+    gdf["is_trauma"] = (gdf["TRAUMA"].astype(str).str.upper().str.strip()
+                        != "NOT AVAILABLE")
+    gdf["name"] = gdf.get("NAME")
 
-    out = gpd.GeoDataFrame(
-        {"name": gdf.get("NAME"), "beds": beds.values,
-         "is_trauma": is_trauma.values},
-        geometry=gdf.geometry, crs="EPSG:4326")
+    out = gdf[["name", "beds", "is_trauma", "geometry"]].copy()
     out = out[out.geometry.notna() & ~out.geometry.is_empty]
 
     out.to_file(OUT, driver="GPKG")

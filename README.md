@@ -1,16 +1,16 @@
-# Hospital × Population — Inhomogeneous K-Function Analysis
+# Hospital × Population: Inhomogeneous K-Function Analysis
 
 Are U.S. hospitals spatially distributed *in proportion to the population they
-serve*? This study tests, across every U.S. metropolitan and micropolitan area,
-whether hospital locations follow population — flagging systematic
+serve*? This study tests, across every U.S. commuting zone,
+whether hospital locations follow population, flagging systematic
 **over-concentration** (urban redundancy) and **under-served gaps** (access
 deserts).
 
 The instrument is an **inhomogeneous Ripley's K-function** of hospital point
 locations whose null intensity is set **proportional to population**, evaluated
 against a Monte-Carlo simulation envelope. The headline novelty is the use of
-**ambient (24-hour) population** (ORNL LandScan) as the point-process null —
-where people actually are during the day — contrasted against conventional
+**ambient (24-hour) population** (ORNL LandScan) as the point-process null,
+where people actually are during the day, contrasted against conventional
 **residential** (nighttime) population, applied **nationally** with
 family-wise-corrected formal hypothesis tests.
 
@@ -27,7 +27,7 @@ A peer-reviewed publication. The repository is organized as a manuscript.
 ## Repository layout
 
 ```
-manuscript/      The paper — one file per section (THIS is what gets submitted)
+manuscript/      The paper, one file per section (THIS is what gets submitted)
   00_abstract.md
   01_introduction.md
   02_related_work.md      (literature review)
@@ -58,11 +58,11 @@ docs/            design notes, methodology working docs
 # 1. acquire data (AWS creds for the S3 raw mirror; internet for TIGER/SEDAC)
 python code/acquire/01_hospitals.py
 python code/acquire/02_commuting_zones.py
-python code/acquire/03_landscan.py 2021       # ambient population (one year)
-python code/acquire/04_gpw.py 2020            # residential population (contrast)
+python code/acquire/03_landscan.py 2020       # ambient population (2020)
+python code/acquire/04_gpw.py 2020            # residential population (2020, contrast)
 
 # 2. run one commuting zone (R/spatstat reference engine)
-Rscript code/scripts/run_cz.R "Phoenix AZ" 2021 ambient
+Rscript code/scripts/run_cz.R "CZ name" 2020 ambient
 
 # 3. build the manuscript in a given citation style
 cd manuscript && make STYLE=apa            # -> manuscript.pdf (APA refs)
@@ -76,4 +76,4 @@ cd manuscript && make STYLE=chicago-author-date
 ## License
 
 Code: MIT (see `LICENSE`). Manuscript text & figures: see `manuscript/LICENSE`
-(CC-BY-4.0 proposed — confirm with target journal).
+(CC-BY-4.0 proposed; confirm with target journal).

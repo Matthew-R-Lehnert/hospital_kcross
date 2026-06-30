@@ -6,90 +6,98 @@ derived file's metadata.
 
 ## Hospital locations (HIFLD)
 
-Hospital point locations come from the **Homeland Infrastructure
-Foundation-Level Data (HIFLD)** "Hospitals" layer (DHS / Oak Ridge National
-Laboratory). The HIFLD Open portal was deactivated 2025-08-26; we source the
-layer from the **DataLumos archive** (ICPSR project 239108).
+Hospital point locations come from the Homeland Infrastructure Foundation-Level
+Data (HIFLD) "Hospitals" layer (DHS / Oak Ridge National Laboratory). The HIFLD
+Open portal was deactivated on 2025-08-26, so we source the layer from the
+DataLumos archive (ICPSR project 239108).
 
-- **Count.** 8,340 facilities, of which **7,966 are `STATUS == OPEN`**; the 374
+- **Count.** 8,340 facilities, of which 7,966 are `STATUS == OPEN`; the 374
   closed facilities are excluded.
 - **Geometry.** Point locations in EPSG:4326 (`lat`/`lon`).
-- **Attributes used.** `BEDS` (staffed beds; the HIFLD `-999` "unknown"
+- **Attributes used.** `BEDS` (staffed beds; the HIFLD `-999` "unknown" bed
   sentinel is masked to missing before any summation), and `TRAUMA` (a facility
-  is treated as a **trauma center** when `TRAUMA` is any value other than
-  "NOT AVAILABLE", i.e. any level I–V / pediatric / state TRH/TRF/CTH code).
-- **Vintage.** A single ~2024 snapshot. HIFLD is *not* a time series; hospitals
-  open and close over time but the snapshot reflects one cross-section. We
-  therefore treat the hospital layer as static and analyze population time
-  variation against a fixed hospital geography (see Limitations).
+  is treated as a trauma center when `TRAUMA` is any value other than
+  "NOT AVAILABLE", that is, any level I through V, pediatric, or state
+  TRH/TRF/CTH code).
+- **Vintage.** A single snapshot dated approximately 2024. HIFLD is not a time
+  series; hospitals open and close over time, but the snapshot reflects one
+  cross-section. We therefore treat the hospital layer as static and analyze
+  population time variation against a fixed hospital geography (see
+  Limitations).
 
-## Population (ORNL LandScan Global — ambient)
+## Population (ORNL LandScan Global, ambient)
 
-The demand surface is **LandScan Global ambient population** (ORNL): a gridded,
-~30 arc-second (~1 km at the equator) raster of **24-hour average** ("ambient")
-population, distributed annually. We use years **2018–2024** (one GeoTIFF per
-year), native EPSG:4326, globally complete (so Alaska, Hawaii, and territories
-receive real values).
+The demand surface is LandScan Global ambient population (ORNL): a gridded,
+roughly 30 arc-second (about 1 km at the equator) raster of 24-hour average
+("ambient") population, distributed annually (one GeoTIFF per year), native
+EPSG:4326, globally complete, so Alaska, Hawaii, and the territories receive
+real values. The LandScan record covers 2018 through 2024; the headline analysis
+uses **2020** to align with the residential surface and the commuting-zone
+vintage, and the other years support a temporal sensitivity check against the
+fixed hospital geography.
 
-LandScan estimates *where people are over a day* — incorporating workplaces,
-roads, and land cover — rather than where they sleep, which is the property we
-exploit: it is the more defensible demand surface for acute care.
+LandScan estimates where people are over a day, incorporating workplaces, roads,
+and land cover, rather than where they sleep. This property is what we exploit:
+it is the more defensible demand surface for acute care.
 
-## Population (NASA SEDAC GPW v4.11 — residential, for contrast)
+## Population (NASA SEDAC GPW v4.11, residential, for contrast)
 
 To isolate the effect of the ambient choice, we replicate the entire analysis
-with a conventional **residential (nighttime) population** surface: the
-**Gridded Population of the World, version 4.11 (GPWv4.11)** from NASA's
-Socioeconomic Data and Applications Center (SEDAC; CIESIN, Columbia University)
-[@doxseywhitfield_gpw_2015]. GPW is provided natively at **30 arc-seconds
-(~1 km at the equator)** — the same grid as LandScan Global — so the two
-surfaces align essentially cell-for-cell and the contrast is a clean grid-vs-
-grid swap with no areal-interpolation step. Both rasters are read identically;
-only the intensity surface changes.
+with a conventional residential (nighttime) population surface: the Gridded
+Population of the World, version 4.11 (GPWv4.11) from NASA's Socioeconomic Data
+and Applications Center (SEDAC; CIESIN, Columbia University)
+[@doxsey_whitfield_etal_2015]. GPW is provided natively at 30 arc-seconds (about
+1 km at the equator), the same grid as LandScan Global, so the two surfaces
+align essentially cell for cell and the contrast is a clean grid-versus-grid
+swap with no areal-interpolation step. Both rasters are read identically; only
+the intensity surface changes.
 
-**Two differences, not one (a controlled-contrast caveat).** GPW and LandScan
-differ in the property we wish to study — residential vs. ambient timing — but
-*also* in construction: GPW is **areal/proportional** (census counts spread
-uniformly within each input administrative unit, so its effective resolution is
-the input unit size), whereas LandScan is **dasymetric/modeled** (counts
-redistributed within units using roads, land cover, and imagery). A raw
-LandScan-vs-GPW difference therefore conflates "ambient vs. residential" with
-"modeled vs. unmodeled." <!-- TODO (robustness): add WorldPop (modeled
-residential, ~1 km) to hold construction constant, or LandScan USA day/night
-(~90 m, US-only) for a same-product-family ambient/residential check. Decide
-v1 scope. -->
+**Two differences, not one: a controlled-contrast caveat.** GPW and LandScan
+differ in the property we wish to study, residential versus ambient timing, but
+they also differ in construction. GPW is areal and proportional (census counts
+are spread uniformly within each input administrative unit, so its effective
+resolution is the input unit size), whereas LandScan is dasymetric and modeled
+(counts are redistributed within units using roads, land cover, and imagery). A
+raw LandScan-versus-GPW difference therefore conflates ambient versus
+residential with modeled versus unmodeled. <!-- TODO (robustness): add WorldPop
+(modeled residential, ~1 km) to hold construction constant, or LandScan USA
+day/night (~90 m, US-only) for a same-product-family ambient/residential check.
+Decide v1 scope. -->
 
 ## Analysis windows (USDA commuting zones)
 
-The unit of analysis is the **commuting zone (CZ)** — clusters of counties tied
+The unit of analysis is the commuting zone (CZ), a cluster of counties tied
 together by commuting flows [@tolbert_sizer_1996]. Commuting zones are chosen
-deliberately over metropolitan/micropolitan statistical areas (CBSAs) for three
-reasons that matter for this test:
+over metropolitan and micropolitan statistical areas (CBSAs) for three reasons
+that matter for this test.
 
-1. **National coverage including rural.** CZs partition the *entire* United
-   States — every county belongs to exactly one zone — so non-metropolitan
-   rural areas, where hospital access deserts are most severe, remain *in*
-   sample. CBSAs, by contrast, exclude all outside-CBSA rural counties.
-2. **Movement-defined, matching ambient population.** CZs are delineated from
-   where people actually travel, the same behavioral basis as LandScan's
-   ambient surface — the window and the demand surface share a logic.
-3. **Exogenous to hospital locations.** Unlike Dartmouth Hospital Service /
-   Referral Regions (which are drawn from hospital-utilization patterns and so
-   are partly endogenous to the thing we test), CZ boundaries do not depend on
-   where hospitals are, avoiding circularity.
+1. **National coverage including rural.** Commuting zones partition the entire
+   United States; every county belongs to exactly one zone. Non-metropolitan
+   rural areas, where hospital access deserts are most severe, therefore remain
+   in sample. CBSAs, by contrast, exclude all outside-CBSA rural counties.
+2. **Movement-defined, matching ambient population.** Commuting zones are
+   delineated from where people travel, the same behavioral basis as LandScan's
+   ambient surface, so the window and the demand surface share a logic.
+3. **Exogenous to hospital locations.** Unlike Dartmouth Hospital Service and
+   Referral Regions, which are drawn from hospital-utilization patterns and so
+   are partly endogenous to the thing we test, commuting zone boundaries do not
+   depend on where hospitals are, which avoids circularity.
 
-CZ geometries are built by dissolving U.S. Census county polygons
-(TIGER/Line) using the USDA Economic Research Service county→CZ crosswalk.
-<!-- TODO: fix CZ vintage (e.g., 2010-delineation) + TIGER county vintage. -->
-As a robustness/comparability check the analysis can additionally be run on
-CBSAs (urban-only) — reported as a sensitivity, not the headline.
+We use the USDA Economic Research Service 2020 commuting-zone delineation, which
+groups the 3,222 US and Puerto Rico counties into 598 contiguous labor markets
+following the Fowler, Rhubart, and Jensen methodology [@fowler_rhubart_jensen_2016;
+@usda_cz2020_2024]. CZ geometries are built by dissolving US Census county
+polygons (TIGER/Line) using the ERS county-to-CZ crosswalk. The 2020 vintage is
+chosen to match the 2020 population rasters (below). As a robustness and
+comparability check the analysis can additionally be run on CBSAs (urban only),
+reported as a sensitivity rather than the headline.
 
 ## Coordinate reference systems
 
-Population is read in EPSG:4326. Within each CBSA, points, the boundary
-polygon, and the population raster are projected to a **local UTM zone** (chosen
-from the CBSA centroid) so that the distance-based K-function and the area
-integral of the intensity are computed in meters with minimal distortion.
+Population is read in EPSG:4326. Within each commuting zone, the points, the
+boundary polygon, and the population raster are projected to a local UTM zone
+(chosen from the zone centroid) so that the distance-based K-function and the
+area integral of the intensity are computed in meters with minimal distortion.
 
 ## Derived inputs
 
