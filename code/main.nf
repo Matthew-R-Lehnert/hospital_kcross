@@ -26,8 +26,6 @@ params.rscript    = "${projectDir}/scripts/run_cz.R"
 params.rbin       = "Rscript"                                // override with full path if R not on PATH
 params.year       = 2020
 params.pop_kinds  = "ambient"        // comma list: ambient,residential
-params.subsets    = "all"            // comma list: all,trauma
-params.weight_by  = "none"           // comma list: none,beds
 params.nsim       = 999
 params.zones      = ""               // SEMICOLON list (CZ names contain commas); empty = all
 
@@ -45,17 +43,18 @@ process LIST_ZONES {
 }
 
 // ---------------------------------------------------------------------------
-// One (zone, pop_kind, subset, weight) combination -> envelope + plot + meta.
-// Outputs are optional: zones with too few hospitals are skipped by the engine
-// and legitimately produce nothing.
+// One (zone, pop_kind) -> three axes (facilities + beds concentration, coverage)
+// plus sufficiency, all from shared population permutations. The point-pattern
+// layers are skipped for zones below the hospital minimum, but a sufficiency
+// meta is still emitted, so every zone produces at least that file.
 // ---------------------------------------------------------------------------
 process HK {
-    tag    { "${zone} | ${pop_kind} | ${subset}${weight == 'beds' ? ' | beds' : ''}" }
+    tag    { "${zone} | ${pop_kind}" }
     cpus   1
     publishDir { "${params.outdir}/${pop_kind}" }, mode: 'copy'
 
     input:
-    tuple val(zone), val(pop_kind), val(subset), val(weight)
+    tuple val(zone), val(pop_kind)
 
     output:
     path "*_envelope.png", optional: true
@@ -66,7 +65,7 @@ process HK {
     script:
     """
     export HK_OUT="\$PWD/_out"
-    ${params.rbin} ${params.rscript} "${zone}" ${params.year} ${pop_kind} ${subset} ${weight} ${params.nsim}
+    ${params.rbin} ${params.rscript} "${zone}" ${params.year} ${pop_kind} ${params.nsim}
     mv _out/* . 2>/dev/null || true
     """
 }
@@ -98,10 +97,8 @@ workflow {
     }
 
     pop_ch = Channel.fromList(params.pop_kinds.split(',').collect { it.trim() })
-    sub_ch = Channel.fromList(params.subsets.split(',').collect   { it.trim() })
-    wt_ch  = Channel.fromList(params.weight_by.split(',').collect  { it.trim() })
 
-    combos = zones_ch.combine(pop_ch).combine(sub_ch).combine(wt_ch)
+    combos = zones_ch.combine(pop_ch)
 
     HK(combos)
     COLLATE(HK.out.meta.collect())

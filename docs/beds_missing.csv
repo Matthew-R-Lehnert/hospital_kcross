@@ -1,0 +1,586 @@
+name,n_hospitals,n_missing_beds,beds_known_sum,frac_missing
+"Culebra zona urbana, PR",1,1,0.0,1.0
+"Vieques (Vieques Municipio), PR",1,1,0.0,1.0
+"Utuado, PR",1,1,0.0,1.0
+"Fairbanks, AK",4,2,175.0,0.5
+"Mobridge city, SD",4,2,37.0,0.5
+"Cayey zona urbana, PR",4,2,366.0,0.5
+"Nome city, AK",2,1,18.0,0.5
+"Unalaska city, AK",2,1,4.0,0.5
+"Alamogordo, NM",6,3,136.0,0.5
+"Gallup, NM",23,11,507.0,0.4782608695652174
+"Sheridan, WY",5,2,131.0,0.4
+"Rugby city, ND",5,2,70.0,0.4
+"Vernal, UT",3,1,88.0,0.3333333333333333
+"Sitka, AK",3,1,52.0,0.3333333333333333
+"Torrington, WY",3,1,50.0,0.3333333333333333
+"San Juan zona urbana, PR",36,11,4986.0,0.3055555555555556
+"San Germán--Cabo Rojo--Sabana Grande, PR",10,3,809.0,0.3
+"Farmington, NM",10,3,399.0,0.3
+"Colorado Springs, CO",24,7,3027.0,0.2916666666666667
+"Tucson, AZ",38,11,3678.0,0.2894736842105263
+"Yuma, AZ--CA",7,2,733.0,0.2857142857142857
+"Cheyenne, WY",7,2,451.0,0.2857142857142857
+"Roseburg, OR",7,2,410.0,0.2857142857142857
+"Prescott--Prescott Valley, AZ",15,4,774.0,0.26666666666666666
+"Grand Junction, CO",8,2,619.0,0.25
+"Sioux City, IA--NE--SD",8,2,939.0,0.25
+"Owensboro, KY",4,1,552.0,0.25
+"Lamar, CO",4,1,73.0,0.25
+"Wilmington, NC",8,2,1208.0,0.25
+"Aberdeen, WA",8,2,145.0,0.25
+"Safford, AZ",4,1,85.0,0.25
+"Albuquerque, NM",37,9,2853.0,0.24324324324324326
+"Manhattan, KS",13,3,450.0,0.23076923076923078
+"Clarksville, TN--KY",9,2,1147.0,0.2222222222222222
+"Clovis, NM",9,2,308.0,0.2222222222222222
+"Great Falls, MT",9,2,536.0,0.2222222222222222
+"Charleston, WV",14,3,1732.0,0.21428571428571427
+"Rapid City, SD",14,3,664.0,0.21428571428571427
+"Raleigh, NC",24,5,5037.0,0.20833333333333334
+"Fort Leonard Wood--St. Robert--Waynesville, MO",5,1,371.0,0.2
+"Boone, NC",5,1,235.0,0.2
+"Watertown, NY",5,1,361.0,0.2
+"Pittsfield, MA",5,1,458.0,0.2
+"Boise City, ID",21,4,1892.0,0.19047619047619047
+"Augusta-Richmond County consolidated government (balance), GA",16,3,2814.0,0.1875
+"Huntington, WV--KY--OH",11,2,1736.0,0.18181818181818182
+"Montgomery, AL",17,3,1694.0,0.17647058823529413
+"Muskogee, OK",12,2,676.0,0.16666666666666666
+"Minot, ND",6,1,477.0,0.16666666666666666
+"Elko, NV",6,1,235.0,0.16666666666666666
+"Emporia, KS",6,1,135.0,0.16666666666666666
+"Elizabethtown--Radcliff, KY",6,1,565.0,0.16666666666666666
+"Tuscaloosa, AL",13,2,1430.0,0.15384615384615385
+"Fargo, ND--MN",13,2,1268.0,0.15384615384615385
+"Murfreesboro, TN",14,2,1825.0,0.14285714285714285
+"Nashua, NH--MA",28,4,2654.0,0.14285714285714285
+"Columbia, MO",14,2,1357.0,0.14285714285714285
+"St. Joseph, MO--KS",7,1,609.0,0.14285714285714285
+"Virginia Beach city, VA",21,3,4152.0,0.14285714285714285
+"Casper, WY",7,1,440.0,0.14285714285714285
+"Edwards--Avon, CO",7,1,244.0,0.14285714285714285
+"Parsons, KS",7,1,211.0,0.14285714285714285
+"Oxford, MS",7,1,569.0,0.14285714285714285
+"Beckley, WV",7,1,714.0,0.14285714285714285
+"Anchorage, AK",14,2,1263.0,0.14285714285714285
+"Sedalia, MO",7,1,343.0,0.14285714285714285
+"Pensacola, FL--AL",22,3,3230.0,0.13636363636363635
+"Morgantown, WV",15,2,1944.0,0.13333333333333333
+"Phoenix--Mesa--Scottsdale, AZ",102,13,12722.0,0.12745098039215685
+"Gulfport--Biloxi, MS",16,2,2303.0,0.125
+"Rochester, NY",16,2,2907.0,0.125
+"Waynesville, NC",8,1,414.0,0.125
+"Bismarck, ND",8,1,647.0,0.125
+"La Crosse, WI--MN",8,1,796.0,0.125
+"Indianapolis, IN",58,7,7853.0,0.1206896551724138
+"Hammond city, IN",25,3,3296.0,0.12
+"Springfield, MA--CT",17,2,2122.0,0.11764705882352941
+"Denver--Aurora, CO",61,7,9683.0,0.11475409836065574
+"El Paso, TX--NM",35,4,3546.0,0.11428571428571428
+"Tulsa, OK",44,5,4416.0,0.11363636363636363
+"Starkville, MS",9,1,597.0,0.1111111111111111
+"Dubuque, IA--IL",9,1,810.0,0.1111111111111111
+"Hilton Head Island town, SC",9,1,744.0,0.1111111111111111
+"Killeen, TX",27,3,2457.0,0.1111111111111111
+"Ponce, PR",9,1,1072.0,0.1111111111111111
+"Valdosta, GA",9,1,686.0,0.1111111111111111
+"Billings, MT",9,1,744.0,0.1111111111111111
+"McAlester, OK",9,1,301.0,0.1111111111111111
+"Scranton, PA",19,2,2728.0,0.10526315789473684
+"Washington city, DC",39,4,8874.0,0.10256410256410256
+"Trenton city, NJ",49,5,8566.0,0.10204081632653061
+"Williamsport, PA",20,2,1942.0,0.1
+"Madison, WI",20,2,1953.0,0.1
+"Huntsville, AL",20,2,2803.0,0.1
+"Honolulu, HI",20,2,2875.0,0.1
+"Columbus, OH",42,4,8201.0,0.09523809523809523
+"Salt Lake City, UT",53,5,6451.0,0.09433962264150944
+"Ottumwa, IA",11,1,470.0,0.09090909090909091
+"Grand Island, NE",11,1,384.0,0.09090909090909091
+"Brownsville, TX",11,1,1474.0,0.09090909090909091
+"Topeka, KS",11,1,1509.0,0.09090909090909091
+"Harrisburg, PA",33,3,5253.0,0.09090909090909091
+"Plattsburgh, NY",11,1,800.0,0.09090909090909091
+"Shreveport, LA",34,3,3372.0,0.08823529411764706
+"Leesburg town, VA",12,1,2020.0,0.08333333333333333
+"Panama City--Panama City Beach, FL",12,1,985.0,0.08333333333333333
+"Philadelphia city, PA",96,8,19501.0,0.08333333333333333
+"Seattle--Tacoma, WA",74,6,10248.0,0.08108108108108109
+"Wichita, KS",25,2,3197.0,0.08
+"Sacramento, CA",38,3,4977.0,0.07894736842105263
+"Cincinnati, OH--KY",52,4,8622.0,0.07692307692307693
+"Joplin, MO",13,1,1017.0,0.07692307692307693
+"Allentown--Bethlehem, PA--NJ",26,2,4663.0,0.07692307692307693
+"Richmond, VA",27,2,6874.0,0.07407407407407407
+"Newark city, NJ",81,6,19583.0,0.07407407407407407
+"Canton, OH",14,1,2076.0,0.07142857142857142
+"Grand Forks, ND--MN",14,1,903.0,0.07142857142857142
+"Bangor, ME",14,1,987.0,0.07142857142857142
+"Tupelo, MS",14,1,1528.0,0.07142857142857142
+"Portland, ME",29,2,3015.0,0.06896551724137931
+"Providence, RI--MA",30,2,5130.0,0.06666666666666667
+"Portland, OR--WA",30,2,6203.0,0.06666666666666667
+"Fort Smith, AR--OK",15,1,1389.0,0.06666666666666667
+"San Diego, CA",45,3,8382.0,0.06666666666666667
+"Warner Robins, GA",15,1,1808.0,0.06666666666666667
+"Springfield, MO",15,1,2372.0,0.06666666666666667
+"Columbia, SC",31,2,4266.0,0.06451612903225806
+"Gainesville city, GA",16,1,2588.0,0.0625
+"Lexington-Fayette, KY",16,1,2988.0,0.0625
+"Santa Barbara, CA",16,1,1736.0,0.0625
+"Newport News city, VA",16,1,2475.0,0.0625
+"Sioux Falls, SD",16,1,1477.0,0.0625
+"Kansas City, MO--KS",66,4,10087.0,0.06060606060606061
+"Johnson City, TN",17,1,2941.0,0.058823529411764705
+"Lebanon, NH--VT",17,1,879.0,0.058823529411764705
+"Ardmore, OK",17,1,819.0,0.058823529411764705
+"Fayetteville, NC",17,1,2333.0,0.058823529411764705
+"Odessa, TX",17,1,1840.0,0.058823529411764705
+"Lincoln, NE",17,1,1674.0,0.058823529411764705
+"Kalamazoo, MI",17,1,1538.0,0.058823529411764705
+"Pittsburgh, PA",52,3,10548.0,0.057692307692307696
+"San Jose, CA",36,2,5955.0,0.05555555555555555
+"Milwaukee, WI",54,3,6853.0,0.05555555555555555
+"Baltimore, MD",36,2,8889.0,0.05555555555555555
+"Alexandria, LA",18,1,1341.0,0.05555555555555555
+"Charleston, SC",18,1,2601.0,0.05555555555555555
+"Dover, DE",19,1,1751.0,0.05263157894736842
+"Germantown CDP, MD",19,1,3076.0,0.05263157894736842
+"Lafayette, LA",38,2,2614.0,0.05263157894736842
+"Tampa--St. Petersburg, FL",57,3,11478.0,0.05263157894736842
+"Minneapolis city, MN",39,2,9843.0,0.05128205128205128
+"Tyler, TX",20,1,2148.0,0.05
+"Bakersfield, CA",22,1,1817.0,0.045454545454545456
+"Erie, PA",23,1,2654.0,0.043478260869565216
+"Las Vegas--Henderson--Paradise, NV",46,2,6956.0,0.043478260869565216
+"San Antonio, TX",71,3,10256.0,0.04225352112676056
+"Winston-Salem, NC",24,1,4824.0,0.041666666666666664
+"South Bend, IN--MI",25,1,2143.0,0.04
+"Atlanta city, GA",50,2,11353.0,0.04
+"Fresno, CA",26,1,3571.0,0.038461538461538464
+"Los Angeles--Long Beach--Anaheim, CA",291,11,47872.0,0.037800687285223365
+"Boston, MA--NH",106,4,18141.0,0.03773584905660377
+"New York city, NY",107,4,34653.0,0.037383177570093455
+"Orlando, FL",55,2,10610.0,0.03636363636363636
+"Grand Rapids, MI",28,1,3389.0,0.03571428571428571
+"Buffalo, NY",29,1,4393.0,0.034482758620689655
+"Omaha, NE--IA",30,1,4525.0,0.03333333333333333
+"Dayton, OH",30,1,4644.0,0.03333333333333333
+"Little Rock, AR",30,1,5016.0,0.03333333333333333
+"Louisville/Jefferson County, KY--IN",30,1,6173.0,0.03333333333333333
+"San Francisco--Oakland, CA",102,3,13858.0,0.029411764705882353
+"Charlotte, NC--SC",35,1,7659.0,0.02857142857142857
+"Yonkers city, NY",38,1,7172.0,0.02631578947368421
+"Lake Charles, LA",41,1,2709.0,0.024390243902439025
+"Baton Rouge, LA",41,1,4193.0,0.024390243902439025
+"Port St. Lucie city, FL",52,1,9099.0,0.019230769230769232
+"New Orleans, LA",62,1,7365.0,0.016129032258064516
+"Cleveland, OH",65,1,13450.0,0.015384615384615385
+"Fort Worth city, TX",66,1,7532.0,0.015151515151515152
+"Oklahoma City, OK",68,1,7236.0,0.014705882352941176
+"Chicago city, IL",122,1,29196.0,0.00819672131147541
+"Pierre, SD",2,0,57.0,0.0
+"Miami, OK",6,0,343.0,0.0
+"Nebraska City, NE",5,0,80.0,0.0
+"Miami city, FL",65,0,17408.0,0.0
+"Milledgeville, GA",6,0,496.0,0.0
+"Mexia, TX",4,0,140.0,0.0
+"Plainview, TX",4,0,133.0,0.0
+"Miles City, MT",3,0,75.0,0.0
+"Platteville, WI",8,0,195.0,0.0
+"Nacogdoches, TX",5,0,435.0,0.0
+"Myrtle Beach--North Myrtle Beach, SC--NC",23,0,2772.0,0.0
+"Middlesborough, KY--TN",5,0,407.0,0.0
+"Natchez, MS--LA",8,0,733.0,0.0
+"Philip city, SD",1,0,18.0,0.0
+"Nantucket, MA",1,0,14.0,0.0
+"Pine Bluff, AR",10,0,603.0,0.0
+"Milbank city, SD",7,0,160.0,0.0
+"Pikeville, KY",9,0,1051.0,0.0
+"Nashville-Davidson, TN",29,0,8011.0,0.0
+"Paris, TN",3,0,237.0,0.0
+"Petoskey, MI",3,0,245.0,0.0
+"Petersburg CDP, AK",1,0,12.0,0.0
+"Norton city, KS",3,0,68.0,0.0
+"O'Neill city, NE",5,0,104.0,0.0
+"Olney, IL",3,0,179.0,0.0
+"Mount Sterling, KY",3,0,216.0,0.0
+"Moses Lake, WA",6,0,140.0,0.0
+"Mountain Home, AR",1,0,268.0,0.0
+"Morristown, TN",4,0,378.0,0.0
+"Ord city, NE",1,0,16.0,0.0
+"Osceola, IA",4,0,100.0,0.0
+"North Eagle Butte CDP, SD",1,0,8.0,0.0
+"Otsego city, MN",7,0,290.0,0.0
+"Muncie, IN",9,0,848.0,0.0
+"Norfolk, NE",7,0,380.0,0.0
+"Monroe, LA",23,0,1489.0,0.0
+"Plentywood city, MT",2,0,44.0,0.0
+"Mobile, AL",16,0,2543.0,0.0
+"Paducah, KY--IL",10,0,1319.0,0.0
+"Moberly, MO",2,0,124.0,0.0
+"Pampa, TX",4,0,176.0,0.0
+"North Platte, NE",3,0,154.0,0.0
+"Moab, UT",3,0,53.0,0.0
+"Parkersburg, WV--OH",6,0,1114.0,0.0
+"Mitchell, SD",5,0,195.0,0.0
+"Parkston city, SD",5,0,98.0,0.0
+"Missoula, MT",10,0,900.0,0.0
+"Nevada, MO",3,0,165.0,0.0
+"Peoria, IL",14,0,1776.0,0.0
+"Newport, OR",3,0,99.0,0.0
+"San Angelo, TX",11,0,831.0,0.0
+"Pocatello, ID",7,0,461.0,0.0
+"Valley City, ND",2,0,43.0,0.0
+"Uvalde, TX",1,0,25.0,0.0
+"Utqiaġvik city, AK",1,0,10.0,0.0
+"Ukiah, CA",5,0,180.0,0.0
+"Twin Falls, ID",4,0,292.0,0.0
+"Trinidad, CO",2,0,45.0,0.0
+"Trenton, MO",2,0,41.0,0.0
+"Traverse City--Garfield, MI",4,0,458.0,0.0
+"Toms River CDP, NJ",17,0,4348.0,0.0
+"Toledo, OH--MI",26,0,3425.0,0.0
+"Tifton, GA",4,0,423.0,0.0
+"Thompson Falls city, MT",1,0,16.0,0.0
+"The Dalles, OR",4,0,102.0,0.0
+"Texarkana, TX--AR",12,0,1203.0,0.0
+"Terre Haute, IN",9,0,757.0,0.0
+"Tappahannock town, VA",2,0,102.0,0.0
+"Taos, NM",1,0,25.0,0.0
+"Tallulah, LA",6,0,177.0,0.0
+"Tallahassee, FL",12,0,2655.0,0.0
+"Syracuse, NY",22,0,4000.0,0.0
+"Sweetwater, TX",3,0,125.0,0.0
+"Susanville, CA",5,0,99.0,0.0
+"Summersville city, WV",2,0,92.0,0.0
+"Storm Lake, IA",6,0,193.0,0.0
+"Valentine city, NE",2,0,56.0,0.0
+"Vernon, TX",3,0,692.0,0.0
+"Poplar Bluff, MO",4,0,489.0,0.0
+"Victoria, TX",12,0,833.0,0.0
+"Youngstown, OH",22,0,2571.0,0.0
+"Yankton, SD",6,0,325.0,0.0
+"Yakima, WA",5,0,542.0,0.0
+"Wrangell city and borough, AK",1,0,8.0,0.0
+"Worthington, MN",6,0,176.0,0.0
+"Woodward, OK",5,0,183.0,0.0
+"Woodstock city, GA",3,0,313.0,0.0
+"Wise--Norton, VA",5,0,532.0,0.0
+"Winner city, SD",3,0,66.0,0.0
+"Willmar, MN",15,0,459.0,0.0
+"Williston, ND",5,0,114.0,0.0
+"Wichita Falls, TX",19,0,1681.0,0.0
+"West Plains, MO",3,0,205.0,0.0
+"Wenatchee, WA",4,0,225.0,0.0
+"Weatherford, OK",9,0,234.0,0.0
+"Wausau, WI",17,0,1364.0,0.0
+"Waterloo, IA",11,0,1100.0,0.0
+"Washington, NC",3,0,216.0,0.0
+"Washington Court House, OH",5,0,264.0,0.0
+"Warrenton--New Baltimore, VA",2,0,179.0,0.0
+"Vineyard Haven--Edgartown--Oak Bluffs, MA",1,0,25.0,0.0
+"Vincennes, IN",3,0,232.0,0.0
+"Village of Four Seasons, MO",3,0,148.0,0.0
+"Stockton, CA",28,0,3192.0,0.0
+"Stillwater, OK",7,0,444.0,0.0
+"Steubenville--Weirton, OH--WV--PA",15,0,1567.0,0.0
+"Sterling, CO",5,0,93.0,0.0
+"Saginaw, MI",29,0,3058.0,0.0
+"Russellville, AR",4,0,337.0,0.0
+"Roswell, NM",5,0,380.0,0.0
+"Roseau city, MN",2,0,40.0,0.0
+"Rocky Mount, NC",4,0,806.0,0.0
+"Rockford, IL",11,0,1664.0,0.0
+"Rock Springs, WY",4,0,165.0,0.0
+"Rochester, MN",8,0,3038.0,0.0
+"Roanoke, VA",11,0,3136.0,0.0
+"Roanoke Rapids, NC",5,0,474.0,0.0
+"Riverton, WY",4,0,268.0,0.0
+"Richmond, KY",8,0,678.0,0.0
+"Richmond, IN--OH",3,0,350.0,0.0
+"Richfield, UT",2,0,44.0,0.0
+"Rice Lake, WI",12,0,298.0,0.0
+"Rhinelander, WI",4,0,216.0,0.0
+"Reno, NV--CA",24,0,2471.0,0.0
+"Redding, CA",17,0,1249.0,0.0
+"Quincy, IL",4,0,506.0,0.0
+"Price, UT",1,0,39.0,0.0
+"Presque Isle, ME",4,0,228.0,0.0
+"Pratt, KS",5,0,97.0,0.0
+"Portsmouth, OH--KY",6,0,903.0,0.0
+"Salida, CO",1,0,25.0,0.0
+"Salina, KS",5,0,449.0,0.0
+"Salmon city, ID",1,0,18.0,0.0
+"Snyder, TX",4,0,100.0,0.0
+"Steamboat Springs, CO",4,0,105.0,0.0
+"State College, PA",5,0,690.0,0.0
+"St. Louis city, MO",55,0,11327.0,0.0
+"St. George, UT",7,0,673.0,0.0
+"St. Cloud, MN",7,0,706.0,0.0
+"Springfield, IL",9,0,1276.0,0.0
+"Spokane, WA",22,0,2375.0,0.0
+"Spirit Lake, IA",4,0,220.0,0.0
+"Spartanburg, SC",10,0,1323.0,0.0
+"Somerset, KY",4,0,375.0,0.0
+"Sioux Center, IA",9,0,210.0,0.0
+"Memphis, TN--MS--AR",29,0,14111.0,0.0
+"Sidney, NE",3,0,50.0,0.0
+"Shelby city, MT",4,0,87.0,0.0
+"Sheboygan, WI",5,0,725.0,0.0
+"Sequim, WA",3,0,122.0,0.0
+"Seminole, TX",2,0,57.0,0.0
+"Searcy, AR",5,0,633.0,0.0
+"Scott City city, KS",6,0,160.0,0.0
+"Savannah, GA",20,0,2145.0,0.0
+"Sault Ste. Marie, MI",4,0,142.0,0.0
+"Sandusky--Port Clinton, OH",7,0,836.0,0.0
+"Meridian, MS",17,0,1208.0,0.0
+"Aberdeen, SD",6,0,161.0,0.0
+"Medford, OR",4,0,720.0,0.0
+"Daytona Beach--Palm Coast--Port Orange, FL",11,0,1841.0,0.0
+"Danville, KY",4,0,271.0,0.0
+"Dalton, GA",7,0,1044.0,0.0
+"Dallas city, TX",129,0,15940.0,0.0
+"Cumberland, MD--WV--PA",5,0,399.0,0.0
+"Crossville, TN",2,0,274.0,0.0
+"Creston, IA",8,0,188.0,0.0
+"Crescent City, CA",3,0,116.0,0.0
+"Covington, VA",2,0,235.0,0.0
+"Cookeville, TN",6,0,672.0,0.0
+"Concordia, KS",6,0,150.0,0.0
+"Columbus, NE",5,0,139.0,0.0
+"Columbus, IN",3,0,299.0,0.0
+"Columbus, GA--AL",22,0,2868.0,0.0
+"Columbia, TN",5,0,524.0,0.0
+"Colstrip city, MT",1,0,24.0,0.0
+"College Station--Bryan, TX",9,0,721.0,0.0
+"Colby, KS",4,0,89.0,0.0
+"Coeur d'Alene, ID",6,0,476.0,0.0
+"Cody, WY",4,0,78.0,0.0
+"Chincoteague, VA",1,0,52.0,0.0
+"Chillicothe, MO",3,0,75.0,0.0
+"Childress, TX",2,0,52.0,0.0
+"Chester town, MT",1,0,25.0,0.0
+"Chattanooga, TN--GA",21,0,8045.0,0.0
+"Charlottesville, VA",4,0,909.0,0.0
+"Champaign, IL",9,0,1232.0,0.0
+"Chamberlain city, SD",2,0,36.0,0.0
+"Davenport, IA--IL",15,0,2101.0,0.0
+"De Queen, AR",6,0,192.0,0.0
+"Cedar Rapids, IA",14,0,2913.0,0.0
+"Decatur, IL",7,0,899.0,0.0
+"Evanston, WY",6,0,364.0,0.0
+"Eureka, CA",6,0,291.0,0.0
+"Eugene, OR",9,0,1011.0,0.0
+"Enterprise city, OR",1,0,25.0,0.0
+"Enid, OK",6,0,508.0,0.0
+"Elmira, NY",10,0,1425.0,0.0
+"Elkins, WV",3,0,177.0,0.0
+"El Dorado, AR",3,0,289.0,0.0
+"Eau Claire, WI",13,0,1114.0,0.0
+"Eastpoint CDP, FL",1,0,25.0,0.0
+"Eagle Pass, TX",5,0,227.0,0.0
+"Dyersburg, TN",2,0,250.0,0.0
+"Dumas, TX",3,0,71.0,0.0
+"Duluth, MN--WI",15,0,1336.0,0.0
+"Dublin, GA",4,0,450.0,0.0
+"Douglas, GA",4,0,197.0,0.0
+"Dothan, AL",11,0,1217.0,0.0
+"Dodge City, KS",5,0,204.0,0.0
+"Dillon, MT",1,0,18.0,0.0
+"Dillingham city, AK",2,0,30.0,0.0
+"Dickinson, ND",1,0,25.0,0.0
+"Devils Lake, ND",2,0,44.0,0.0
+"Detroit, MI",129,0,21611.0,0.0
+"Des Moines, IA",16,0,2138.0,0.0
+"Denison, IA",4,0,108.0,0.0
+"Delta city, UT",2,0,37.0,0.0
+"Decorah, IA",3,0,62.0,0.0
+"Centralia, IL",7,0,458.0,0.0
+"Carrington city, ND",2,0,50.0,0.0
+"McCook, NE",3,0,52.0,0.0
+"Bartlesville, OK",8,0,295.0,0.0
+"Baker city, MT",2,0,50.0,0.0
+"Austin, TX",56,0,5336.0,0.0
+"Atwood city, KS",2,0,31.0,0.0
+"Athens-Clarke County, GA",5,0,678.0,0.0
+"Athens, OH",4,0,711.0,0.0
+"Ashland, WI",2,0,60.0,0.0
+"Asheville, NC",8,0,1501.0,0.0
+"Arecibo zona urbana, PR",8,0,1105.0,0.0
+"Appleton, WI",19,0,1876.0,0.0
+"Anniston--Oxford, AL",13,0,1462.0,0.0
+"Andrews town, NC",3,0,127.0,0.0
+"Andalusia, AL",6,0,481.0,0.0
+"Ames, IA",8,0,462.0,0.0
+"Americus, GA",2,0,125.0,0.0
+"Amarillo, TX",14,0,1278.0,0.0
+"Altus, OK",4,0,127.0,0.0
+"Altoona, PA",14,0,1617.0,0.0
+"Alpine, TX",1,0,25.0,0.0
+"Alpena, MI",6,0,383.0,0.0
+"Alliance, NE",5,0,134.0,0.0
+"Alice, TX",1,0,135.0,0.0
+"Alexandria, MN",12,0,554.0,0.0
+"Albany--Schenectady, NY",22,0,3526.0,0.0
+"Albany, GA",6,0,1165.0,0.0
+"Alamosa, CO",3,0,83.0,0.0
+"Aguadilla--Isabela--San Sebastián, PR",2,0,260.0,0.0
+"Abilene, TX",8,0,1036.0,0.0
+"Bardstown, KY",7,0,374.0,0.0
+"Batesville, AR",4,0,299.0,0.0
+"Cape Girardeau, MO--IL",7,0,881.0,0.0
+"Beloit city, KS",4,0,82.0,0.0
+"Cape Coral, FL",16,0,3301.0,0.0
+"Caguas zona urbana, PR",5,0,793.0,0.0
+"Cadillac, MI",3,0,123.0,0.0
+"Burns, OR",1,0,25.0,0.0
+"Burlington, VT",5,0,805.0,0.0
+"Burlington, NC",3,0,560.0,0.0
+"Burlington, IA--IL",6,0,504.0,0.0
+"Burlington city, CO",2,0,44.0,0.0
+"Burley, ID",2,0,50.0,0.0
+"Brunswick--St. Simons, GA",3,0,632.0,0.0
+"Brownwood, TX",5,0,361.0,0.0
+"Brookings, SD",4,0,146.0,0.0
+"Broken Bow city, NE",2,0,35.0,0.0
+"Brainerd, MN",10,0,482.0,0.0
+"Brady, TX",2,0,40.0,0.0
+"Bradford, PA--NY",5,0,240.0,0.0
+"Bradenton--Sarasota--Venice, FL",18,0,3457.0,0.0
+"Bozeman, MT",9,0,409.0,0.0
+"Bowman city, ND",2,0,48.0,0.0
+"Bowling Green, KY",8,0,948.0,0.0
+"Blytheville, AR",3,0,291.0,0.0
+"Bluefield, WV--VA",8,0,961.0,0.0
+"Bloomington, IN",8,0,536.0,0.0
+"Birmingham, AL",24,0,5736.0,0.0
+"Binghamton, NY",11,0,1274.0,0.0
+"Bethel, AK",1,0,37.0,0.0
+"Bend, OR",4,0,381.0,0.0
+"Evansville, IN",15,0,1806.0,0.0
+"Falls City, NE",6,0,132.0,0.0
+"Farmington, MO",7,0,576.0,0.0
+"Las Vegas, NM",6,0,255.0,0.0
+"Lansing, MI",15,0,1389.0,0.0
+"Lakeland, FL",12,0,2236.0,0.0
+"Lake City, FL",7,0,567.0,0.0
+"Lafayette, IN",13,0,1388.0,0.0
+"La Grande, OR",2,0,50.0,0.0
+"Kotzebue city, AK",1,0,17.0,0.0
+"Kodiak--Mill Bay, AK",1,0,25.0,0.0
+"Knoxville, TN",21,0,4856.0,0.0
+"Klamath Falls--Altamont, OR",5,0,249.0,0.0
+"Kirksville, MO",4,0,158.0,0.0
+"Ketchikan, AK",1,0,25.0,0.0
+"Kerrville, TX",5,0,652.0,0.0
+"Kennewick--Richland--Pasco, WA",12,0,895.0,0.0
+"Kenai, AK",3,0,77.0,0.0
+"Keene, NH",4,0,398.0,0.0
+"Kearney, NE",11,0,476.0,0.0
+"Kapaa, HI",3,0,111.0,0.0
+"Kankakee, IL",3,0,507.0,0.0
+"Kalispell, MT",5,0,317.0,0.0
+"Kahului--Wailuku, HI",4,0,247.0,0.0
+"Juneau, AK",1,0,73.0,0.0
+"Jordan town, MT",1,0,25.0,0.0
+"Jonesboro, AR",9,0,1076.0,0.0
+"John Day city, OR",1,0,25.0,0.0
+"Jamestown, ND",5,0,223.0,0.0
+"Jacksonville, NC",5,0,791.0,0.0
+"Jacksonville, FL",34,0,6805.0,0.0
+"Laramie, WY",3,0,124.0,0.0
+"Lewiston, ID--WA",10,0,390.0,0.0
+"Farmville, VA",3,0,431.0,0.0
+"Lewistown, MT",1,0,25.0,0.0
+"McComb, MS",7,0,390.0,0.0
+"McCall, ID",2,0,25.0,0.0
+"McAllen, TX",36,0,4673.0,0.0
+"Maysville, KY--OH",2,0,125.0,0.0
+"Mason City, IA",8,0,945.0,0.0
+"Maryville, MO",2,0,106.0,0.0
+"Martinsville, VA",1,0,220.0,0.0
+"Marquette, MI",6,0,295.0,0.0
+"Marion--Herrin, IL",12,0,1009.0,0.0
+"Marion, VA",5,0,497.0,0.0
+"Marinette--Menominee, WI--MI",4,0,146.0,0.0
+"Mansfield, OH",8,0,935.0,0.0
+"Mankato, MN",10,0,567.0,0.0
+"Malta city, MT",1,0,6.0,0.0
+"Magnolia, AR",1,0,49.0,0.0
+"Lynchburg, VA",5,0,1539.0,0.0
+"Lufkin, TX",6,0,593.0,0.0
+"Ludington, MI",2,0,90.0,0.0
+"Lubbock, TX",20,0,1980.0,0.0
+"Longview, TX",9,0,1031.0,0.0
+"Logansport, IN",5,0,317.0,0.0
+"Logan, UT",6,0,270.0,0.0
+"Livingston, MT",2,0,50.0,0.0
+"Lisbon city, ND",2,0,45.0,0.0
+"Lima, OH",9,0,1207.0,0.0
+"Liberal, KS",5,0,144.0,0.0
+"Lexington, VA",1,0,25.0,0.0
+"Jackson, WY",2,0,91.0,0.0
+"Jackson, TN",9,0,1929.0,0.0
+"Jackson, MS",21,0,4915.0,0.0
+"Jackson, MI",7,0,617.0,0.0
+"Greenville, SC",24,0,3439.0,0.0
+"Greenville, NC",5,0,1686.0,0.0
+"Greenville, MS",8,0,697.0,0.0
+"Greensburg, IN",2,0,50.0,0.0
+"Greendale--Lawrenceburg--Hidden Valley, IN--OH",5,0,315.0,0.0
+"Green Bay, WI",14,0,1409.0,0.0
+"Great Bend, KS",6,0,744.0,0.0
+"Granite City city, IL",13,0,962.0,0.0
+"Grand Marais city, MN",1,0,16.0,0.0
+"Graham, TX",6,0,173.0,0.0
+"Grafton city, ND",5,0,83.0,0.0
+"Goodland, KS",1,0,25.0,0.0
+"Gonzales, TX",4,0,163.0,0.0
+"Glasgow, KY",3,0,254.0,0.0
+"Glasgow city, MT",5,0,117.0,0.0
+"Gillette, WY",3,0,118.0,0.0
+"Garden City, KS",6,0,212.0,0.0
+"Gainesville, FL",7,0,1988.0,0.0
+"Gadsden, AL",10,0,1368.0,0.0
+"Friday Harbor, WA",1,0,15.0,0.0
+"Fredericksburg, VA",4,0,1404.0,0.0
+"Fort Wayne, IN",24,0,2684.0,0.0
+"Fort Stockton, TX",2,0,39.0,0.0
+"Fort Dodge, IA",4,0,299.0,0.0
+"Fort Collins, CO",13,0,1299.0,0.0
+"Findlay, OH",7,0,531.0,0.0
+"Fayetteville--Springdale--Rogers, AR--MO",15,0,1669.0,0.0
+"Greenville, TX",4,0,471.0,0.0
+"Greenwood, MS",3,0,375.0,0.0
+"Gunnison, CO",1,0,24.0,0.0
+"Hilo, HI",6,0,333.0,0.0
+"Ironwood, MI--WI",2,0,43.0,0.0
+"Iowa Falls, IA",4,0,107.0,0.0
+"International Falls, MN",1,0,25.0,0.0
+"Idaho Falls, ID",3,0,423.0,0.0
+"Hutchinson, KS",11,0,536.0,0.0
+"Hugoton city, KS",3,0,70.0,0.0
+"Houston, TX",152,0,22137.0,0.0
+"Houma, LA",11,0,1011.0,0.0
+"Houghton--Hancock, MI",3,0,76.0,0.0
+"Houghton Lake, MI",3,0,205.0,0.0
+"Hot Springs, AR",10,0,763.0,0.0
+"Hobbs, NM",3,0,162.0,0.0
+"Hickory, NC",6,0,1244.0,0.0
+"Guymon, OK",3,0,72.0,0.0
+"Henderson, KY",5,0,680.0,0.0
+"Helena-West Helena, AR",5,0,372.0,0.0
+"Heber Springs, AR",2,0,50.0,0.0
+"Hazard, KY",4,0,528.0,0.0
+"Hays, KS",6,0,318.0,0.0
+"Hattiesburg, MS",13,0,1405.0,0.0
+"Hastings, NE",4,0,225.0,0.0
+"Harrisonburg, VA",6,0,723.0,0.0
+"Harrison, AR",3,0,214.0,0.0
+"Harrisburg, IL",3,0,127.0,0.0
+"Harlan, KY",1,0,150.0,0.0
+"Hamilton city, AL",3,0,159.0,0.0
+"Lakeview town, OR",1,0,24.0,0.0

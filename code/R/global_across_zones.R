@@ -8,22 +8,31 @@
 # test (Myllymaki et al. 2017). It REUSES the *_simfuns.rds written by the
 # per-zone runs, so nothing is re-simulated.
 #
-# Usage:
-#   Rscript code/R/global_across_zones.R <sim_dir> [out_csv]
-#   Rscript code/R/global_across_zones.R output/ambient
+# Each layer (facilities/beds/trauma) saved its own simfuns, so the family-wise
+# test runs PER LAYER -- mixing layers into one combined test would be wrong.
+# Select the layer with the 2nd arg (all | beds | trauma; default all).
 #
-# Output: <sim_dir>/_global_across_zones.csv  (per-zone family-wise verdict)
-#   and prints the combined family-wise global p-value.
+# Usage:
+#   Rscript code/R/global_across_zones.R <sim_dir> [layer] [out_csv]
+#   Rscript code/R/global_across_zones.R output/ambient all
+#   Rscript code/R/global_across_zones.R output/residential trauma
+#
+# Output: <sim_dir>/_global_across_zones_<layer>.csv (per-zone family-wise verdict)
+#   and prints the combined family-wise global p-value for that layer.
 
 suppressPackageStartupMessages({ library(GET) })
 
 args    <- commandArgs(trailingOnly = TRUE)
 sim_dir <- if (length(args) >= 1) args[1] else "output/ambient"
-out_csv <- if (length(args) >= 2) args[2] else file.path(sim_dir, "_global_across_zones.csv")
+layer   <- if (length(args) >= 2) args[2] else "all"
+out_csv <- if (length(args) >= 3) args[3] else
+             file.path(sim_dir, sprintf("_global_across_zones_%s.csv", layer))
 
-files <- list.files(sim_dir, pattern = "_simfuns\\.rds$", full.names = TRUE)
-if (!length(files)) stop("no *_simfuns.rds in ", sim_dir,
-                         " -- run the per-zone analysis with save_sims first")
+files <- list.files(sim_dir, pattern = sprintf("_%s_simfuns\\.rds$", layer),
+                    full.names = TRUE)
+if (!length(files)) stop("no *_", layer, "_simfuns.rds in ", sim_dir,
+                         " -- run the combined per-zone analysis first")
+message(sprintf("layer = %s", layer))
 
 cs <- list(); zones <- character()
 for (f in files) {
