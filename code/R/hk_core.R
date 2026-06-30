@@ -25,6 +25,7 @@ suppressPackageStartupMessages({
   library(sf)
   library(terra)
   library(spatstat)
+  library(GET)
   library(ggplot2)
 })
 
@@ -104,7 +105,7 @@ run_hk <- function(window_name, windows_sf, hospitals_sf, raster_path,
                    weight_by = c("none", "beds"),
                    nsim = 999, r_max = NULL, r_step = NULL,
                    correction = "Ripley", seed = 42, res_m = 1000,
-                   min_hospitals = 8, verbose = TRUE) {
+                   min_hospitals = 8, save_sims = TRUE, verbose = TRUE) {
   subset    <- match.arg(subset)
   weight_by <- match.arg(weight_by)
   t0 <- Sys.time()
@@ -169,8 +170,16 @@ run_hk <- function(window_name, windows_sf, hospitals_sf, raster_path,
     X, fun = Kfun, nsim = nsim, simulate = expression(sim_one()),
     savefuns = TRUE, verbose = verbose
   )
-  env_df <- as.data.frame(env)
-  env_df$theo <- pi * env_df$r^2
+  # Global (family-wise over the whole r-curve) envelope test, ERL ordering,
+  # alpha = 0.05 (Myllymaki et al. 2017; GET package). This replaces the raw
+  # pointwise min/max band, which at nsim=999 is the 1st/999th extreme -- far
+  # too conservative (per-r alpha ~0.001) and, at small nsim, too narrow (false
+  # positives). The ERL band has a controlled GLOBAL 5% level across all r and
+  # yields one global p-value per zone. lo/hi below are the 95% global band.
+  gt <- GET::global_envelope_test(env, type = "erl", alpha = 0.05)
+  global_p <- as.numeric(attr(gt, "p"))
+  env_df <- data.frame(r = gt$r, obs = gt$obs, mmean = gt$central,
+                       lo = gt$lo, hi = gt$hi, theo = pi * gt$r^2)
 
   # --- verdict + outputs ---------------------------------------------------
   above <- env_df$obs > env_df$hi
@@ -180,6 +189,21 @@ run_hk <- function(window_name, windows_sf, hospitals_sf, raster_path,
   png_path  <- file.path(out_dir, paste0(tag, "_envelope.png"))
   csv_path  <- file.path(out_dir, paste0(tag, "_envelope.csv"))
   meta_path <- file.path(out_dir, paste0(tag, "_meta.json"))
+
+  # Persist the 999 simulated K-curves (+ observed) so the across-zone
+  # family-wise global test (code/R/global_across_zones.R) and any re-analysis
+  # can reuse them WITHOUT re-simulating. Sims are valid only for THIS
+  # (zone, pop_kind, subset, weight_by) -- lambda and n differ across those.
+  if (save_sims) {
+    simfv <- attr(env, "simfuns")
+    simm  <- if (!is.null(simfv))
+               as.matrix(as.data.frame(simfv)[, -1, drop = FALSE]) else NULL
+    saveRDS(list(r = env_df$r, obs = env_df$obs, sims = simm,
+                 window = window_name, pop_kind = pop_kind, subset = subset,
+                 weight_by = weight_by, nsim = nsim, n_hospitals = n,
+                 r_capped = r_capped, seed = seed),
+            file.path(out_dir, paste0(tag, "_simfuns.rds")))
+  }
 
   p <- ggplot(env_df, aes(x = r)) +
     geom_ribbon(aes(ymin = lo, ymax = hi), fill = "grey80", alpha = .6) +
@@ -198,6 +222,9 @@ run_hk <- function(window_name, windows_sf, hospitals_sf, raster_path,
                nsim = nsim, r_max = r_max, r_step = r_step, r_capped = r_capped,
                correction = correction, res_m = res_m, seed = seed,
                lambda_floor = lam$floor_used, pop_integral = lam$integral_pop,
+               global_p = global_p,
+               verdict = if (any(above)) "over-concentrated"
+                         else if (any(below)) "dispersed" else "consistent",
                r_first_overconc = if (any(above)) min(env_df$r[above]) else NA_real_,
                frac_r_overconc = mean(above), frac_r_dispersed = mean(below),
                runtime_sec = round(as.numeric(difftime(Sys.time(), t0, "secs")), 1))

@@ -60,6 +60,7 @@ process HK {
     output:
     path "*_envelope.png", optional: true
     path "*_envelope.csv", optional: true
+    path "*_simfuns.rds",  optional: true
     path "*_meta.json",    optional: true, emit: meta
 
     script:

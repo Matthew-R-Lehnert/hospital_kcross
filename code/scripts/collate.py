@@ -11,8 +11,9 @@ import json
 import sys
 
 FIELDS = ["window", "pop_kind", "subset", "weight_by", "n_hospitals", "nsim",
-          "r_max", "r_step", "r_capped", "frac_r_overconc", "frac_r_dispersed",
-          "r_first_overconc", "lambda_floor", "runtime_sec", "epsg"]
+          "r_max", "r_step", "r_capped", "verdict", "global_p",
+          "frac_r_overconc", "frac_r_dispersed", "r_first_overconc",
+          "lambda_floor", "runtime_sec", "epsg"]
 
 
 def main(paths: list[str]) -> int:
