@@ -19,16 +19,18 @@ threshold should be read with that caveat, and we recommend a sensitivity check
 at higher thresholds (e.g., 10 and 15) to confirm the headline verdicts are not
 threshold-sensitive.
 
-## These zones are not ignored
+## These zones are not ignored: only the K test is gated
 
-Skipping the **K-test** in a sparse zone is not the same as excluding its
-population from the study's concern. A zone with few hospitals and substantial
-population is a candidate access desert, but "are hospitals *clustered relative
-to population within the zone*" is the wrong question there (there is no cluster
-structure to test); the right question is **coverage / distance** (how far is the
-population from the nearest hospital). Sparse zones are therefore the natural
-domain of the complementary population-weighted coverage metric, not of the
-clustering test. We report them explicitly rather than dropping them silently.
+The minimum applies **only to the concentration (K) axis**. The **coverage** and
+**sufficiency** axes are computed for *every* zone with at least one hospital,
+including all the sparse ones below the threshold. This is deliberate: a zone
+with few hospitals and substantial population is a candidate access desert, and
+"are hospitals *clustered relative to population*" is the wrong question there
+(there is no cluster structure to test), whereas "how far is the population from
+the nearest hospital" (coverage) and "are there enough beds per person"
+(sufficiency) remain well-defined and are exactly right. So the rural zones the
+K test cannot speak to are precisely the ones coverage and sufficiency do cover.
+Only concentration is restricted to the 261 zones with at least 8 hospitals.
 
 ## Summary (threshold = 8 hospitals, LandScan 2020 ambient population)
 

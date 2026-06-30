@@ -4,23 +4,25 @@
 # permutations (hospitals resampled, population fixed):
 #
 #   CONCENTRATION  is supply clumped beyond population?   inhomogeneous K
-#                  - facilities (unweighted) and beds (capacity-weighted)
+#                  (facilities + bed-weighted); needs >= min_hospitals points.
 #   COVERAGE       are people far from care?              pop-weighted distance
-#                  to nearest hospital, vs the same null (curve over distance)
-#   SUFFICIENCY    is there enough capacity per person?   beds per 1,000 pop
+#                  to nearest hospital, vs the same null; runs for ANY zone with
+#                  >= 1 hospital (so rural/desert zones are included).
+#   SUFFICIENCY    is there enough capacity per person?   beds per 1,000 pop;
+#                  computed for EVERY zone.
 #
-# CROSS-BORDER (buffered) COVERAGE: a person near the zone edge may be served by
-# a hospital in a neighbouring zone, so restricting coverage to in-zone
-# hospitals would invent false edge deserts. The coverage axis therefore uses
-# every hospital within the zone OR within `buffer_km` of it; the null resamples
-# only the IN-ZONE hospitals (the allocation question) while holding the
-# out-of-zone buffer hospitals FIXED, so both observed and null credit
-# cross-border access. Concentration (K, edge-corrected) and sufficiency remain
-# in-zone quantities.
+# Only the second-order K test needs a minimum hospital count; coverage and
+# sufficiency are defined with one (or zero) hospitals, which is exactly where
+# deserts live, so they are not gated by the concentration threshold.
+#
+# CROSS-BORDER coverage: observed distance uses hospitals within the zone OR
+# within buffer_km of it; the null resamples only IN-ZONE hospitals while
+# holding out-of-zone buffer hospitals fixed, crediting cross-border access in
+# both observed and null.
 #
 # Estimator: spatstat::Kinhom (validated). Bed-weighting via the per-point
-# intensity identity L_i/w_i. Verdict: GET global ERL. The 999 curves are saved
-# per layer for the across-zone family-wise test.
+# intensity identity L_i/w_i. Verdict: GET global ERL. 999 curves saved per
+# layer for the across-zone family-wise test.
 # =============================================================================
 
 suppressPackageStartupMessages({
@@ -76,7 +78,6 @@ run_hk_all <- function(window_name, windows_sf, hospitals_sf, raster_path,
   win  <- spatstat.geom::as.owin(wU)
   buf_poly <- sf::st_buffer(wU, buffer_km * 1000); Wbuf <- spatstat.geom::as.owin(buf_poly)
 
-  # in-zone hospitals (for K, beds, sufficiency) + out-of-zone buffer neighbours
   h_all   <- sf::st_transform(hospitals_sf, epsg)
   in_mask <- sf::st_within(h_all, wU, sparse = FALSE)[, 1]
   in_buf  <- sf::st_within(h_all, buf_poly, sparse = FALSE)[, 1]
@@ -88,8 +89,9 @@ run_hk_all <- function(window_name, windows_sf, hospitals_sf, raster_path,
 
   pim <- population_im(raster_path, wU, epsg, res_m = res_m)
   pop_total <- sum(pim$v, na.rm = TRUE)
+  tagbase <- gsub("[^A-Za-z0-9]+", "_", window_name)
 
-  # --- SUFFICIENCY (always; covers sparse zones the K-test skips) -----------
+  # --- SUFFICIENCY (every zone) --------------------------------------------
   beds_known <- h$beds[is.finite(h$beds) & h$beds > 0]
   beds_total <- sum(beds_known)
   beds_per_1000 <- if (pop_total > 0) 1000 * beds_total / pop_total else NA_real_
@@ -98,76 +100,65 @@ run_hk_all <- function(window_name, windows_sf, hospitals_sf, raster_path,
                ratio_to_US = beds_per_1000 / BEDS_PER_1000_US,
                ratio_to_OECD = beds_per_1000 / BEDS_PER_1000_OECD,
                us_ref = BEDS_PER_1000_US, oecd_ref = BEDS_PER_1000_OECD)
-  tagbase <- gsub("[^A-Za-z0-9]+", "_", window_name)
   writeLines(.json(c(list(window = window_name, pop_kind = pop_kind), suff)),
              file.path(out_dir, sprintf("%s_%s_sufficiency_meta.json", tagbase, pop_kind)))
 
-  if (n_all < min_hospitals)
-    return(invisible(list(skipped_pp = TRUE, window = window_name, n = n_all, sufficiency = suff,
-        reason = sprintf("only %d hospitals (< %d): point-pattern tests skipped, sufficiency reported", n_all, min_hospitals))))
+  if (n_all == 0)
+    return(invisible(list(skipped_pp = TRUE, window = window_name, n = 0, sufficiency = suff,
+        reason = "no in-zone hospitals: sufficiency reported (beds_per_1000 = 0)")))
 
-  X_all <- spatstat.geom::ppp(hc[, 1], hc[, 2], window = win, checkdup = FALSE)
-  beds  <- h$beds; if (is.na(beds_median)) beds_median <- stats::median(beds, na.rm = TRUE)
-  n_imp <- sum(is.na(beds) | beds < 1); beds[is.na(beds) | beds < 1] <- beds_median
-
+  do_conc <- n_all >= min_hospitals
+  X_all   <- spatstat.geom::ppp(hc[, 1], hc[, 2], window = win, checkdup = FALSE)
   lam_all <- lambda_im(pim, n_all)$im
   g_im    <- lambda_im(pim, 1)$im
 
-  # populated in-zone cells (coverage), placed in the buffered window so distance
-  # to out-of-zone hospitals is computable
+  # populated in-zone cells (coverage), placed in the buffered window
   ix  <- which(is.finite(pim$v) & pim$v > 0, arr.ind = TRUE)
   cx  <- pim$xcol[ix[, 2]]; cy <- pim$yrow[ix[, 1]]; wv <- pim$v[ix]
   ins <- spatstat.geom::inside.owin(cx, cy, win)
-  cells <- spatstat.geom::ppp(cx[ins], cy[ins], window = Wbuf, checkdup = FALSE)
-  cellw <- wv[ins]
-
-  bb <- spatstat.geom::as.rectangle(win)
-  maxdim <- max(diff(bb$xrange), diff(bb$yrange))
-  r_max <- min(50000, 0.25 * min(diff(bb$xrange), diff(bb$yrange)))
-  r <- seq(0, r_max, by = 1000); r_capped <- r_max < 50000
+  cells <- spatstat.geom::ppp(cx[ins], cy[ins], window = Wbuf, checkdup = FALSE); cellw <- wv[ins]
+  bb <- spatstat.geom::as.rectangle(win); maxdim <- max(diff(bb$xrange), diff(bb$yrange))
   cov_d <- seq(0, min(100000, maxdim), by = 2000)
-  KI  <- function(P, lam) spatstat.explore::Kinhom(P, lambda = lam, r = r,
-                                                  correction = "Ripley", renormalise = TRUE)$iso
-  gat <- function(P) as.numeric(g_im[P, drop = FALSE])
-  covf <- function(hx, hy) {                          # % pop beyond d from nearest hospital (in-zone + buffer)
+  covf <- function(hx, hy) {
+    if (!length(hx)) return(rep(1, length(cov_d)))
     H <- spatstat.geom::ppp(hx, hy, window = Wbuf, checkdup = FALSE)
     d <- spatstat.geom::nncross(cells, H, what = "dist")
     vapply(cov_d, function(dd) sum(cellw[d > dd]) / sum(cellw), numeric(1))
   }
 
-  K_fac_obs <- KI(X_all, lam_all)
-  K_bed_obs <- KI(X_all, (sum(beds) * gat(X_all)) / beds)
-  cov_obs   <- covf(c(hc[, 1], nbx), c(hc[, 2], nby))
+  # concentration machinery only when there are enough hospitals
+  if (do_conc) {
+    beds  <- h$beds; if (is.na(beds_median)) beds_median <- stats::median(beds, na.rm = TRUE)
+    n_imp <- sum(is.na(beds) | beds < 1); beds[is.na(beds) | beds < 1] <- beds_median
+    r_max <- min(50000, 0.25 * min(diff(bb$xrange), diff(bb$yrange)))
+    r <- seq(0, r_max, by = 1000); r_capped <- r_max < 50000
+    KI  <- function(P, lam) spatstat.explore::Kinhom(P, lambda = lam, r = r,
+                                                    correction = "Ripley", renormalise = TRUE)$iso
+    gat <- function(P) as.numeric(g_im[P, drop = FALSE])
+    K_fac_obs <- KI(X_all, lam_all); K_bed_obs <- KI(X_all, (sum(beds) * gat(X_all)) / beds)
+  } else { n_imp <- NA; r_max <- NA; r_capped <- NA }
+
+  cov_obs <- covf(c(hc[, 1], nbx), c(hc[, 2], nby))
 
   set.seed(seed)
   fac <- bed <- cov <- vector("list", nsim)
   for (s in seq_len(nsim)) {
     P  <- spatstat.random::rpoispp(lam_all)[win]; np <- spatstat.geom::npoints(P)
-    if (np >= 2) {
-      fac[[s]] <- KI(P, lam_all)
-      ws <- sample(beds, np, replace = TRUE); bed[[s]] <- KI(P, (sum(ws) * gat(P)) / ws)
-    } else { fac[[s]] <- rep(0, length(r)); bed[[s]] <- rep(0, length(r)) }
-    cov[[s]] <- covf(c(P$x, nbx), c(P$y, nby))        # resampled in-zone + FIXED neighbours
+    cov[[s]] <- covf(c(P$x, nbx), c(P$y, nby))
+    if (do_conc) {
+      if (np >= 2) {
+        fac[[s]] <- KI(P, lam_all)
+        ws <- sample(beds, np, replace = TRUE); bed[[s]] <- KI(P, (sum(ws) * gat(P)) / ws)
+      } else { fac[[s]] <- rep(0, length(r)); bed[[s]] <- rep(0, length(r)) }
+    }
   }
+
   base_meta <- list(window = window_name, epsg = epsg, pop_kind = pop_kind,
-                    nsim = nsim, r_max = r_max, r_step = 1000, r_capped = r_capped,
-                    correction = "Ripley", res_m = res_m, seed = seed,
+                    nsim = nsim, r_max = r_max, r_capped = r_capped, res_m = res_m, seed = seed,
                     n_hospitals = n_all, n_neighbors = nrow(nb), buffer_km = buffer_km,
                     beds_imputed = n_imp, beds_median = beds_median, beds_per_1000 = beds_per_1000)
 
   res <- list(sufficiency = suff)
-  res$facilities <- .finalize_layer(
-    sprintf("%s_%s_all", tagbase, pop_kind), r, K_fac_obs, do.call(cbind, fac),
-    out_dir, sprintf("%s -- hospitals vs %s population", window_name, pop_kind),
-    expression(italic(K)[inhom](r)),
-    c(base_meta, list(layer = "facilities", subset = "all", weight_by = "none")))
-  res$beds <- .finalize_layer(
-    sprintf("%s_%s_beds", tagbase, pop_kind), r, K_bed_obs, do.call(cbind, bed),
-    out_dir, sprintf("%s -- bed supply vs %s population", window_name, pop_kind),
-    expression(italic(K)[inhom]^{beds}(r)),
-    c(base_meta, list(layer = "beds", subset = "all", weight_by = "beds")))
-  # descriptive: % population beyond several access thresholds (test itself is
-  # threshold-free; 35 mi ~ the CMS Critical Access Hospital distance rule)
   thr_mi <- c(10, 25, 35)
   pct <- lapply(thr_mi, function(mi) round(100 * cov_obs[which.min(abs(cov_d - mi * 1609.34))], 2))
   names(pct) <- paste0("pct_pop_beyond_", thr_mi, "mi")
@@ -179,9 +170,22 @@ run_hk_all <- function(window_name, windows_sf, hospitals_sf, raster_path,
     c(base_meta, list(layer = "coverage"), pct),
     above_label = "under-served", below_label = "over-served", show_theo = FALSE)
 
-  if (verbose) message(sprintf("  [%s/%s] n=%d (+%d nbr) beds/1k=%.2f  %.1fs  conc=%s beds=%s cover=%s",
+  if (do_conc) {
+    res$facilities <- .finalize_layer(
+      sprintf("%s_%s_all", tagbase, pop_kind), r, K_fac_obs, do.call(cbind, fac),
+      out_dir, sprintf("%s -- hospitals vs %s population", window_name, pop_kind),
+      expression(italic(K)[inhom](r)),
+      c(base_meta, list(layer = "facilities", subset = "all", weight_by = "none")))
+    res$beds <- .finalize_layer(
+      sprintf("%s_%s_beds", tagbase, pop_kind), r, K_bed_obs, do.call(cbind, bed),
+      out_dir, sprintf("%s -- bed supply vs %s population", window_name, pop_kind),
+      expression(italic(K)[inhom]^{beds}(r)),
+      c(base_meta, list(layer = "beds", subset = "all", weight_by = "beds")))
+  }
+
+  if (verbose) message(sprintf("  [%s/%s] n=%d (+%d nbr) beds/1k=%.2f  %.1fs  conc=%s cover=%s",
       window_name, pop_kind, n_all, nrow(nb), beds_per_1000,
       as.numeric(difftime(Sys.time(), t0, units = "secs")),
-      res$facilities$verdict, res$beds$verdict, res$coverage$verdict))
+      if (do_conc) res$facilities$verdict else "skip(<min)", res$coverage$verdict))
   invisible(res)
 }
