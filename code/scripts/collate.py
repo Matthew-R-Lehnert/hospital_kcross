@@ -10,9 +10,11 @@ import csv
 import json
 import sys
 
-FIELDS = ["window", "pop_kind", "layer", "n_hospitals", "nsim", "verdict",
-          "global_p", "frac_above", "frac_below", "beds_per_1000",
-          "ratio_to_US", "ratio_to_OECD", "beds_imputed", "r_max", "r_capped"]
+FIELDS = ["window", "pop_kind", "layer", "n_hospitals", "n_neighbors", "nsim",
+          "verdict", "global_p", "frac_above", "frac_below",
+          "pct_pop_beyond_10mi", "pct_pop_beyond_25mi", "pct_pop_beyond_35mi",
+          "beds_per_1000", "ratio_to_US", "ratio_to_OECD", "beds_imputed",
+          "buffer_km", "r_max", "r_capped"]
 
 
 def main(paths: list[str]) -> int:

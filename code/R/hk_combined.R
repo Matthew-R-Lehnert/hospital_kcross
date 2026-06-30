@@ -166,12 +166,17 @@ run_hk_all <- function(window_name, windows_sf, hospitals_sf, raster_path,
     out_dir, sprintf("%s -- bed supply vs %s population", window_name, pop_kind),
     expression(italic(K)[inhom]^{beds}(r)),
     c(base_meta, list(layer = "beds", subset = "all", weight_by = "beds")))
+  # descriptive: % population beyond several access thresholds (test itself is
+  # threshold-free; 35 mi ~ the CMS Critical Access Hospital distance rule)
+  thr_mi <- c(10, 25, 35)
+  pct <- lapply(thr_mi, function(mi) round(100 * cov_obs[which.min(abs(cov_d - mi * 1609.34))], 2))
+  names(pct) <- paste0("pct_pop_beyond_", thr_mi, "mi")
   res$coverage <- .finalize_layer(
     sprintf("%s_%s_coverage", tagbase, pop_kind), cov_d, cov_obs, do.call(cbind, cov),
     out_dir, sprintf("%s -- population beyond distance d from nearest hospital (%s, +%gkm buffer)",
                      window_name, pop_kind, buffer_km),
     "fraction of population beyond d",
-    c(base_meta, list(layer = "coverage")),
+    c(base_meta, list(layer = "coverage"), pct),
     above_label = "under-served", below_label = "over-served", show_theo = FALSE)
 
   if (verbose) message(sprintf("  [%s/%s] n=%d (+%d nbr) beds/1k=%.2f  %.1fs  conc=%s beds=%s cover=%s",

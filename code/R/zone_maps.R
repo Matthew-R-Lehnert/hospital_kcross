@@ -49,7 +49,10 @@ cells <- spatstat.geom::ppp(cx[ins], cy[ins], window = Wbuf, checkdup = FALSE)
 Hcov  <- spatstat.geom::ppp(hb[, 1], hb[, 2], window = Wbuf, checkdup = FALSE)
 dist_km <- spatstat.geom::nncross(cells, Hcov, what = "dist") / 1000
 cdf <- data.frame(x = cx[ins], y = cy[ins], pop = pv[ins], dist_km = dist_km)
-pop_far <- sum(cdf$pop[cdf$dist_km > desert_km]); pct_far <- 100 * pop_far / sum(cdf$pop)
+thr_mi <- c(10, 25, 35)
+pcts <- sapply(thr_mi * 1.60934, function(t) 100 * sum(cdf$pop[cdf$dist_km > t]) / sum(cdf$pop))
+sub_txt <- paste0(">", paste(thr_mi, collapse = "/"), " mi from a hospital: ",
+                  paste(sprintf("%.1f", pcts), collapse = "/"), "% of population; cyan = hospitals")
 
 # --- desert map: cells by distance to nearest hospital -----------------------
 p1 <- ggplot() +
@@ -58,9 +61,8 @@ p1 <- ggplot() +
   geom_sf(data = wsf, fill = NA, colour = "grey30", linewidth = .3) +
   geom_point(data = as.data.frame(hc), aes(X, Y), colour = "cyan", size = 1.1, shape = 16) +
   coord_sf(datum = epsg) +
-  labs(title = sprintf("%s -- distance to nearest hospital (%s)", zone, pop_kind),
-       subtitle = sprintf("%.1f%% of population is >%g km from a hospital; cyan = hospitals",
-                          pct_far, desert_km), x = NULL, y = NULL) +
+  labs(title = sprintf("%s -- distance to nearest hospital (%s, +%gkm buffer)", zone, pop_kind, buffer_km),
+       subtitle = sub_txt, x = NULL, y = NULL) +
   theme_minimal()
 ggsave(file.path(out_dir, paste0(tag, "_desertmap.png")), p1, width = 8, height = 7, dpi = 200)
 
@@ -83,5 +85,6 @@ p2 <- ggplot() +
   theme_minimal()
 ggsave(file.path(out_dir, paste0(tag, "_localK.png")), p2, width = 8, height = 7, dpi = 200)
 
-cat(sprintf("zone=%s n=%d  %.1f%% of population >%gkm from a hospital\n", zone, nrow(hc), pct_far, desert_km))
+cat(sprintf("zone=%s n=%d  pop >%s mi from a hospital: %s%%\n", zone, nrow(hc),
+            paste(thr_mi, collapse = "/"), paste(sprintf("%.1f", pcts), collapse = "/")))
 cat(sprintf("wrote %s_desertmap.png and %s_localK.png\n", tag, tag))
