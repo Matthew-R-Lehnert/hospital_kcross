@@ -163,16 +163,39 @@ once with the GPW residential $\lambda$, holding the hospital data, window,
 buffer, edge correction, grids, and seeds fixed. The reported contrast is the
 set of zones whose diagnosis changes between the two demand surfaces.
 
-## Validation
+## Validation and robustness
 
-The facility test reproduces the standard spatstat `Kinhom` behavior. For the
-newer bed and coverage estimators we confirm **Type-I calibration** by simulation
-(drawing patterns under the null and verifying the test rejects at the nominal
-rate): facilities, beds, and coverage all reject near 0.04 against a 0.05 target,
-confirming no estimator bias. A power analysis against an inhomogeneous Thomas
-over-concentration alternative establishes the inclusion threshold, and a
-threshold-sensitivity re-run (at 8, 10, and 15 hospitals) confirms the
-concentration headline does not depend on it (Results).
+We validate the estimators and probe every discretionary choice; the outcomes
+are in Results.
+
+**Type-I calibration.** For each estimator we draw many patterns under the null
+(hospitals proportional to population, beds resampled as in the engine) and test
+each against the others, which estimates the false-positive rate. The facility
+test also reproduces standard spatstat `Kinhom` behavior; the newer bed and
+coverage estimators are the ones this most needs to confirm.
+
+**Power and the inclusion threshold.** We estimate the concentration test's
+power as a function of the hospital count $n$ against a meaningful
+over-concentration alternative, an inhomogeneous Thomas cluster process whose
+first-order trend follows population but which adds genuine second-order
+clustering (a `pop`$^\gamma$ first-order shift is not a valid alternative here,
+since the intensity-reweighted K is designed to ignore it). For each $n$ we build
+one null pool of curves and test many alternative draws against it. The
+$\ge 8$-hospital floor for the concentration test is set from this curve and
+reported with a sensitivity re-run at 8, 10, and 15 hospitals.
+
+**Buffer-distance sensitivity.** Because the coverage null credits hospitals
+within a fixed buffer, we recompute the coverage test at 25, 50, and 100 km to
+confirm the desert verdicts are not an artifact of the buffer choice.
+
+**Modeled-versus-areal control (WorldPop).** LandScan (ambient) is modeled while
+GPW (residential) is areal, so the ambient-versus-residential contrast could be
+confounded by construction. We repeat the analysis with WorldPop, a surface that
+is modeled like LandScan but residential like GPW; whether it patterns with the
+ambient or the residential surface isolates the two effects.
+
+**Windowing comparability (CBSA).** We re-run the entire analysis on 939 CBSA
+windows to test whether the findings depend on the commuting-zone partition.
 
 ## Implementation and reproducibility
 

@@ -92,9 +92,15 @@ groups the 3,222 US and Puerto Rico counties into 598 contiguous labor markets
 following the Fowler, Rhubart, and Jensen methodology [@fowler_rhubart_jensen_2016;
 @usda_cz2020_2024]. CZ geometries are built by dissolving US Census county
 polygons (TIGER/Line) using the ERS county-to-CZ crosswalk. The 2020 vintage is
-chosen to match the 2020 population rasters (below). As a robustness and
-comparability check the analysis can additionally be run on CBSAs (urban only),
-reported as a sensitivity rather than the headline.
+chosen to match the 2020 population rasters (below).
+
+As a windowing-comparability check we additionally re-run the entire analysis on
+**Core-Based Statistical Areas** (939 metropolitan and micropolitan CBSAs,
+Census TIGER 2020 cartographic boundaries). CBSAs are the more familiar unit but
+cover only urbanized cores and their commuting fringes, omitting the
+outside-CBSA rural areas; comparing the two window sets tests whether the
+findings depend on the partition rather than on the data. The CBSA run is
+reported as a sensitivity, not the headline.
 
 ## Coordinate reference systems
 
@@ -111,3 +117,5 @@ area integral of the intensity are computed in meters with minimal distortion.
 | `commuting_zones.gpkg`                       | `acquire/02_commuting_zones.py`   | CZ boundary polygons (counties dissolved by USDA crosswalk) |
 | `landscan/landscan-global-<year>.tif`        | `acquire/03_landscan.py`          | ambient population rasters (LandScan Global) |
 | `gpw/gpw_v4_<year>.tif`                       | `acquire/04_gpw.py`               | residential population rasters (NASA SEDAC GPWv4.11) |
+| `cbsa.gpkg`                                   | `acquire/05_cbsa.py`              | 939 CBSA windows (Census TIGER 2020), robustness re-run |
+| `worldpop/worldpop_2020.tif`                  | `acquire/06_worldpop.py`          | modeled-residential control raster (WorldPop US, ~1 km) |
