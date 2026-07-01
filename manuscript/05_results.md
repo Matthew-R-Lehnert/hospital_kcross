@@ -27,6 +27,17 @@ against where people sleep is fully consistent with where people are during the
 day. The over-concentrated (residential) set is led by large and mid-size metros
 (for example Dallas, San Diego, Philadelphia, Orlando, Las Vegas, New Orleans).
 
+The bed-weighted test is not redundant with the facility test: capacity and
+building count diverge. Of the residential-population zones flagged, 9 are
+over-concentrated on both facilities and beds, 6 on facilities only (Brownsville,
+Dallas, Dayton, Erie, Johnson City, San Diego, where many similarly sized
+hospitals cluster without concentrating capacity), and 4 on beds only (Allentown,
+Augusta, Jacksonville, Saginaw, where a few large hospitals concentrate capacity
+even where building locations are not over-clustered). Measuring capacity
+therefore flags zones a facility-count analysis would miss. The bed weighting
+imputes the 5.2% of hospitals with an unknown bed count; the 9 zones where more
+than half of beds are unknown are flagged and excluded from bed claims.
+
 ## Coverage
 
 The pattern reverses on coverage. Under **ambient** population, **6 of 585**
