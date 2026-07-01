@@ -1,0 +1,16 @@
+zone,L_ratio_at_10km,eval_distance_km,first_exceed_km
+Anchorage_AK,31.62,10.0,10.0
+Orlando_FL,25.04,10.0,1.0
+Fort_Collins_CO,11.24,10.0,1.0
+Dallas_city_TX,11.22,10.0,4.0
+Fresno_CA,5.83,10.0,1.0
+New_Orleans_LA,3.91,10.0,1.0
+Abilene_TX,3.52,10.0,1.0
+Amarillo_TX,2.93,10.0,1.0
+San_Diego_CA,2.39,10.0,1.0
+Erie_PA,1.89,10.0,1.0
+Las_Vegas_Henderson_Paradise_NV,1.57,10.0,1.0
+Philadelphia_city_PA,1.5,10.0,1.0
+Johnson_City_TN,1.46,10.0,1.0
+Brownsville_TX,1.34,10.0,1.0
+Dayton_OH,1.26,10.0,1.0

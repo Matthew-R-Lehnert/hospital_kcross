@@ -39,7 +39,14 @@ fixed hospital geography.
 
 LandScan estimates where people are over a day, incorporating workplaces, roads,
 and land cover, rather than where they sleep. This property is what we exploit:
-it is the more defensible demand surface for acute care.
+it is a complementary demand surface whose timing differs from the residential
+denominator that accessibility analyses use by default. We do not claim it is the
+single correct surface for acute care. Many acute events (nocturnal myocardial
+infarction, stroke, falls among older adults) occur at or near home, and
+admissions reflect a mix of daytime and residential exposure; ambient population
+captures the daytime component that residential surfaces miss, and our point is
+that the choice between the two materially changes the verdict, not that one is
+uniformly right.
 
 ## Population (NASA SEDAC GPW v4.11, residential, for contrast)
 
@@ -92,7 +99,12 @@ groups the 3,222 US and Puerto Rico counties into 598 contiguous labor markets
 following the Fowler, Rhubart, and Jensen methodology [@fowler_rhubart_jensen_2016;
 @usda_cz2020_2024]. CZ geometries are built by dissolving US Census county
 polygons (TIGER/Line) using the ERS county-to-CZ crosswalk. The 2020 vintage is
-chosen to match the 2020 population rasters (below).
+chosen to match the 2020 population rasters (below). One reconciliation is
+required: the 2020 crosswalk keys Connecticut (a single commuting zone spanning
+the whole state) to the state's 2022 planning-region FIPS codes, which are not
+present in the 2020 county boundary file (Connecticut there is still its eight
+historical counties); we map Connecticut's counties to that zone so the state is
+retained, giving the full set of 598 commuting zones.
 
 As a windowing-comparability check we additionally re-run the entire analysis on
 **Core-Based Statistical Areas** (939 metropolitan and micropolitan CBSAs,

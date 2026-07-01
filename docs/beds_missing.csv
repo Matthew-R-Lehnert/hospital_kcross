@@ -87,67 +87,68 @@ name,n_hospitals,n_missing_beds,beds_known_sum,frac_missing
 "Valdosta, GA",9,1,686.0,0.1111111111111111
 "Billings, MT",9,1,744.0,0.1111111111111111
 "McAlester, OK",9,1,301.0,0.1111111111111111
+"Hartford, CT",47,5,11833.0,0.10638297872340426
 "Scranton, PA",19,2,2728.0,0.10526315789473684
 "Washington city, DC",39,4,8874.0,0.10256410256410256
 "Trenton city, NJ",49,5,8566.0,0.10204081632653061
-"Williamsport, PA",20,2,1942.0,0.1
 "Madison, WI",20,2,1953.0,0.1
-"Huntsville, AL",20,2,2803.0,0.1
 "Honolulu, HI",20,2,2875.0,0.1
+"Huntsville, AL",20,2,2803.0,0.1
+"Williamsport, PA",20,2,1942.0,0.1
 "Columbus, OH",42,4,8201.0,0.09523809523809523
 "Salt Lake City, UT",53,5,6451.0,0.09433962264150944
-"Ottumwa, IA",11,1,470.0,0.09090909090909091
-"Grand Island, NE",11,1,384.0,0.09090909090909091
-"Brownsville, TX",11,1,1474.0,0.09090909090909091
 "Topeka, KS",11,1,1509.0,0.09090909090909091
+"Brownsville, TX",11,1,1474.0,0.09090909090909091
+"Grand Island, NE",11,1,384.0,0.09090909090909091
+"Ottumwa, IA",11,1,470.0,0.09090909090909091
 "Harrisburg, PA",33,3,5253.0,0.09090909090909091
 "Plattsburgh, NY",11,1,800.0,0.09090909090909091
 "Shreveport, LA",34,3,3372.0,0.08823529411764706
-"Leesburg town, VA",12,1,2020.0,0.08333333333333333
-"Panama City--Panama City Beach, FL",12,1,985.0,0.08333333333333333
 "Philadelphia city, PA",96,8,19501.0,0.08333333333333333
+"Panama City--Panama City Beach, FL",12,1,985.0,0.08333333333333333
+"Leesburg town, VA",12,1,2020.0,0.08333333333333333
 "Seattle--Tacoma, WA",74,6,10248.0,0.08108108108108109
 "Wichita, KS",25,2,3197.0,0.08
 "Sacramento, CA",38,3,4977.0,0.07894736842105263
-"Cincinnati, OH--KY",52,4,8622.0,0.07692307692307693
 "Joplin, MO",13,1,1017.0,0.07692307692307693
+"Cincinnati, OH--KY",52,4,8622.0,0.07692307692307693
 "Allentown--Bethlehem, PA--NJ",26,2,4663.0,0.07692307692307693
-"Richmond, VA",27,2,6874.0,0.07407407407407407
 "Newark city, NJ",81,6,19583.0,0.07407407407407407
-"Canton, OH",14,1,2076.0,0.07142857142857142
-"Grand Forks, ND--MN",14,1,903.0,0.07142857142857142
+"Richmond, VA",27,2,6874.0,0.07407407407407407
 "Bangor, ME",14,1,987.0,0.07142857142857142
 "Tupelo, MS",14,1,1528.0,0.07142857142857142
+"Canton, OH",14,1,2076.0,0.07142857142857142
+"Grand Forks, ND--MN",14,1,903.0,0.07142857142857142
 "Portland, ME",29,2,3015.0,0.06896551724137931
+"Springfield, MO",15,1,2372.0,0.06666666666666667
+"San Diego, CA",45,3,8382.0,0.06666666666666667
+"Fort Smith, AR--OK",15,1,1389.0,0.06666666666666667
+"Warner Robins, GA",15,1,1808.0,0.06666666666666667
 "Providence, RI--MA",30,2,5130.0,0.06666666666666667
 "Portland, OR--WA",30,2,6203.0,0.06666666666666667
-"Fort Smith, AR--OK",15,1,1389.0,0.06666666666666667
-"San Diego, CA",45,3,8382.0,0.06666666666666667
-"Warner Robins, GA",15,1,1808.0,0.06666666666666667
-"Springfield, MO",15,1,2372.0,0.06666666666666667
 "Columbia, SC",31,2,4266.0,0.06451612903225806
-"Gainesville city, GA",16,1,2588.0,0.0625
-"Lexington-Fayette, KY",16,1,2988.0,0.0625
 "Santa Barbara, CA",16,1,1736.0,0.0625
-"Newport News city, VA",16,1,2475.0,0.0625
+"Lexington-Fayette, KY",16,1,2988.0,0.0625
+"Gainesville city, GA",16,1,2588.0,0.0625
 "Sioux Falls, SD",16,1,1477.0,0.0625
+"Newport News city, VA",16,1,2475.0,0.0625
 "Kansas City, MO--KS",66,4,10087.0,0.06060606060606061
-"Johnson City, TN",17,1,2941.0,0.058823529411764705
-"Lebanon, NH--VT",17,1,879.0,0.058823529411764705
+"Kalamazoo, MI",17,1,1538.0,0.058823529411764705
+"Lincoln, NE",17,1,1674.0,0.058823529411764705
 "Ardmore, OK",17,1,819.0,0.058823529411764705
 "Fayetteville, NC",17,1,2333.0,0.058823529411764705
+"Lebanon, NH--VT",17,1,879.0,0.058823529411764705
+"Johnson City, TN",17,1,2941.0,0.058823529411764705
 "Odessa, TX",17,1,1840.0,0.058823529411764705
-"Lincoln, NE",17,1,1674.0,0.058823529411764705
-"Kalamazoo, MI",17,1,1538.0,0.058823529411764705
 "Pittsburgh, PA",52,3,10548.0,0.057692307692307696
-"San Jose, CA",36,2,5955.0,0.05555555555555555
+"Charleston, SC",18,1,2601.0,0.05555555555555555
+"Alexandria, LA",18,1,1341.0,0.05555555555555555
 "Milwaukee, WI",54,3,6853.0,0.05555555555555555
 "Baltimore, MD",36,2,8889.0,0.05555555555555555
-"Alexandria, LA",18,1,1341.0,0.05555555555555555
-"Charleston, SC",18,1,2601.0,0.05555555555555555
+"San Jose, CA",36,2,5955.0,0.05555555555555555
+"Lafayette, LA",38,2,2614.0,0.05263157894736842
 "Dover, DE",19,1,1751.0,0.05263157894736842
 "Germantown CDP, MD",19,1,3076.0,0.05263157894736842
-"Lafayette, LA",38,2,2614.0,0.05263157894736842
 "Tampa--St. Petersburg, FL",57,3,11478.0,0.05263157894736842
 "Minneapolis city, MN",39,2,9843.0,0.05128205128205128
 "Tyler, TX",20,1,2148.0,0.05
@@ -156,8 +157,8 @@ name,n_hospitals,n_missing_beds,beds_known_sum,frac_missing
 "Las Vegas--Henderson--Paradise, NV",46,2,6956.0,0.043478260869565216
 "San Antonio, TX",71,3,10256.0,0.04225352112676056
 "Winston-Salem, NC",24,1,4824.0,0.041666666666666664
-"South Bend, IN--MI",25,1,2143.0,0.04
 "Atlanta city, GA",50,2,11353.0,0.04
+"South Bend, IN--MI",25,1,2143.0,0.04
 "Fresno, CA",26,1,3571.0,0.038461538461538464
 "Los Angeles--Long Beach--Anaheim, CA",291,11,47872.0,0.037800687285223365
 "Boston, MA--NH",106,4,18141.0,0.03773584905660377
@@ -165,10 +166,10 @@ name,n_hospitals,n_missing_beds,beds_known_sum,frac_missing
 "Orlando, FL",55,2,10610.0,0.03636363636363636
 "Grand Rapids, MI",28,1,3389.0,0.03571428571428571
 "Buffalo, NY",29,1,4393.0,0.034482758620689655
-"Omaha, NE--IA",30,1,4525.0,0.03333333333333333
 "Dayton, OH",30,1,4644.0,0.03333333333333333
-"Little Rock, AR",30,1,5016.0,0.03333333333333333
 "Louisville/Jefferson County, KY--IN",30,1,6173.0,0.03333333333333333
+"Little Rock, AR",30,1,5016.0,0.03333333333333333
+"Omaha, NE--IA",30,1,4525.0,0.03333333333333333
 "San Francisco--Oakland, CA",102,3,13858.0,0.029411764705882353
 "Charlotte, NC--SC",35,1,7659.0,0.02857142857142857
 "Yonkers city, NY",38,1,7172.0,0.02631578947368421
@@ -181,55 +182,55 @@ name,n_hospitals,n_missing_beds,beds_known_sum,frac_missing
 "Oklahoma City, OK",68,1,7236.0,0.014705882352941176
 "Chicago city, IL",122,1,29196.0,0.00819672131147541
 "Pierre, SD",2,0,57.0,0.0
-"Miami, OK",6,0,343.0,0.0
-"Nebraska City, NE",5,0,80.0,0.0
-"Miami city, FL",65,0,17408.0,0.0
-"Milledgeville, GA",6,0,496.0,0.0
-"Mexia, TX",4,0,140.0,0.0
-"Plainview, TX",4,0,133.0,0.0
-"Miles City, MT",3,0,75.0,0.0
-"Platteville, WI",8,0,195.0,0.0
-"Nacogdoches, TX",5,0,435.0,0.0
-"Myrtle Beach--North Myrtle Beach, SC--NC",23,0,2772.0,0.0
-"Middlesborough, KY--TN",5,0,407.0,0.0
-"Natchez, MS--LA",8,0,733.0,0.0
-"Philip city, SD",1,0,18.0,0.0
-"Nantucket, MA",1,0,14.0,0.0
-"Pine Bluff, AR",10,0,603.0,0.0
 "Milbank city, SD",7,0,160.0,0.0
 "Pikeville, KY",9,0,1051.0,0.0
-"Nashville-Davidson, TN",29,0,8011.0,0.0
-"Paris, TN",3,0,237.0,0.0
-"Petoskey, MI",3,0,245.0,0.0
-"Petersburg CDP, AK",1,0,12.0,0.0
-"Norton city, KS",3,0,68.0,0.0
-"O'Neill city, NE",5,0,104.0,0.0
-"Olney, IL",3,0,179.0,0.0
-"Mount Sterling, KY",3,0,216.0,0.0
-"Moses Lake, WA",6,0,140.0,0.0
+"Pine Bluff, AR",10,0,603.0,0.0
 "Mountain Home, AR",1,0,268.0,0.0
-"Morristown, TN",4,0,378.0,0.0
-"Ord city, NE",1,0,16.0,0.0
+"Philip city, SD",1,0,18.0,0.0
+"Middlesborough, KY--TN",5,0,407.0,0.0
 "Osceola, IA",4,0,100.0,0.0
 "North Eagle Butte CDP, SD",1,0,8.0,0.0
-"Otsego city, MN",7,0,290.0,0.0
 "Muncie, IN",9,0,848.0,0.0
+"Miles City, MT",3,0,75.0,0.0
+"Nacogdoches, TX",5,0,435.0,0.0
+"Miami, OK",6,0,343.0,0.0
+"Miami city, FL",65,0,17408.0,0.0
+"Mexia, TX",4,0,140.0,0.0
+"Plainview, TX",4,0,133.0,0.0
+"Platteville, WI",8,0,195.0,0.0
 "Norfolk, NE",7,0,380.0,0.0
-"Monroe, LA",23,0,1489.0,0.0
 "Plentywood city, MT",2,0,44.0,0.0
+"Newport, OR",3,0,99.0,0.0
+"Nantucket, MA",1,0,14.0,0.0
+"Nashville-Davidson, TN",29,0,8011.0,0.0
+"O'Neill city, NE",5,0,104.0,0.0
+"Natchez, MS--LA",8,0,733.0,0.0
+"Parkersburg, WV--OH",6,0,1114.0,0.0
+"Nebraska City, NE",5,0,80.0,0.0
+"Nevada, MO",3,0,165.0,0.0
+"Ord city, NE",1,0,16.0,0.0
 "Mobile, AL",16,0,2543.0,0.0
 "Paducah, KY--IL",10,0,1319.0,0.0
 "Moberly, MO",2,0,124.0,0.0
 "Pampa, TX",4,0,176.0,0.0
-"North Platte, NE",3,0,154.0,0.0
+"Morristown, TN",4,0,378.0,0.0
+"Paris, TN",3,0,237.0,0.0
 "Moab, UT",3,0,53.0,0.0
-"Parkersburg, WV--OH",6,0,1114.0,0.0
+"Moses Lake, WA",6,0,140.0,0.0
 "Mitchell, SD",5,0,195.0,0.0
+"North Platte, NE",3,0,154.0,0.0
 "Parkston city, SD",5,0,98.0,0.0
+"Otsego city, MN",7,0,290.0,0.0
 "Missoula, MT",10,0,900.0,0.0
-"Nevada, MO",3,0,165.0,0.0
+"Mount Sterling, KY",3,0,216.0,0.0
+"Myrtle Beach--North Myrtle Beach, SC--NC",23,0,2772.0,0.0
+"Olney, IL",3,0,179.0,0.0
 "Peoria, IL",14,0,1776.0,0.0
-"Newport, OR",3,0,99.0,0.0
+"Petersburg CDP, AK",1,0,12.0,0.0
+"Petoskey, MI",3,0,245.0,0.0
+"Milledgeville, GA",6,0,496.0,0.0
+"Norton city, KS",3,0,68.0,0.0
+"Monroe, LA",23,0,1489.0,0.0
 "San Angelo, TX",11,0,831.0,0.0
 "Pocatello, ID",7,0,461.0,0.0
 "Valley City, ND",2,0,43.0,0.0

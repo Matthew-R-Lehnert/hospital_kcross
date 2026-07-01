@@ -20,15 +20,18 @@ within and across zones. Hospitals come from HIFLD (n = 7,966). Ambient
 population is ORNL LandScan; residential population is NASA SEDAC GPWv4.11.
 
 **Results.** The demand surface reverses the conclusion. Against residential
-population, 15 of 261 hospital-dense zones are significantly over-concentrated
+population, 15 of 262 hospital-dense zones are significantly over-concentrated
 (family-wise p = 0.002) and none are under-served; against ambient population,
 that over-concentration disappears entirely (0 zones, p = 0.47) and instead 6
 zones are significantly under-served (p = 0.001). Over-concentration and
-under-service never co-occur in the same zone, and 44 of 597 zones change
+under-service do not co-occur in the same zone (a pattern that is partly
+structural, since concentration is tested only in hospital-dense zones), and 44
+of 598 zones change
 diagnosis between the two surfaces. A WorldPop control (modeled but residential)
 shows the reversal tracks day-versus-night timing, not raster construction, and
 the findings are stable to the hospital-count threshold, the coverage buffer,
-and a re-run on 939 CBSA windows.
+a re-run on 939 CBSA windows, and neutralizing the population LandScan places at
+the hospital sites themselves.
 
 **Conclusions.** Whether US hospital supply looks over-provided or under-serving
 depends on whether demand is counted where people sleep or where they are by

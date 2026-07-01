@@ -30,27 +30,27 @@ with few hospitals and substantial population is a candidate access desert, and
 the nearest hospital" (coverage) and "are there enough beds per person"
 (sufficiency) remain well-defined and are exactly right. So the rural zones the
 K test cannot speak to are precisely the ones coverage and sufficiency do cover.
-Only concentration is restricted to the 261 zones with at least 8 hospitals.
+Only concentration is restricted to the 262 zones with at least 8 hospitals.
 
 ## Summary (threshold = 8 hospitals, LandScan 2020 ambient population)
 
 | | zones | share of ambient population |
 |---|------:|----------------------------:|
-| **Analyzed** (n_hospitals >= 8) | 261 | **91.1%** |
-| **Skipped** (n_hospitals < 8)   | 336 | 8.9% |
+| **Analyzed** (n_hospitals >= 8) | 262 | **91.2%** |
+| **Skipped** (n_hospitals < 8)   | 336 | 8.8% |
 | of which zero-hospital zones    | 12  | |
-| **Total**                       | 597 | 100% |
+| **Total**                       | 598 | 100% |
 
-So although a majority of *zones* (336 of 597) fall below the threshold, they
+So although a majority of *zones* (336 of 598) fall below the threshold, they
 contain under 9% of the ambient population: the K-function analysis still speaks
 to roughly **91% of where Americans are during the day**. Skipped zones are also
 not simply "the largest rural ones" (skipped median area 8,438 km^2 vs analyzed
-median 12,343 km^2); they are predominantly **low-population** zones, which is
+median 12,389 km^2); they are predominantly **low-population** zones, which is
 exactly why they carry few hospitals and little population weight.
 
 ## Reproducibility
 
-`docs/skipped_zones.csv` lists all 597 zones with `n_hospitals`, `ambient_pop`,
+`docs/skipped_zones.csv` lists all 598 zones with `n_hospitals`, `ambient_pop`,
 `area_km2`, and `included`. Regenerate with:
 
 ```bash

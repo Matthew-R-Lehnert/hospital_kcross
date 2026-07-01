@@ -1,0 +1,46 @@
+name: Build manuscript PDF
+
+# Builds manuscript/manuscript.pdf from the Markdown sources with pandoc + a
+# xelatex engine, so the paper is reproducible without any local toolchain.
+# The rendered PDF is uploaded as a workflow artifact on every run.
+
+on:
+  push:
+    paths:
+      - "manuscript/**"
+      - ".github/workflows/manuscript.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+        with:
+          pandoc-version: "3.5"
+
+      - name: Install TinyTeX (xelatex engine)
+        uses: r-lib/actions/setup-tinytex@v2
+
+      - name: Install LaTeX packages needed by the default template
+        run: >
+          tlmgr install
+          xetex fontspec euenc unicode-math
+          amsmath booktabs caption etoolbox
+          fancyvrb footnotehyper hyperref
+          geometry setspace xcolor upquote
+          parskip mdwtools listings
+
+      - name: Build PDF (APA style)
+        working-directory: manuscript
+        run: make STYLE=apa
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: manuscript-pdf
+          path: manuscript/manuscript.pdf
+          if-no-files-found: error

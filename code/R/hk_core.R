@@ -47,14 +47,44 @@ utm_epsg_for <- function(geom_4326) {
 # window's UTM CRS, and return a spatstat image (im) of population PER CELL,
 # zeroed outside the window. `res_m` sets the working pixel size in meters
 # (default 1000 m, matching the ~1 km native LandScan/GPW grid).
+#
+# `mask_xy` (optional, a 2-column lon/lat matrix in the RASTER's CRS) neutralizes
+# the native raster cells that contain those points BEFORE projection. It exists
+# to test the ambient-endogeneity threat: LandScan allocates daytime population
+# to hospitals themselves (staff, outpatients, visitors), so a hospital cell is
+# inflated *because* the hospital is there. We remove that induced spike by
+# REPLACING each hospital cell with its local neighborhood background (the mean
+# of the surrounding 5x5 cells, excluding the center), i.e. the ambient level the
+# cell would carry without the hospital. We do NOT zero the cell: the
+# inhomogeneous-K estimator weights each hospital by 1/lambda at its own
+# location, so driving lambda to zero there would divide by ~0 and spuriously
+# inflate K. Replacing with the local background keeps lambda positive and
+# realistic while stripping the hospital's self-induced population.
 # -----------------------------------------------------------------------------
-population_im <- function(raster_path, window_utm, epsg, res_m = 1000) {
+population_im <- function(raster_path, window_utm, epsg, res_m = 1000,
+                          mask_xy = NULL) {
   r <- terra::rast(raster_path)
   # crop in the raster's own CRS (LandScan/GPW are EPSG:4326)
   win_ll <- sf::st_transform(window_utm, terra::crs(r))
   r <- terra::crop(r, terra::vect(win_ll), snap = "out")
   # mask negative nodata/sentinels to NA, then project to the window UTM
   r <- terra::clamp(r, lower = 0, values = FALSE)
+  # neutralize hospital-containing native cells to local background (endogeneity
+  # control): replace each with the mean of its 5x5 neighborhood excluding the
+  # center, computed with two focal sums so the inflated center never enters.
+  if (!is.null(mask_xy) && nrow(mask_xy) > 0) {
+    cid <- terra::cellFromXY(r, mask_xy[, 1:2, drop = FALSE])
+    cid <- cid[!is.na(cid)]
+    if (length(cid)) {
+      wt <- matrix(1, 5, 5); wt[3, 3] <- 0
+      nb_sum <- terra::focal(r, w = wt, fun = "sum", na.rm = TRUE, na.policy = "omit")
+      nb_cnt <- terra::focal(!is.na(r), w = wt, fun = "sum", na.rm = TRUE, na.policy = "omit")
+      nb_mean <- nb_sum / nb_cnt
+      fillv <- as.numeric(terra::values(nb_mean)[cid, 1])
+      fillv[!is.finite(fillv)] <- 0
+      r[cid] <- fillv
+    }
+  }
   tmpl <- terra::rast(terra::ext(terra::project(terra::vect(win_ll),
                                                 paste0("EPSG:", epsg))),
                       resolution = res_m, crs = paste0("EPSG:", epsg))
@@ -105,7 +135,8 @@ run_hk <- function(window_name, windows_sf, hospitals_sf, raster_path,
                    weight_by = c("none", "beds"),
                    nsim = 999, r_max = NULL, r_step = NULL,
                    correction = "Ripley", seed = 42, res_m = 1000,
-                   min_hospitals = 8, save_sims = TRUE, verbose = TRUE) {
+                   min_hospitals = 8, save_sims = TRUE, verbose = TRUE,
+                   mask_hospital_cells = FALSE) {
   subset    <- match.arg(subset)
   weight_by <- match.arg(weight_by)
   t0 <- Sys.time()
@@ -140,7 +171,14 @@ run_hk <- function(window_name, windows_sf, hospitals_sf, raster_path,
   }
 
   # --- population intensity (the null) ------------------------------------
-  pim <- population_im(raster_path, w_utm, epsg, res_m = res_m)
+  # optionally blank hospital-containing raster cells (ambient-endogeneity test)
+  mask_xy <- NULL
+  if (mask_hospital_cells) {
+    r0 <- terra::rast(raster_path)
+    h_ll <- sf::st_transform(h, terra::crs(r0))
+    mask_xy <- sf::st_coordinates(h_ll)
+  }
+  pim <- population_im(raster_path, w_utm, epsg, res_m = res_m, mask_xy = mask_xy)
   lam <- lambda_im(pim, n = spatstat.geom::npoints(X))
   lambda <- lam$im
 
@@ -222,6 +260,7 @@ run_hk <- function(window_name, windows_sf, hospitals_sf, raster_path,
                nsim = nsim, r_max = r_max, r_step = r_step, r_capped = r_capped,
                correction = correction, res_m = res_m, seed = seed,
                lambda_floor = lam$floor_used, pop_integral = lam$integral_pop,
+               mask_hospital_cells = mask_hospital_cells,
                global_p = global_p,
                verdict = if (any(above)) "over-concentrated"
                          else if (any(below)) "dispersed" else "consistent",

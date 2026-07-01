@@ -10,19 +10,32 @@ conclusion: against residential population the country shows significant hospita
 over-concentration and no coverage gaps, while against ambient population the
 over-concentration vanishes and genuine coverage gaps appear instead. Forty-four
 zones change diagnosis between the two surfaces, and over-concentration and
-under-service are never found together in the same zone. The pattern holds up
+under-service are not found together in the same zone (partly structural, since
+concentration is tested only in the hospital-dense zones). The pattern holds up
 under scrutiny: it is stable to the hospital-count threshold and the coverage
 buffer, a WorldPop control shows the reversal is about day-versus-night timing
-rather than raster construction, and a re-run on CBSA windows reproduces the
-concentration result while confirming that the coverage deserts live in the
-rural areas only the commuting-zone partition captures.
+rather than raster construction, neutralizing the population LandScan places at
+the hospital sites themselves leaves the ambient result unchanged, and a re-run
+on CBSA windows reproduces the concentration result while confirming that the
+coverage deserts live in the rural areas only the commuting-zone partition
+captures.
 
 ## Limitations
 
-- **Static hospital snapshot.** HIFLD is a single cross-section dated about
-  2024. We test a fixed hospital geography against time-varying population, so we
-  cannot speak to hospital openings or closings over time. A dated HIFLD or CMS
-  panel would enable a true longitudinal design.
+- **Static hospital snapshot, and a vintage gap.** HIFLD is a single
+  cross-section current to about mid-2024 (its records carry 2024 source dates),
+  which we test against 2020 population, commuting zones, and rasters, a roughly
+  four-year gap. The dataset carries no per-facility opening or closing date and
+  no 2020-vintage layer was available to us, so we cannot re-run on a
+  contemporaneous hospital geography. Two considerations bound the concern. The
+  coverage deserts are conservative with respect to this gap: a hospital that
+  opened between 2020 and 2024 and appears in our layer makes a zone look less
+  deserted than it was in 2020, while a closure we cannot see would make it worse,
+  so the six deserts are lower bounds. The over-concentration result is a
+  family-wise finding across 262 zones with large effect sizes (a median tenfold-
+  scale clustering ratio near three), which the low-single-digit-percent net
+  change in the US hospital stock over four years cannot manufacture. A dated
+  HIFLD or CMS panel would still enable a stronger, truly longitudinal design.
 - **Ambient is not acute demand.** Ambient population is a better proxy than
   residential for where acute events occur, but it is still a proxy. True demand
   also depends on age structure, morbidity, and case mix, which a population
@@ -56,14 +69,21 @@ rural areas only the commuting-zone partition captures.
 
 ## Implications
 
-The choice of demand surface is not a technical detail; it determines the policy
-story. A residential denominator points toward curbing urban over-provision,
-while an ambient denominator points toward closing daytime access gaps in the
-same metros. Because acute care is needed where people are when an emergency
-occurs, not only where they sleep, the ambient framing deserves weight in
-capacity and siting decisions. The diagnostic typology further separates the
-distinct failures, too little capacity, capacity in the wrong place, and
-populations left far from care, each of which calls for a different response.
+The choice of demand surface is not a technical detail; it reframes the policy
+question. A residential denominator invites a reading of urban supply as
+excessive, while an ambient denominator recasts the same metros as places with
+daytime access gaps. We stop short of prescribing that capacity be removed:
+statistical over-concentration relative to a population-proportional null is not
+by itself evidence of inefficiency or inequity, since hospital location also
+reflects agglomeration, tertiary-referral role, historical siting, and
+certificate-of-need regulation, none of which this test observes. What the
+analysis does license is narrower and, we think, more useful: that an
+accessibility assessment can flip between "over-supplied" and "under-serving" for
+the same place purely on the demand surface, so the ambient framing deserves
+weight alongside the residential default in capacity and siting deliberations.
+The diagnostic typology further separates the distinct failures, too little
+capacity, capacity in the wrong place, and populations left far from care, each
+of which calls for a different response.
 
 ## Reproducibility and data availability
 

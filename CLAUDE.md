@@ -95,6 +95,19 @@ $RS code/R/calibration.R "Tucson, AZ" 300 199              # Type-I (~0.04)
 $RS code/R/power_analysis.R "Tucson, AZ" 200 199 4 2500    # justify the >=8 floor
 $RS code/R/threshold_sensitivity.R output/residential all
 
+# ambient endogeneity: neutralize hospital cells, re-test concentration
+OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES \
+  $RS code/scripts/run_masked_ambient.R 2020 999            # -> output/ambient_masked/
+$RS code/R/global_across_zones.R output/ambient_masked all  # family-wise (expect 0/262)
+
+# second-round reviewer robustness (2026-07-01)
+$RS code/R/coverage_power.R "San Diego, CA" 200 199         # coverage-test power vs desert severity
+$RS code/R/null_sensitivity.R residential 8 999             # Poisson vs fixed-N null
+python3 code/scripts/effect_sizes.py                        # magnitudes for flagged zones
+python3 code/scripts/reversal_decomposition.py              # reversal is structured, not mechanical
+python3 code/scripts/typology.py 1.536                      # sufficiency threshold sensitivity (OECD cutoff)
+python3 code/scripts/drivetime_deserts.py                   # OSRM road distance for the 6 deserts (needs network)
+
 # quality gates
 python3 code/scripts/verify_references.py manuscript/references.bib   # must be FAIL=0
 cd manuscript && make styles && make STYLE=apa                        # build PDF
@@ -121,32 +134,75 @@ cd manuscript && make styles && make STYLE=apa                        # build PD
 
 ## Status (as of the current work)
 
-**Analysis complete.** National commuting-zone run (597 zones x ambient +
+**Analysis complete.** National commuting-zone run (598 zones x ambient +
 residential x 999 sims) done + analyzed; family-wise corrected; diagnostic
 typology built (`output/typology_*.csv`). Full robustness suite complete:
 Type-I calibration (~0.04), power analysis (justifies the >=8 floor; ~0.67 power
 at n=8, 0.80 at n=10), threshold sensitivity (headline stable at 8/10/15), buffer
 sensitivity (deserts robust at 25/50/100 km), the WorldPop modeled-residential
-control (`output/worldpop/`), and the 939-CBSA windowing re-run (`output_cbsa/`).
+control (`output/worldpop/`), the 939-CBSA windowing re-run (`output_cbsa/`), the
+ambient-endogeneity control (`output/ambient_masked/`), coverage power
+(`code/R/coverage_power.R`), Poisson-vs-fixed-N null sensitivity
+(`code/R/null_sensitivity.R`), effect sizes (`code/scripts/effect_sizes.py`), the
+reversal-is-structured decomposition (`code/scripts/reversal_decomposition.py`),
+sufficiency threshold sensitivity, and OSRM drive-time validation of the deserts
+(`code/scripts/drivetime_deserts.py`).
 
-**Key results (family-wise corrected):**
-- Concentration: 0/261 zones over-concentrated vs ambient (p=0.47) but 15/261 vs
-  residential (p=0.002); beds 13/261. Replicates on CBSAs (0/185, 15/185).
-- Coverage: 6/585 under-served vs ambient (p=0.001), 0 vs residential (p=0.13).
+**Connecticut fix (2026-07-01):** the USDA crosswalk keys all of CT to its 2022
+planning-region FIPS (09110-09190), absent from the 2020 TIGER county file, so
+`acquire/02_commuting_zones.py` had silently dropped the whole state (the old
+598-vs-597 gap). Fixed (CT counties -> CZ 70), rebuilt `commuting_zones.gpkg`
+(598 zones), re-ran Hartford, recomputed family-wise + typology. Hartford is
+consistent/well-matched on every axis, so denominators grew (261->262 conc,
+585->586 coverage) but all numerators held.
+
+**Key results (family-wise corrected, 598 zones):**
+- Concentration: 0/262 zones over-concentrated vs ambient (p=0.475) but 15/262 vs
+  residential (p=0.002); beds 13/262. Replicates on CBSAs (0/185, 15/185).
+- Coverage: 6/586 under-served vs ambient (p=0.001), 0 vs residential (p=0.126).
   Deserts appear only with CZ windows (CBSAs omit the rural fringe).
 - WorldPop (modeled residential) patterns with GPW, not LandScan -> the
-  ambient/residential flip is day/night TIMING, not raster construction.
-- 44/597 zones change diagnosis between surfaces.
+  ambient/residential flip is day/night TIMING, not raster construction (18/258
+  conc, 0/576 coverage).
+- Ambient endogeneity ruled out: neutralizing hospital cells (replace with 5x5
+  neighborhood background via `mask_hospital_cells`) leaves ambient at 0/262
+  (p=0.446), same as unmasked. NB: must REPLACE not zero the cell -- zeroing
+  divides Kinhom by lambda~0 at the points and spuriously flags 231/262.
+- 44/598 zones change diagnosis between surfaces.
 
-**Manuscript complete** (~7,300 words, 0 em dashes): all 7 sections written with
-real results + full robustness, 31 verified citations, national typology maps +
-Dallas exemplar figures. Everything committed and pushed (private repo).
+**Second-round robustness (2026-07-01, reviewer items):**
+- Reversal is structured, not mechanical: normalized ambient/residential ratio at
+  hospitals median 1.73 (251/262 >1; flipped zones 1.94) vs residential-weighted
+  baseline 1.0 (the identity under any global reweighting).
+- Coverage power: Type-I ~0.05; power is desert-geometry-dependent (San Diego
+  0.99 at 20% stranded; Amarillo conservative). 6 deserts are strong detections.
+- Null type: Poisson vs fixed-N binomial -> 8/8 verdict agreement.
+- Effect sizes: concentration L_obs/L_null at 10 km median 2.9x (1.3-31x);
+  coverage excess mean distance up to ~3 km, peak excess stranded frac 9-37 pts.
+- Drive-time (OSRM): road >= Euclidean in all 6 deserts (ratio 1.13-2.62), so
+  deserts are conservative to the Euclidean assumption.
+- Sufficiency threshold sensitivity: capacity-shortfall count 38/102/277 at bed
+  cutoffs 0.7x-US / US(2.8) / OECD(4.3); tested categories unchanged.
+- Temporal: HIFLD confirmed 2024-vintage (S3 metadata + per-record SOURCEDATE);
+  no 2020 layer available and no facility open/close dates, so handled as a
+  bounded limitation (deserts conservative; over-conc is family-wise + large ES).
+
+**Manuscript complete** (~7,400 words, 0 em dashes): all 7 sections written with
+real results + full robustness (incl. the CT fix and ambient-endogeneity
+control), 31 verified citations, national typology maps (regenerated with CT) +
+Dallas exemplar figures. NOTE: the 2026-07-01 edits (CT + endogeneity + production
+defects) are LOCAL to this working dir, which is not itself a git checkout; sync
+them to the private repo (github.com/Matthew-R-Lehnert/hospital_kcross).
 
 **Remaining to submission:** length/polish (Related Work ~1,666 is heavy; trim
 abstract + Methods to a journal word limit), build the PDF
-(`cd manuscript && make styles && make STYLE=apa`), pick the target journal
-(rec: Int. J. Health Geographics primary; JAMA Network Open reach) and set the
-CSL style. Optional: WorldPop excludes Puerto Rico (US-only file).
+(`cd manuscript && make styles && make STYLE=apa`; pandoc+xelatex not on PATH in
+the current env), pick the target journal (rec: Int. J. Health Geographics
+primary; JAMA Network Open reach) and set the CSL style. Repo stays PRIVATE for
+now (author decision); public + Zenodo/OSF DOI is a pre-submission action.
+All reviewer statistics/substance/minor items now addressed (see
+`docs/reviewer_feedback.md`); only the reproducibility gate (public + DOI) and
+final length/polish remain. Optional: WorldPop excludes Puerto Rico.
 
 Results/data live under `output/`, `output_cbsa/`, `data/` (all gitignored,
 local-only, regenerable from `code/acquire/` + the pipeline).
@@ -155,20 +211,28 @@ local-only, regenerable from `code/acquire/` + the pipeline).
 
 A simulated peer review of `manuscript.pdf` (2026-07-01) surfaced open questions
 to resolve before submission. Full list with actions and checkboxes in
-**`docs/reviewer_feedback.md`**. Highest-priority items:
+**`docs/reviewer_feedback.md`**.
 
-- **Ambient endogeneity (blocking):** LandScan puts daytime population *at*
-  hospitals (staff/outpatients/visitors), which may mechanically explain the
-  reversal. Re-run with hospital cells masked from the ambient raster, or show
-  the induced population is negligible.
-- **Is the reversal mechanical?** Show it carries information beyond "LandScan is
-  more urban-core-weighted than GPW."
-- **Euclidean vs drive-time:** validate the 6 rural coverage deserts against
-  road-network distance.
-- **Temporal mismatch:** hospitals ~2024 vs population/CZ 2020 — use a 2020
-  hospital layer or show insensitivity to closures.
-- **Soften claims:** "ambient is the better acute-demand surface" and "curbing
-  urban over-provision" overreach what the test licenses.
-- **Production defects:** title block renders `true`/`2026`; abstract
-  build-fallback comment leaks into body; trauma subset claimed as a contribution
-  but deferred; 598-vs-597 zone count; repo must be public + DOI-archived.
+**Resolved 2026-07-01:**
+- **Ambient endogeneity (was blocking):** ruled out. Quantified (hospital-cell
+  ambient pop is 3.2% pooled, <=8.8% max) AND re-ran concentration on a
+  hospital-neutralized ambient surface -> 0/262, p=0.446, same as unmasked. See
+  Results robustness + `output/ambient_masked/`.
+  Results robustness + `output/ambient_masked/`.
+- **Production defects:** title block (author flattened, `date: "July 2026"`),
+  leaked abstract comment (removed `abstract:` field), trauma contradiction
+  (dropped from contributions), 598-vs-597 (Connecticut fix). All done.
+- **Reversal is mechanical?** Resolved (decomposition; rho_hosp 1.73).
+- **Euclidean vs drive-time:** resolved (OSRM; road >= Euclidean, deserts
+  conservative).
+- **Temporal mismatch:** bounded reasoned limitation (no 2020 layer / no facility
+  dates; deserts conservative, over-conc family-wise + large ES).
+- **Soften claims:** resolved (Data "complementary surface"; Implications no
+  longer prescribes curbing capacity).
+- **Effect sizes / null-type / coverage power / sufficiency asymmetry / beds
+  denominator / structural co-occurrence:** all resolved (see reviewer_feedback).
+
+**Still open:**
+- **Repo public + DOI:** deferred (author wants private for now).
+- **Length/polish + PDF build + git sync** (pandoc/xelatex not on PATH here; this
+  dir is not a git checkout, so sync 2026-07-01 edits to the private repo).

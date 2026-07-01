@@ -564,6 +564,7 @@ name,n_hospitals,ambient_pop,area_km2,included
 "Tulsa, OK",44,1015198.0,18359.587835531194,True
 "San Diego, CA",45,3386542.0,11027.02812402814,True
 "Las Vegas--Henderson--Paradise, NV",46,2370905.0,77303.56076355513,True
+"Hartford, CT",47,3516150.0,12923.745748441053,True
 "Trenton city, NJ",49,2223805.0,8695.360383590049,True
 "Atlanta city, GA",50,4062580.0,10984.245667286841,True
 "Cincinnati, OH--KY",52,2201661.0,10508.176484639327,True

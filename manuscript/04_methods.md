@@ -23,7 +23,7 @@ hospitals**. A simulation power analysis (against an inhomogeneous Thomas
 over-concentration alternative) shows the global test reaches about 67% power at
 $n = 8$ and 80% at $n \approx 10$, with Type-I near nominal throughout, so we
 treat 8 as a permissive floor and confirm in Results that the headline is stable
-when the floor is raised. Of the 597 commuting zones, **261 meet the threshold and 336 do
+when the floor is raised. Of the 598 commuting zones, **262 meet the threshold and 336 do
 not**, but the excluded zones hold only about **9% of population**, so the
 concentration analysis still covers roughly **91% of where people are during the
 day**. The **sufficiency** and **coverage** axes are computed for *every* zone,

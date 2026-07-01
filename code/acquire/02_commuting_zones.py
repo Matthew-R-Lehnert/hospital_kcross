@@ -76,6 +76,26 @@ def main() -> int:
     xw = crosswalk()
 
     merged = counties.merge(xw, on="FIPStxt", how="left")
+
+    # --- Connecticut fix ------------------------------------------------------
+    # The 2020 CZ crosswalk keys Connecticut to its 2022 planning-region FIPS
+    # (09110-09190), which do not exist in the 2020 TIGER county file (CT there
+    # is still the old 8 counties, 09001-09015). The left-merge therefore leaves
+    # every CT county unmatched and drops the entire state. All CT planning
+    # regions belong to a single CZ (the whole state, "Hartford, CT"), so remap
+    # every unmatched CT county polygon to that CZ. Guarded so it only fires when
+    # CT genuinely maps to one CZ in the crosswalk.
+    ct_xw = xw[xw["FIPStxt"].str.startswith("09")]
+    if len(ct_xw) and ct_xw["CZ2020"].nunique() == 1:
+        ct_cz = ct_xw["CZ2020"].iloc[0]
+        ct_name = ct_xw["CZName"].iloc[0]
+        ct_fix = merged["FIPStxt"].str.startswith("09") & merged["CZ2020"].isna()
+        if ct_fix.any():
+            merged.loc[ct_fix, "CZ2020"] = ct_cz
+            merged.loc[ct_fix, "CZName"] = ct_name
+            print(f"Connecticut fix: mapped {int(ct_fix.sum())} CT counties to "
+                  f"CZ {ct_cz} ({ct_name}); 2022 planning-region FIPS reconciled")
+
     missing = merged["CZ2020"].isna().sum()
     if missing:
         print(f"warning: {missing} county polygons unmatched to a CZ (dropped); "
