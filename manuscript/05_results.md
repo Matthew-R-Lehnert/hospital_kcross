@@ -47,7 +47,9 @@ Dallas, Detroit, Houston, San Diego, and San Juan (PR). Under **residential**
 population, **0 of 585** survive family-wise correction ($p = 0.126$). The
 ambient lens reveals access gaps that the residential surface hides. Because
 coverage credits hospitals within 50 km across zone boundaries, these are not
-edge artifacts. <!-- Figure: fig_dallas_ambient_desert.png -->
+edge artifacts.
+
+![Distance from each populated cell to the nearest hospital in the Dallas commuting zone (ambient population, 50 km cross-border buffer). Warm cells are populated areas far from care; cyan points are hospitals. The under-served population sits in the outer ring that a metropolitan-only window would exclude.](figures/fig_dallas_ambient_desert.png){width=78%}
 
 ## Sufficiency
 
@@ -63,8 +65,8 @@ the reverse for bedroom communities.
 
 ## The diagnostic typology
 
-Combining the three corrected axes classifies each zone (Table 1; Figures
-fig_typology_ambient, fig_typology_residential).
+Combining the three corrected axes classifies each zone (Table 1; national maps
+below).
 
 | Diagnosis | Ambient | Residential |
 |-----------|--------:|------------:|
@@ -84,17 +86,24 @@ yields a **redundancy** story (13 zones, over-provision) and no coverage gaps,
 whereas ambient population yields a **geographic-gap** story (6 zones) and no
 redundancy.
 
+![Diagnostic typology of hospital supply by commuting zone under **ambient** population (CONUS; Alaska, Hawaii, and Puerto Rico analyzed but off-frame). Grey is well-matched; orange is capacity shortfall; dark orange is a coverage gap; black is a zone with no hospital.](figures/fig_typology_ambient.png){width=98%}
+
+![The same diagnosis under **residential** population. Over-concentration (blue, redundancy) appears that is absent under the ambient surface, and the coverage gaps disappear.](figures/fig_typology_residential.png){width=98%}
+
 ## Ambient versus residential
 
 **44 of 597 zones change diagnosis** between the two surfaces. The clearest
 cases are metros that are simultaneously over-concentrated against residential
 population and under-served against ambient population, so their diagnosis moves
 from *redundancy* (residential) to *geographic gap* (ambient): Dallas, San
-Diego, and Amarillo are in both flagged sets. Dallas is illustrative (Figures
-fig_dallas_residential_concentration, fig_dallas_ambient_coverage,
-fig_dallas_ambient_desert): its hospitals cluster beyond nighttime population yet
-leave daytime population comparatively far from care. The demand surface does
-not refine the conclusion; it reverses it.
+Diego, and Amarillo are in both flagged sets. Dallas is illustrative (panels
+below): its hospitals cluster beyond nighttime population yet leave daytime
+population comparatively far from care. The demand surface does not refine the
+conclusion; it reverses it.
+
+![Dallas, residential population: the observed inhomogeneous K (red) rises above the simulation envelope (grey), i.e. hospitals are more clustered than residential population predicts (over-concentrated).](figures/fig_dallas_residential_concentration.png){width=68%}
+
+![Dallas, ambient population: the observed coverage curve (red), the share of population beyond distance d from a hospital, rises above the envelope, i.e. more daytime population is far from care than a population-proportional placement would leave (under-served).](figures/fig_dallas_ambient_coverage.png){width=68%}
 
 This reversal is driven by the day-versus-night timing of the demand surface,
 not by how the surface is built. LandScan (ambient) is a dasymetric, modeled
