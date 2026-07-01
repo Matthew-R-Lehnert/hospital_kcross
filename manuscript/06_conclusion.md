@@ -25,9 +25,12 @@ under-service are never found together in the same zone.
   residential for where acute events occur, but it is still a proxy. True demand
   also depends on age structure, morbidity, and case mix, which a population
   surface does not capture.
-- **Modeled versus areal confound.** The contrast between LandScan (ambient,
-  modeled) and GPW (residential, areal) mixes timing with construction. The
-  WorldPop or LandScan USA day/night robustness check, if run, bounds this.
+- **Modeled versus areal construction.** The LandScan (ambient, modeled) versus
+  GPW (residential, areal) contrast could in principle mix timing with raster
+  construction. A WorldPop control (modeled but residential) resolves this: it
+  behaves like the residential surface, so the effect tracks day-versus-night
+  timing, not construction. A residual limitation is that WorldPop is US-only, so
+  Puerto Rico is absent from that check.
 - **Window dependence.** Results are conditional on the commuting-zone
   partition. The CBSA re-run quantifies sensitivity to the windowing choice.
 - **Distance, not travel time.** All distances are Euclidean, whereas real

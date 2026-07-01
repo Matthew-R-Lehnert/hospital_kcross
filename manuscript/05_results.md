@@ -96,6 +96,22 @@ fig_dallas_ambient_desert): its hospitals cluster beyond nighttime population ye
 leave daytime population comparatively far from care. The demand surface does
 not refine the conclusion; it reverses it.
 
+This reversal is driven by the day-versus-night timing of the demand surface,
+not by how the surface is built. LandScan (ambient) is a dasymetric, modeled
+product while GPW (residential) is areal, so a modeled-versus-areal difference
+could in principle confound the ambient-versus-residential contrast. We rule
+that out with a third surface, WorldPop, which is modeled like LandScan but
+residential like GPW. Under WorldPop, hospital concentration behaves like the
+residential (GPW) surface, not the ambient one: 18 of 257 zones are
+significantly over-concentrated on facilities (combined $p = 0.001$) and 17 on
+beds, with 0 of 575 zones under-served on coverage ($p = 0.48$). Both
+residential surfaces, whether areal (GPW) or modeled (WorldPop), yield
+over-concentration and no coverage gaps, while the ambient surface yields the
+reverse. The effect therefore tracks whether population is counted by day or by
+night, not the construction of the raster. (WorldPop is US-only, so Puerto Rico
+and a small number of coverage-gap zones are absent, leaving 257 rather than 261
+concentration zones; this does not affect the comparison.)
+
 ## Validation and robustness
 
 Type-I calibration by simulation (target 0.05) gives facilities 0.040, beds

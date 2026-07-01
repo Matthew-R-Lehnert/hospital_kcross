@@ -60,10 +60,13 @@ are spread uniformly within each input administrative unit, so its effective
 resolution is the input unit size), whereas LandScan is dasymetric and modeled
 (counts are redistributed within units using roads, land cover, and imagery). A
 raw LandScan-versus-GPW difference therefore conflates ambient versus
-residential with modeled versus unmodeled. <!-- TODO (robustness): add WorldPop
-(modeled residential, ~1 km) to hold construction constant, or LandScan USA
-day/night (~90 m, US-only) for a same-product-family ambient/residential check.
-Decide v1 scope. -->
+residential with modeled versus unmodeled. To separate the two we add a third
+surface as a control: **WorldPop** (UN-adjusted, ~1 km, 2020), which is
+dasymetric and modeled like LandScan but residential like GPW. If the ambient
+effect were a modeling artifact, WorldPop would behave like LandScan; if it is
+about day-versus-night timing, WorldPop behaves like GPW (Results confirm the
+latter). WorldPop is distributed per country and we use the US file, so Puerto
+Rico is not covered by this control.
 
 ## Analysis windows (USDA commuting zones)
 
