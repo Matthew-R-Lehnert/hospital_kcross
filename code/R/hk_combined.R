@@ -51,7 +51,9 @@ BEDS_PER_1000_OECD <- 4.3    # ~OECD average (verify/cite)
   verdict <- if (any(above)) above_label else if (any(below)) below_label else "consistent"
 
   utils::write.csv(df, file.path(out_dir, paste0(tag, "_envelope.csv")), row.names = FALSE)
-  saveRDS(list(x = x, obs = obs, sims = sims, tag = tag),
+  saveRDS(list(x = x, obs = obs, sims = sims, tag = tag,
+               window = extra_meta$window, pop_kind = extra_meta$pop_kind,
+               layer = extra_meta$layer),
           file.path(out_dir, paste0(tag, "_simfuns.rds")))
   p <- ggplot(df, aes(x)) +
     geom_ribbon(aes(ymin = lo, ymax = hi), fill = "grey80", alpha = .6) +

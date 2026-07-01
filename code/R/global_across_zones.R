@@ -34,13 +34,18 @@ if (!length(files)) stop("no *_", layer, "_simfuns.rds in ", sim_dir,
                          " -- run the combined per-zone analysis first")
 message(sprintf("layer = %s", layer))
 
+pop_kind <- basename(normalizePath(sim_dir))
 cs <- list(); zones <- character()
 for (f in files) {
   s <- readRDS(f)
   if (is.null(s$sims) || nrow(s$sims) < 2) next
   cs[[length(cs) + 1]] <- GET::create_curve_set(
-    list(r = s$r, obs = s$obs, sim_m = s$sims))
-  zones <- c(zones, s$window)
+    list(r = s$x, obs = s$obs, sim_m = s$sims))       # engine saves the grid as `x`
+  # zone key from filename: <tagbase>_<pop>_<layer>_simfuns.rds -> <tagbase>
+  key <- sub("_simfuns\\.rds$", "", basename(f))
+  key <- sub(sprintf("_%s$", layer), "", key)
+  key <- sub(sprintf("_%s$", pop_kind), "", key)
+  zones <- c(zones, key)
 }
 names(cs) <- zones
 message(sprintf("combining %d zones from %s", length(cs), sim_dir))
@@ -51,16 +56,19 @@ combined_p <- attr(res, "p")
 
 # Per-zone family-wise-adjusted verdict (does the zone's obs exit its combined
 # envelope). res is a list of per-zone global envelopes when given a list.
+# layer-aware verdict labels: coverage above-envelope = under-served, not clustered
+above_lab <- if (layer == "coverage") "under-served" else "over-concentrated"
+below_lab <- if (layer == "coverage") "over-served"  else "dispersed"
 per <- if (is.null(res$obs)) res else list(res)   # robust to 1-zone case
 rows <- lapply(seq_along(per), function(i) {
   e <- per[[i]]
   data.frame(window = zones[i],
-             fw_verdict = if (any(e$obs > e$hi)) "over-concentrated"
-                          else if (any(e$obs < e$lo)) "dispersed" else "consistent")
+             fw_verdict = if (any(e$obs > e$hi)) above_lab
+                          else if (any(e$obs < e$lo)) below_lab else "consistent")
 })
 df <- do.call(rbind, rows)
 utils::write.csv(df, out_csv, row.names = FALSE)
 cat(sprintf("combined family-wise global p-value = %s\n", format(combined_p)))
-cat(sprintf("family-wise over-concentrated zones: %d / %d\n",
-            sum(df$fw_verdict == "over-concentrated"), nrow(df)))
+cat(sprintf("family-wise %s zones: %d / %d\n", above_lab,
+            sum(df$fw_verdict == above_lab), nrow(df)))
 cat(sprintf("wrote %s\n", out_csv))

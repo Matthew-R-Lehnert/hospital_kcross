@@ -25,26 +25,38 @@ Usage: python code/scripts/typology.py [suff_ratio_cutoff=1.0]
 """
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
 import pandas as pd
 
+
+def zkey(win: str) -> str:
+    """Normalized zone key matching the engine's file tag (non-alnum -> '_')."""
+    return re.sub(r"[^A-Za-z0-9]+", "_", str(win))
+
 CUT = float(sys.argv[1]) if len(sys.argv) > 1 else 1.0   # ratio_to_US below this = "low"
 KINDS = ["ambient", "residential"]
-DIAGNOSES = ["shortage", "maldistribution", "geographic gap",
-             "capacity shortfall", "redundancy", "well-matched", "incomplete"]
+DIAGNOSES = ["no hospital", "shortage", "maldistribution", "geographic gap",
+             "capacity shortfall", "redundancy", "well-matched"]
 
 
 def diagnose(conc: str, cov: str, suff_low: bool) -> str:
-    """Map the three axis verdicts to one named diagnosis (priority order)."""
-    if conc is None or cov is None:
-        return "incomplete"                     # zone skipped on a point-pattern axis
+    """Map the axis verdicts to one named diagnosis (priority order).
+
+    Sparse zones have no concentration verdict (conc is None); they are still
+    diagnosed on coverage + sufficiency (they just cannot be flagged
+    maldistribution or redundancy, which require the K test). Zero-hospital
+    zones have no coverage either and are the extreme 'no hospital' deserts.
+    """
+    if cov is None:
+        return "no hospital"                    # no in-zone hospital at all
     under = cov == "under-served"
-    overc = conc == "over-concentrated"
+    overc = conc == "over-concentrated"         # False when concentration untested
     if suff_low and under:   return "shortage"          # too few AND people stranded
     if under and overc:      return "maldistribution"   # enough but clumped; fringe stranded
-    if under:                return "geographic gap"    # stranded despite proportional/spread supply
+    if under:                return "geographic gap"    # stranded (concentration proportional or untested)
     if suff_low:             return "capacity shortfall"  # thin supply, but people reachable
     if overc:                return "redundancy"        # clumped, adequately/over-covered
     return "well-matched"
@@ -68,13 +80,13 @@ def build(kind: str, summ: pd.DataFrame) -> tuple[pd.DataFrame, str]:
         by = g.set_index("layer")
         ratio = by["ratio_to_US"].dropna().iloc[0] if "ratio_to_US" in by and by["ratio_to_US"].notna().any() else None
         def verdict(layer, fw):
-            if fw is not None and win in fw:
-                return fw[win]
+            if fw is not None and zkey(win) in fw:
+                return fw[zkey(win)]              # family-wise-corrected verdict
             return by.loc[layer, "verdict"] if layer in by.index and pd.notna(by.loc[layer, "verdict"]) else None
         conc = verdict("facilities", conc_fw)
         cov  = verdict("coverage", cov_fw)
         suff_low = (ratio is not None) and (ratio < CUT)
-        rows.append(dict(window=win, conc=conc, cov=cov, beds_per_1000=by.get("beds_per_1000"),
+        rows.append(dict(window=win, conc=conc, cov=cov, conc_tested=conc is not None,
                          ratio_to_US=ratio, suff_low=suff_low,
                          diagnosis=diagnose(conc, cov, suff_low)))
     return pd.DataFrame(rows), mode
