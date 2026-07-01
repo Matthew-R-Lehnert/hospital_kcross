@@ -15,7 +15,8 @@ concentration is tested only in the hospital-dense zones). The pattern holds up
 under scrutiny: it is stable to the hospital-count threshold and the coverage
 buffer, a WorldPop control shows the reversal is about day-versus-night timing
 rather than raster construction, neutralizing the population LandScan places at
-the hospital sites themselves leaves the ambient result unchanged, and a re-run
+the hospital sites themselves leaves the ambient result unchanged, routing the
+deserts on the road network shows travel distance only deepens them, and a re-run
 on CBSA windows reproduces the concentration result while confirming that the
 coverage deserts live in the rural areas only the commuting-zone partition
 captures.
