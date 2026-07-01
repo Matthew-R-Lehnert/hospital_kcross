@@ -133,4 +133,16 @@ and San Diego remains borderline throughout. Crediting hospitals as far as 100 k
 across zone boundaries therefore does not dissolve the deserts, so they are not
 an artifact of the 50 km default.
 
-<!-- TODO (running): CBSA-window re-run; WorldPop modeled-residential control. -->
+Re-running the entire analysis on 939 CBSA windows shows the concentration
+result is robust to the partition while clarifying the coverage result. Under
+CBSAs, concentration behaves exactly as under commuting zones: 0 of 185
+hospital-dense CBSAs are over-concentrated against ambient population and 15 of
+185 against residential (combined $p = 0.001$). Coverage, by contrast, flags no
+zones under either surface on CBSAs (0 of 927). This is expected and supportive
+rather than contradictory: CBSAs cover only urbanized cores and their immediate
+commuting fringe, so the under-served populations, which sit in the rural areas
+that commuting zones include but CBSAs omit, lie outside the CBSA windows
+altogether. The coverage deserts are therefore a genuine property of rural
+populations that only the whole-country commuting-zone partition captures, not
+an artifact of the commuting-zone boundaries; and the concentration finding does
+not depend on the windowing choice at all.

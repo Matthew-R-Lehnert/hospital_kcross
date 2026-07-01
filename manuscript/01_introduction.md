@@ -1,10 +1,5 @@
 # Introduction
 
-<!-- Target ~1000-1400 words. Structure: (1) the problem, (2) the limits of the
-dominant paradigm, (3) our reframing, (4) the ambient-population angle, (5)
-contributions + roadmap. Citation keys [@key] are resolved from references.bib
-at build time. -->
-
 ## The problem
 
 Access to hospital care is unevenly distributed across the United States, and
@@ -56,9 +51,12 @@ Conventional access analyses use where people sleep. People have medical
 emergencies, however, where they work, shop, and commute. Ambient (24-hour
 average) population, operationalized here with ORNL LandScan, is a more
 appropriate demand surface for acute hospital care. We make the ambient versus
-residential choice a first-class object of study. We run the identical test
-under both demand surfaces and report where the equity verdict changes, which is
-itself an empirical contribution.
+residential choice a first-class object of study, running the identical test
+under both demand surfaces and reporting where the equity verdict changes. This
+choice turns out not to refine the picture but to reverse it: measured against
+residential population, US hospitals appear significantly over-concentrated, but
+that over-concentration vanishes against ambient population, which instead
+reveals access gaps the residential surface hides.
 
 ## Three axes, not one number
 

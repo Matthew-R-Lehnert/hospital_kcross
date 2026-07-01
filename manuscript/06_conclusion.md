@@ -1,8 +1,5 @@
 # Conclusion
 
-<!-- ~600-900 words. Restate what was tested and found (once results exist),
-then limitations and implications. -->
-
 ## Summary
 
 We characterized US hospital supply on three orthogonal axes, concentration,
@@ -13,7 +10,12 @@ conclusion: against residential population the country shows significant hospita
 over-concentration and no coverage gaps, while against ambient population the
 over-concentration vanishes and genuine coverage gaps appear instead. Forty-four
 zones change diagnosis between the two surfaces, and over-concentration and
-under-service are never found together in the same zone.
+under-service are never found together in the same zone. The pattern holds up
+under scrutiny: it is stable to the hospital-count threshold and the coverage
+buffer, a WorldPop control shows the reversal is about day-versus-night timing
+rather than raster construction, and a re-run on CBSA windows reproduces the
+concentration result while confirming that the coverage deserts live in the
+rural areas only the commuting-zone partition captures.
 
 ## Limitations
 
@@ -32,7 +34,11 @@ under-service are never found together in the same zone.
   timing, not construction. A residual limitation is that WorldPop is US-only, so
   Puerto Rico is absent from that check.
 - **Window dependence.** Results are conditional on the commuting-zone
-  partition. The CBSA re-run quantifies sensitivity to the windowing choice.
+  partition. The CBSA re-run shows the concentration finding is insensitive to
+  the partition, but the coverage deserts are visible only with commuting zones,
+  because CBSAs exclude the rural fringe where the under-served populations sit.
+  The coverage conclusion is thus specific to a whole-country partition; a
+  metropolitan-only windowing would miss it by construction.
 - **Distance, not travel time.** All distances are Euclidean, whereas real
   access depends on roads, terrain, and traffic. The method answers a question
   about spatial distribution that complements, rather than replaces, travel-time
