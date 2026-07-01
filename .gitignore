@@ -40,3 +40,6 @@ work/
 # Local credentials / secrets
 .env
 *.pem
+
+# Local build toolchain (pandoc binary)
+.tools/

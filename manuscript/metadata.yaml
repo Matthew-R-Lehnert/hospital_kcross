@@ -18,4 +18,5 @@ abstract: >
   a fallback for formats that key on document metadata.)
 link-citations: true
 linkReferences: true
+reference-section-title: References
 ---

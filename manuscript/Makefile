@@ -32,7 +32,7 @@ PANDOC_FLAGS = --citeproc --bibliography=$(BIB) --csl=$(CSL) \
 all: pdf
 
 pdf: $(CSL)
-	pandoc $(TITLE) $(SECTIONS) $(PANDOC_FLAGS) -o $(OUT).pdf
+	pandoc $(TITLE) $(SECTIONS) $(PANDOC_FLAGS) --pdf-engine=xelatex -o $(OUT).pdf
 
 docx: $(CSL)
 	pandoc $(TITLE) $(SECTIONS) $(PANDOC_FLAGS) -o $(OUT).docx
@@ -44,13 +44,11 @@ html: $(CSL)
 CSL_BASE = https://raw.githubusercontent.com/citation-style-language/styles/master
 styles:
 	mkdir -p csl
-	curl -fsSL $(CSL_BASE)/apa.csl                 -o csl/apa.csl
-	curl -fsSL $(CSL_BASE)/chicago-author-date.csl -o csl/chicago-author-date.csl
-	curl -fsSL $(CSL_BASE)/chicago-note-bibliography.csl -o csl/chicago-note-bibliography.csl
-	curl -fsSL $(CSL_BASE)/vancouver.csl           -o csl/vancouver.csl
-	curl -fsSL $(CSL_BASE)/ieee.csl                -o csl/ieee.csl
-	curl -fsSL $(CSL_BASE)/elsevier-harvard.csl    -o csl/elsevier-harvard.csl
-	@echo "Installed CSL styles into csl/. Build with: make STYLE=<name>"
+	@for s in apa chicago-author-date vancouver ieee elsevier-harvard nature; do \
+	  curl -fsSL $(CSL_BASE)/$$s.csl -o csl/$$s.csl && echo "  got $$s.csl" \
+	    || echo "  (skipped $$s.csl: not found at source)"; \
+	done
+	@echo "Installed available CSL styles into csl/. Build with: make STYLE=<name>"
 
 $(CSL):
 	@echo "Missing $(CSL). Run 'make styles' to download citation styles, or"
