@@ -150,3 +150,25 @@ CSL style. Optional: WorldPop excludes Puerto Rico (US-only file).
 
 Results/data live under `output/`, `output_cbsa/`, `data/` (all gitignored,
 local-only, regenerable from `code/acquire/` + the pipeline).
+
+## Next steps / open questions (pre-submission review)
+
+A simulated peer review of `manuscript.pdf` (2026-07-01) surfaced open questions
+to resolve before submission. Full list with actions and checkboxes in
+**`docs/reviewer_feedback.md`**. Highest-priority items:
+
+- **Ambient endogeneity (blocking):** LandScan puts daytime population *at*
+  hospitals (staff/outpatients/visitors), which may mechanically explain the
+  reversal. Re-run with hospital cells masked from the ambient raster, or show
+  the induced population is negligible.
+- **Is the reversal mechanical?** Show it carries information beyond "LandScan is
+  more urban-core-weighted than GPW."
+- **Euclidean vs drive-time:** validate the 6 rural coverage deserts against
+  road-network distance.
+- **Temporal mismatch:** hospitals ~2024 vs population/CZ 2020 — use a 2020
+  hospital layer or show insensitivity to closures.
+- **Soften claims:** "ambient is the better acute-demand surface" and "curbing
+  urban over-provision" overreach what the test licenses.
+- **Production defects:** title block renders `true`/`2026`; abstract
+  build-fallback comment leaks into body; trauma subset claimed as a contribution
+  but deferred; 598-vs-597 zone count; repo must be public + DOI-archived.

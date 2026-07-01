@@ -4,7 +4,8 @@
 
 Access to hospital care is unevenly distributed across the United States, and
 the consequences of that unevenness, including delayed treatment, worse
-outcomes, and rural hospital closures, are well documented. A foundational
+outcomes, and rural hospital closures, are well documented
+[@branas_etal_2005; @carr_etal_2017; @hsia_shen_2011]. A foundational
 question underlies any equity claim: are hospitals located in proportion to the
 population that needs them? Where they are not, two distinct failures appear.
 The first is over-concentration, where facilities accumulate beyond what local
