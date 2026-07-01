@@ -108,5 +108,13 @@ lax. The concentration result is stable to that floor: re-running the residentia
 facility test at minimum 8, 10, and 15 hospitals flags 15, 14, and 9 zones
 (combined $p = 0.002, 0.002, 0.028$) and the bed test 13, 12, and 9, so raising
 the threshold only shrinks the eligible pool without overturning the finding.
-<!-- TODO: buffer-distance sensitivity; CBSA-window re-run; WorldPop
-modeled-residential control. -->
+
+The coverage (desert) results are invariant to the cross-border buffer distance.
+Recomputing the coverage test for the ambient under-served zones at 25, 50, and
+100 km buffers leaves every zone's verdict unchanged: Amarillo, Dallas, Detroit,
+Houston, and San Juan remain significantly under-served at all three distances,
+and San Diego remains borderline throughout. Crediting hospitals as far as 100 km
+across zone boundaries therefore does not dissolve the deserts, so they are not
+an artifact of the 50 km default.
+
+<!-- TODO (running): CBSA-window re-run; WorldPop modeled-residential control. -->

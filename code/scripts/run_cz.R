@@ -21,18 +21,20 @@ args <- commandArgs(trailingOnly = TRUE)
 if (length(args) < 3) stop("need: <window_name> <year> <pop_kind> [nsim]")
 window_name <- args[1]
 year        <- as.integer(args[2])
-pop_kind    <- match.arg(args[3], c("ambient", "residential"))
+pop_kind    <- match.arg(args[3], c("ambient", "residential", "worldpop"))
 nsim        <- if (length(args) >= 4) as.integer(args[4]) else 999
 
 windows_path   <- Sys.getenv("HK_WINDOWS",   file.path(root, "data", "commuting_zones.gpkg"))
 hospitals_path <- Sys.getenv("HK_HOSPITALS", file.path(root, "data", "hospitals.gpkg"))
 landscan_dir   <- Sys.getenv("HK_LANDSCAN_DIR", file.path(root, "data", "landscan"))
 gpw_dir        <- Sys.getenv("HK_GPW_DIR",      file.path(root, "data", "gpw"))
+worldpop_dir   <- Sys.getenv("HK_WORLDPOP_DIR", file.path(root, "data", "worldpop"))
 out_dir        <- Sys.getenv("HK_OUT",          file.path(root, "output", pop_kind))
 
-raster_path <- if (pop_kind == "ambient")
-  file.path(landscan_dir, sprintf("landscan-global-%d.tif", year)) else
-  file.path(gpw_dir, sprintf("gpw_v4_%d.tif", year))
+raster_path <- switch(pop_kind,
+  ambient     = file.path(landscan_dir, sprintf("landscan-global-%d.tif", year)),
+  residential = file.path(gpw_dir, sprintf("gpw_v4_%d.tif", year)),
+  worldpop    = file.path(worldpop_dir, "worldpop_2020.tif"))   # modeled-residential control
 if (!file.exists(raster_path)) stop("missing population raster: ", raster_path)
 
 windows_sf   <- sf::st_read(windows_path, quiet = TRUE)
