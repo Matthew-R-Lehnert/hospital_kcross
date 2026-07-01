@@ -65,6 +65,7 @@ process HK {
     script:
     """
     export HK_OUT="\$PWD/_out"
+    export HK_WINDOWS='${params.windows}'
     ${params.rbin} ${params.rscript} "${zone}" ${params.year} ${pop_kind} ${params.nsim}
     mv _out/* . 2>/dev/null || true
     """
