@@ -23,14 +23,20 @@ controlling error within and across zones. Hospital locations come from HIFLD
 (24-hour) population at about 1 km, contrasted against NASA SEDAC GPWv4.11
 **residential** population at the same grid.
 
-**Results.** *(Pending the national run.)* We report the distribution of zones
-across a diagnostic typology that the three axes define (shortage,
-maldistribution, geographic gap, redundancy, well-matched), the geography of
-over-concentration and under-served populations, and the set of zones whose
-diagnosis changes when the ambient population null is replaced by the
-residential null.
+**Results.** Across 597 commuting zones, the demand surface reverses the
+conclusion. Against **residential** population, 15 of 261 hospital-dense zones
+are significantly over-concentrated (family-wise $p = 0.002$) and none are
+under-served; against **ambient** population, that over-concentration disappears
+entirely (0 zones, $p = 0.47$) and instead 6 zones are significantly
+under-served ($p = 0.001$). Over-concentration and under-service never co-occur
+in the same zone. In total, **44 of 597 zones change diagnosis** between the two
+surfaces, moving metros such as Dallas and San Diego from a redundancy diagnosis
+(residential) to a geographic-access-gap diagnosis (ambient).
 
-**Conclusions.** *(Pending.)*
+**Conclusions.** Whether US hospital supply looks over-provided or under-serving
+depends on whether demand is measured by where people sleep or where they are by
+day. Analyses that default to residential population may systematically mistake
+the nature of local hospital-access inequity.
 
 **Keywords:** inhomogeneous K-function; spatial point patterns; healthcare
 access; hospital capacity; ambient population; LandScan; hospital deserts.

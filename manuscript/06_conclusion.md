@@ -5,11 +5,15 @@ then limitations and implications. -->
 
 ## Summary
 
-*To be completed after results.* We characterized hospital supply nationally on
-three orthogonal axes, concentration, coverage, and sufficiency, each against a
+We characterized US hospital supply on three orthogonal axes, concentration,
+coverage, and sufficiency, in every commuting zone, each against a
 population-proportional null and contrasted between ambient and residential
-population, and combined them into a per-zone diagnosis that separates too-few
-capacity from wrong-place arrangement from stranded populations.
+population. The central result is that the demand surface reverses the
+conclusion: against residential population the country shows significant hospital
+over-concentration and no coverage gaps, while against ambient population the
+over-concentration vanishes and genuine coverage gaps appear instead. Forty-four
+zones change diagnosis between the two surfaces, and over-concentration and
+under-service are never found together in the same zone.
 
 ## Limitations
 
@@ -43,10 +47,14 @@ capacity from wrong-place arrangement from stranded populations.
 
 ## Implications
 
-*To be completed.* The geography of population-relative over- and under-provision,
-and the cases where the ambient framing changes the verdict, speaks to where
-redundant capacity and genuine access gaps coexist, and to how the choice of
-demand surface shapes equity conclusions.
+The choice of demand surface is not a technical detail; it determines the policy
+story. A residential denominator points toward curbing urban over-provision,
+while an ambient denominator points toward closing daytime access gaps in the
+same metros. Because acute care is needed where people are when an emergency
+occurs, not only where they sleep, the ambient framing deserves weight in
+capacity and siting decisions. The diagnostic typology further separates the
+distinct failures, too little capacity, capacity in the wrong place, and
+populations left far from care, each of which calls for a different response.
 
 ## Reproducibility and data availability
 
