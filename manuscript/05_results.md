@@ -53,8 +53,9 @@ edge artifacts. <!-- Figure: fig_dallas_ambient_desert.png -->
 
 Zone-level capacity is right-skewed: the median zone has 4.6 (ambient) / 4.4
 (residential) staffed beds per 1,000, well above the US population-weighted
-average of ~2.8, because many low-population rural zones carry high per-capita
-capacity while dense metros sit low. Below the US reference fall **88** zones
+average of ~2.8 [@kff_beds_2020], because many low-population rural zones carry
+high per-capita capacity while dense metros sit low, the documented rural-urban
+capacity gradient [@hegland_owens_selden_2022]. Below the US reference fall **88** zones
 under ambient and **114** under residential population; below the OECD reference
 (~4.3), 251 and 289 respectively. The denominator matters: commuter-destination
 zones look better supplied on residential population and worse on ambient, and
@@ -99,5 +100,13 @@ not refine the conclusion; it reverses it.
 
 Type-I calibration by simulation (target 0.05) gives facilities 0.040, beds
 0.043, and coverage 0.040, confirming the estimators, including the newer bed
-and coverage constructions, are well behaved. <!-- TODO: threshold and buffer
-sensitivity; CBSA-window re-run; WorldPop modeled-residential control. -->
+and coverage constructions, are well behaved. A power analysis against an
+inhomogeneous Thomas over-concentration alternative (cluster scale 2.5 km) shows
+power rising from 0.67 at 8 hospitals to 0.80 at 10 and 0.99 at 30, with Type-I
+near nominal throughout, so the 8-hospital floor is permissive rather than
+lax. The concentration result is stable to that floor: re-running the residential
+facility test at minimum 8, 10, and 15 hospitals flags 15, 14, and 9 zones
+(combined $p = 0.002, 0.002, 0.028$) and the bed test 13, 12, and 9, so raising
+the threshold only shrinks the eligible pool without overturning the finding.
+<!-- TODO: buffer-distance sensitivity; CBSA-window re-run; WorldPop
+modeled-residential control. -->

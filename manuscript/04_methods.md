@@ -19,10 +19,11 @@ The inhomogeneous K-function is a second-order (pairwise) summary, so it
 requires enough hospitals per zone to estimate. Below a small count the
 Monte-Carlo envelope is degenerate and the test has no power. We therefore
 compute the concentration tests only for zones with at least **8 open
-hospitals**; the threshold is justified by a simulation power analysis (the
-smallest $n$ at which the global test reaches adequate power against a fixed
-over-concentration alternative) and is reported with a sensitivity check at
-higher values. Of the 597 commuting zones, **261 meet the threshold and 336 do
+hospitals**. A simulation power analysis (against an inhomogeneous Thomas
+over-concentration alternative) shows the global test reaches about 67% power at
+$n = 8$ and 80% at $n \approx 10$, with Type-I near nominal throughout, so we
+treat 8 as a permissive floor and confirm in Results that the headline is stable
+when the floor is raised. Of the 597 commuting zones, **261 meet the threshold and 336 do
 not**, but the excluded zones hold only about **9% of population**, so the
 concentration analysis still covers roughly **91% of where people are during the
 day**. The **sufficiency** and **coverage** axes are computed for *every* zone,
@@ -119,7 +120,8 @@ simplification discussed in the limitations.
 Both tests above condition on the observed hospital (or bed) total, so neither
 asks whether there is *enough* capacity. We measure that with the standard
 metric, **staffed beds per 1,000 population**, reported against the US national
-average (~2.8) and the OECD average (~4.3) [reference values to be cited]. It is
+average (~2.8 [@kff_beds_2020]) and the OECD average (~4.3
+[@oecd_health_glance_2023]). It is
 a descriptive ratio, computed for every zone (including the sparse zones the
 concentration tests skip), under both ambient and residential population. Folding
 sufficiency into the K statistic would confound it with concentration (over-
@@ -167,8 +169,10 @@ The facility test reproduces the standard spatstat `Kinhom` behavior. For the
 newer bed and coverage estimators we confirm **Type-I calibration** by simulation
 (drawing patterns under the null and verifying the test rejects at the nominal
 rate): facilities, beds, and coverage all reject near 0.04 against a 0.05 target,
-confirming no estimator bias. A power analysis against a population-raised-to-a-
-power over-concentration alternative establishes the inclusion threshold.
+confirming no estimator bias. A power analysis against an inhomogeneous Thomas
+over-concentration alternative establishes the inclusion threshold, and a
+threshold-sensitivity re-run (at 8, 10, and 15 hospitals) confirms the
+concentration headline does not depend on it (Results).
 
 ## Implementation and reproducibility
 
