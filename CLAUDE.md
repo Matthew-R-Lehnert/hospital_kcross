@@ -121,7 +121,32 @@ cd manuscript && make styles && make STYLE=apa                        # build PD
 
 ## Status (as of the current work)
 
-National CZ run complete + analyzed; robustness done except the CBSA re-run
-(finishing). Manuscript fully drafted (~6,300 words) with real results, figures,
-and verified citations. Remaining: fold in CZ-vs-CBSA comparability, polish
-(trim abstract/related-work, build PDF), pick target journal.
+**Analysis complete.** National commuting-zone run (597 zones x ambient +
+residential x 999 sims) done + analyzed; family-wise corrected; diagnostic
+typology built (`output/typology_*.csv`). Full robustness suite complete:
+Type-I calibration (~0.04), power analysis (justifies the >=8 floor; ~0.67 power
+at n=8, 0.80 at n=10), threshold sensitivity (headline stable at 8/10/15), buffer
+sensitivity (deserts robust at 25/50/100 km), the WorldPop modeled-residential
+control (`output/worldpop/`), and the 939-CBSA windowing re-run (`output_cbsa/`).
+
+**Key results (family-wise corrected):**
+- Concentration: 0/261 zones over-concentrated vs ambient (p=0.47) but 15/261 vs
+  residential (p=0.002); beds 13/261. Replicates on CBSAs (0/185, 15/185).
+- Coverage: 6/585 under-served vs ambient (p=0.001), 0 vs residential (p=0.13).
+  Deserts appear only with CZ windows (CBSAs omit the rural fringe).
+- WorldPop (modeled residential) patterns with GPW, not LandScan -> the
+  ambient/residential flip is day/night TIMING, not raster construction.
+- 44/597 zones change diagnosis between surfaces.
+
+**Manuscript complete** (~7,300 words, 0 em dashes): all 7 sections written with
+real results + full robustness, 31 verified citations, national typology maps +
+Dallas exemplar figures. Everything committed and pushed (private repo).
+
+**Remaining to submission:** length/polish (Related Work ~1,666 is heavy; trim
+abstract + Methods to a journal word limit), build the PDF
+(`cd manuscript && make styles && make STYLE=apa`), pick the target journal
+(rec: Int. J. Health Geographics primary; JAMA Network Open reach) and set the
+CSL style. Optional: WorldPop excludes Puerto Rico (US-only file).
+
+Results/data live under `output/`, `output_cbsa/`, `data/` (all gitignored,
+local-only, regenerable from `code/acquire/` + the pipeline).
