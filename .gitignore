@@ -1,6 +1,7 @@
 # Data and results are large / derived — never committed
 data/
 output/
+output_cbsa/
 !data/.gitkeep
 !output/.gitkeep
 
