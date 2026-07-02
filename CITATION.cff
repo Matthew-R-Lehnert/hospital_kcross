@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code or manuscript, please cite it as below."
+title: "Are Hospitals Where the People Are? A National Inhomogeneous K-Function Test of U.S. Hospital Distribution Against Ambient Population"
+authors:
+  - family-names: Lehnert
+    given-names: Matthew R.
+    affiliation: Axle Informatics
+    email: Matthew.Lehnert@axleinfo.com
+repository-code: "https://github.com/Matthew-R-Lehnert/hospital_kcross"
+license: MIT
+version: "1.0.0"
+date-released: "2026-07-02"
+keywords:
+  - spatial point patterns
+  - inhomogeneous K-function
+  - healthcare access
+  - ambient population
+  - LandScan
+  - hospital deserts
+# After minting a Zenodo/OSF DOI for the v1.0.0 release, add it here, e.g.:
+# identifiers:
+#   - type: doi
+#     value: 10.5281/zenodo.XXXXXXX
