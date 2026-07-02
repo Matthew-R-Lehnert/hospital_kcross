@@ -160,15 +160,18 @@ run_hk <- function(window_name, windows_sf, hospitals_sf, raster_path,
   hc <- sf::st_coordinates(h)
   X  <- spatstat.geom::ppp(hc[, 1], hc[, 2], window = win, checkdup = FALSE)
 
-  # capacity weighting by bed-count: first pass replicates each point by its
-  # (rounded) bed count so a high-capacity hospital counts proportionally more.
-  # TODO: replace with a proper weighted-K estimator; replication is the crude
-  # but transparent v1. Beds missing (HIFLD -999 -> NA) fall back to weight 1.
-  if (weight_by == "beds") {
-    bw <- h$beds; bw[is.na(bw) | bw < 1] <- 1
-    rep_idx <- rep(seq_len(n), pmax(1L, round(bw / stats::median(bw[bw > 0]))))
-    X <- spatstat.geom::ppp(hc[rep_idx, 1], hc[rep_idx, 2], window = win, checkdup = FALSE)
-  }
+  # DEPRECATED bed path. This helper's only correct use is weight_by = "none"
+  # (facility concentration; e.g. the masked-ambient endogeneity control). The
+  # bed-weighted concentration reported in the manuscript is computed by
+  # run_hk_all() in hk_combined.R via the mark-weighted-intensity identity
+  # (per-point lambda = Lambda(x_i)/beds_i), NOT by point replication. An earlier
+  # replication draft lived here; it produced coincident points against a
+  # non-replicated null and is not the estimator the manuscript describes, so it
+  # is disabled to prevent accidental use (it was reachable via run_all.R).
+  if (weight_by == "beds")
+    stop("run_hk(weight_by = 'beds') is deprecated and NOT the manuscript ",
+         "estimator; use run_hk_all() in hk_combined.R for bed-weighted ",
+         "concentration.")
 
   # --- population intensity (the null) ------------------------------------
   # optionally blank hospital-containing raster cells (ambient-endogeneity test)

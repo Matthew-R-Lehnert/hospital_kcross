@@ -86,7 +86,7 @@ below).
 | geographic gap | 6 | 0 |
 | capacity shortfall | 76 | 102 |
 | redundancy | 0 | 13 |
-| well-matched | 503 | 470 |
+| well-matched | 504 | 471 |
 
 Two results stand out. First, **over-concentration and under-service do not
 co-occur** in the same zone (maldistribution = 0 under either surface). This is
@@ -99,7 +99,15 @@ but we do not read it as a strong empirical discovery. Second, the dominant
 flagged category flips with the demand surface: residential population yields a
 **redundancy** story (13 zones, clustering beyond population) and no coverage
 gaps, whereas ambient population yields a **geographic-gap** story (6 zones) and
-no redundancy.
+no redundancy. Two points on how these counts are formed. The 13 redundancy
+zones are fewer than the 15 flagged over-concentrated on facilities because the
+diagnostic rule is a priority cascade (see Methods): two of the fifteen (Fort
+Collins and Fresno) also fall below the US bed average and are therefore
+reported under *capacity shortfall*, so the redundancy count is a lower bound on
+residential over-concentration. And all six ambient geographic-gap zones were
+hospital-dense enough to be tested on concentration and returned proportional
+(they are not merely untested), so the label reflects a measured, not assumed,
+proportional arrangement.
 
 ![Diagnostic typology of hospital supply by commuting zone under **ambient** population (CONUS; Alaska, Hawaii, and Puerto Rico analyzed but off-frame). Grey is well-matched; orange is capacity shortfall; dark orange is a coverage gap; black is a zone with no hospital.](figures/fig_typology_ambient.png){width=98%}
 
@@ -146,7 +154,7 @@ power rising from 0.67 at 8 hospitals to 0.80 at 10 and 0.99 at 30, with Type-I
 near nominal throughout, so the 8-hospital floor is permissive rather than
 lax. The concentration result is stable to that floor: re-running the residential
 facility test at minimum 8, 10, and 15 hospitals flags 15, 14, and 9 zones
-(combined $p = 0.002, 0.002, 0.028$) and the bed test 13, 12, and 9, so raising
+(combined $p = 0.002, 0.002, 0.030$) and the bed test 13, 12, and 9, so raising
 the threshold only shrinks the eligible pool without overturning the finding.
 
 The coverage axis has its own power analysis. Against a manufactured desert (a

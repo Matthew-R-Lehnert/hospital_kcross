@@ -60,7 +60,19 @@ cov_verdict <- function(zone, buffer_km) {
 
 cat(sprintf("Coverage buffer sensitivity (%s, nsim=%d)\n", pop_kind, nsim))
 cat(sprintf("%-28s %-14s %-14s %-14s\n", "zone", "25km", "50km", "100km"))
+rows <- list()
 for (z in zones) {
-  cells_out <- sapply(BUFFERS, function(b) { r <- cov_verdict(z, b); sprintf("%s(p%s)", r["verdict"], r["p"]) })
+  cells_out <- character(length(BUFFERS))
+  for (i in seq_along(BUFFERS)) {
+    b <- BUFFERS[i]; r <- cov_verdict(z, b)
+    cells_out[i] <- sprintf("%s(p%s)", r["verdict"], r["p"])
+    rows[[length(rows) + 1]] <- data.frame(zone = z, pop_kind = pop_kind, nsim = nsim,
+      buffer_km = b, verdict = unname(r["verdict"]), global_p = as.numeric(r["p"]),
+      pct_pop_beyond_25mi = as.numeric(r["pct_beyond_25mi"]))
+  }
   cat(sprintf("%-28s %-14s %-14s %-14s\n", substr(z, 1, 28), cells_out[1], cells_out[2], cells_out[3]))
 }
+out <- do.call(rbind, rows)
+dir.create(file.path(root, "docs"), showWarnings = FALSE)
+utils::write.csv(out, file.path(root, "docs", "buffer_sensitivity.csv"), row.names = FALSE)
+cat(sprintf("-> wrote %s\n", file.path(root, "docs", "buffer_sensitivity.csv")))

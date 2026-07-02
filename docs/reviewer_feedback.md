@@ -152,3 +152,52 @@ DONE. Only open item is the reproducibility gate (repo public + DOI), deferred b
 author choice. New robustness artifacts: coverage power, null-type sensitivity,
 effect sizes, reversal decomposition, sufficiency threshold sensitivity,
 drive-time (`code/{R,scripts}/*`, `docs/*.csv`).
+
+## Round 2 -- full code audit (2026-07-01)
+
+Triggered by a suspected bed-estimator bug. That suspicion was a FALSE ALARM:
+the point-replication bed code lives in `hk_core.R::run_hk`, which is DEAD
+(the pipeline runs `main.nf` -> `run_cz.R` -> `hk_combined.R::run_hk_all`). The
+production bed test (`hk_combined.R:140,153`) is the mark-weighted-intensity
+identity `lambda = Lambda(x_i)/beds_i` the Methods describe, with zone-median
+imputation (`:133-134`). Re-running the 3 zones that looked marginal in a
+scratch reimplementation reproduced the stored p-values EXACTLY through the
+production code (Augusta 0.014, Las Vegas 0.006, Saginaw 0.020, Abilene 0.004),
+so the 13/262 bed count stands. Lesson: audit the production path, not helpers.
+
+Then a 5-way audit (concentration, coverage, sufficiency+typology, family-wise
++robustness, data acquisition) cross-checked ~30 headline numbers against the
+committed code/output. ALL reproduce: facilities 15/0, beds 13/0, coverage 6/0,
+WorldPop 18/0, CBSA 15/0, masked-ambient 0/262 p=0.446, rho 1.73/251/1.94,
+effect sizes, power curve, null-type, coverage power. The family-wise combined
+ERL test is a legitimate FWER procedure.
+
+Genuine discrepancies found and FIXED (all doc/wording, plus one stale table):
+- [x] Table 1 well-matched was 503/470 (rows summed to 597, pre-CT-fix); corrected
+  to 504/471, columns now sum to 598.
+- [x] Threshold-sensitivity n>=15 facility combined p 0.028 -> 0.030 (999-sim
+  rounding drift).
+- [x] Typology prose in Methods rewritten to match the code's priority cascade:
+  redundancy no longer described as requiring "high sufficiency"/"over-served"
+  (code needs only over-concentration + >=US-avg sufficiency + not-under-served);
+  noted that low-sufficiency over-concentrated zones (Fort Collins, Fresno) fall
+  under capacity shortfall, so redundancy (13) is a lower bound on the 15
+  over-concentrated; geographic gap flagged as "proportional or not evaluated".
+- [x] `renormalise = TRUE` on Kinhom now disclosed in Methods.
+- [x] lambda-floor description corrected (floors any zero-pop cell, not only
+  hospital cells).
+- [x] Footgun removed: `hk_core.R::run_hk(weight_by="beds")` (replication draft,
+  reachable via legacy `run_all.R`) now `stop()`s, pointing to `run_hk_all`.
+- [x] manuscript.pdf rebuilt (apa) with all corrections.
+
+Recommendations still open (not correctness bugs):
+- [x] Persist Type-I calibration and buffer-sensitivity verdicts to `docs/*.csv`.
+  DONE: `calibration.R`/`buffer_sensitivity.R` now write `docs/calibration.csv`
+  and `docs/buffer_sensitivity.csv`. Re-run reproduced the manuscript exactly:
+  Type-I facilities 0.040, beds 0.043, coverage 0.040 (Tucson, M=300, env=199);
+  ambient deserts under-served at 25/50/100 km for Amarillo/Dallas/Detroit/
+  Houston/San Juan, San Diego borderline (p 0.07-0.08) throughout.
+- [ ] `docs/coverage_power.csv` is a duplicate of the San Diego file (overwritten
+  by a San Diego run); the cited `_sandiego`/`_amarillo` files are correct.
+- [ ] Delete legacy `run_all.R` (superseded by nextflow/`run_cz.R`) to fully
+  retire the dead concentration path.

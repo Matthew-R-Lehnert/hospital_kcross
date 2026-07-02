@@ -1,0 +1,19 @@
+"zone","pop_kind","nsim","buffer_km","verdict","global_p","pct_pop_beyond_25mi"
+"Amarillo, TX","ambient",499,25,"under-served",0.01,2.5
+"Amarillo, TX","ambient",499,50,"under-served",0.002,2.4
+"Amarillo, TX","ambient",499,100,"under-served",0.002,2.4
+"Dallas city, TX","ambient",499,25,"under-served",0.018,0
+"Dallas city, TX","ambient",499,50,"under-served",0.012,0
+"Dallas city, TX","ambient",499,100,"under-served",0.012,0
+"Detroit, MI","ambient",499,25,"under-served",0.016,0
+"Detroit, MI","ambient",499,50,"under-served",0.014,0
+"Detroit, MI","ambient",499,100,"under-served",0.014,0
+"Houston, TX","ambient",499,25,"under-served",0.004,0
+"Houston, TX","ambient",499,50,"under-served",0.004,0
+"Houston, TX","ambient",499,100,"under-served",0.004,0
+"San Diego, CA","ambient",499,25,"consistent",0.078,0.4
+"San Diego, CA","ambient",499,50,"consistent",0.07,0.4
+"San Diego, CA","ambient",499,100,"consistent",0.07,0.4
+"San Juan zona urbana, PR","ambient",499,25,"under-served",0.004,0
+"San Juan zona urbana, PR","ambient",499,50,"under-served",0.004,0
+"San Juan zona urbana, PR","ambient",499,100,"under-served",0.004,0

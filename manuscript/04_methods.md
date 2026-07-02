@@ -47,8 +47,10 @@ $n$ hospitals in expectation and the inhomogeneous K below is comparable to its
 Poisson value $\pi r^2$. Because $\lambda$ is **supplied by the population
 raster**, there is no kernel bandwidth to choose and no leave-one-out intensity
 to floor; the instability that arises when $\lambda$ is estimated from sparse
-points does not occur. A small positive floor is applied only to populated-by-a-
-hospital-but-zero-population cells, to keep $1/\lambda$ finite.
+points does not occur. A small positive floor (a fixed tiny fraction of the mean
+intensity) replaces any exactly-zero-population cell so that $1/\lambda$ stays
+finite; in practice these are cells a hospital occupies but the raster records as
+unpopulated.
 
 ### The estimator
 
@@ -65,6 +67,10 @@ with $e(\cdot,\cdot)$ the Ripley isotropic edge-correction weight. Under the
 null that hospitals follow population, $K_{\text{inhom}}(r) \approx \pi r^2$;
 values above indicate hospitals more clustered than population warrants
 (over-concentration), values below a more regular-than-population arrangement.
+The estimate is intensity-renormalized (spatstat's `renormalise = TRUE`), which
+rescales each curve to correct for the gap between the nominal and realized
+point counts, so that the observed pattern and the Poisson simulations (whose
+counts fluctuate around $n$) remain on a comparable scale.
 
 ### Bed-weighted concentration
 
@@ -131,14 +137,22 @@ separate, orthogonal coordinate.
 ## A diagnostic typology
 
 The three axes combine into a per-zone diagnosis that a single accessibility
-score cannot provide: low sufficiency with under-served coverage indicates a
-genuine **shortage**; adequate sufficiency with over-concentration and under-
-served coverage indicates **maldistribution** (enough supply, clumped, fringe
-stranded); adequate sufficiency with proportional concentration but under-served
-coverage indicates a **geographic gap** (remote population); high sufficiency
-with over-concentration and over-served coverage indicates **redundancy**. The
-national results are reported as the distribution of zones across this typology,
-which maps each failure mode to a different policy response.
+score cannot provide. The diagnosis is assigned by a fixed **priority rule**, in
+which sufficiency is called *low* when beds per 1,000 fall below the US average
+and *adequate* otherwise. A zone with no in-zone hospital is a **no-hospital**
+desert. Otherwise, in order: low sufficiency with under-served coverage is a
+genuine **shortage**; adequate sufficiency with over-concentration and
+under-served coverage is **maldistribution** (enough supply, clumped, fringe
+stranded); under-served coverage whose concentration is proportional (or, in a
+sparse zone, not evaluated) is a **geographic gap** (remote population); low
+sufficiency that is nonetheless reachable is a **capacity shortfall**;
+over-concentration with adequate sufficiency and coverage that is not
+under-served is **redundancy**; and the remainder are **well-matched**. Because
+the rule is a priority cascade, a low-sufficiency zone is reported as a capacity
+shortfall even when it is also over-concentrated, so the redundancy count is a
+lower bound on over-concentration (Section 5). The national results are reported
+as the distribution of zones across this typology, which maps each failure mode
+to a different policy response.
 
 ## Two-level inference
 

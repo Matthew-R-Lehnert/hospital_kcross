@@ -74,7 +74,15 @@ rej <- function(mat, x) {
   }
   mean(p < 0.05)
 }
+ti_fac <- rej(fac, r); ti_bed <- rej(bed, r); ti_cov <- rej(cov, cov_d)
 cat(sprintf("Type-I (zone=%s, M=%d, envelope=%d, target alpha=0.05):\n", zone, M, nsim_env))
-cat(sprintf("  facilities: %.3f\n", rej(fac, r)))
-cat(sprintf("  beds:       %.3f\n", rej(bed, r)))
-cat(sprintf("  coverage:   %.3f\n", rej(cov, cov_d)))
+cat(sprintf("  facilities: %.3f\n", ti_fac))
+cat(sprintf("  beds:       %.3f\n", ti_bed))
+cat(sprintf("  coverage:   %.3f\n", ti_cov))
+
+out <- data.frame(zone = zone, M = M, nsim_env = nsim_env, target_alpha = 0.05,
+                  layer = c("facilities", "beds", "coverage"),
+                  type_I = c(ti_fac, ti_bed, ti_cov))
+dir.create(file.path(root, "docs"), showWarnings = FALSE)
+utils::write.csv(out, file.path(root, "docs", "calibration.csv"), row.names = FALSE)
+cat(sprintf("-> wrote %s\n", file.path(root, "docs", "calibration.csv")))
