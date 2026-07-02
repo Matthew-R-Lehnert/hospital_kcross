@@ -66,7 +66,8 @@ captures.
   `CZContainment` measure flags the most exposed zones.
 - **Beds missing for some hospitals.** 5.2% of hospitals lack a bed count;
   sufficiency is therefore a lower bound, and bed-concentration verdicts in the
-  9 zones where most beds are unknown are imputation-driven and flagged.
+  9 zones where most hospitals lack a recorded bed count are imputation-driven
+  and flagged.
 
 ## Implications
 

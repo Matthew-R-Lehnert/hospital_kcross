@@ -17,7 +17,8 @@ DataLumos archive (ICPSR project 239108).
 - **Attributes used.** `BEDS` (staffed beds; the HIFLD `-999` "unknown" bed
   sentinel is masked to missing). Missing beds are uncommon nationally (415 of
   7,966 hospitals, 5.2%; total known beds 1,087,608, median 70), but are
-  concentrated enough that 9 zones have over half their beds unknown and are
+  concentrated enough that 9 zones have over half their hospitals lacking a
+  recorded bed count and are
   flagged where the bed result depends on imputation. The `TRAUMA` designation
   is recorded but the trauma-subset analysis is deferred to future work.
 - **Vintage.** A single snapshot dated approximately 2024. HIFLD is not a time

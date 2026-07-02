@@ -189,7 +189,7 @@ consistent/well-matched on every axis, so denominators grew (261->262 conc,
 
 **Manuscript complete** (~7,400 words, 0 em dashes): all 7 sections written with
 real results + full robustness (incl. the CT fix and ambient-endogeneity
-control), 31 verified citations, national typology maps (regenerated with CT) +
+control), 33 verified citations, national typology maps (regenerated with CT) +
 Dallas exemplar figures. NOTE: the 2026-07-01 edits (CT + endogeneity + production
 defects) are LOCAL to this working dir, which is not itself a git checkout; sync
 them to the private repo (github.com/Matthew-R-Lehnert/hospital_kcross).

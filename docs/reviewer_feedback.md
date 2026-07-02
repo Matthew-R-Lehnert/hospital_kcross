@@ -201,3 +201,49 @@ Recommendations still open (not correctness bugs):
   by a San Diego run); the cited `_sandiego`/`_amarillo` files are correct.
 - [ ] Delete legacy `run_all.R` (superseded by nextflow/`run_cz.R`) to fully
   retire the dead concentration path.
+
+## Round 3 -- whole-project crawl (2026-07-02)
+
+Six agents audited every remaining source file (orchestration, citations,
+figures/build/metadata, robustness-script LOGIC, CBSA output, and an INDEPENDENT
+re-derivation of the derived numbers from raw rasters/envelopes -- not trusting
+the CSVs), plus an exhaustive manuscript number sweep of all 7 sections.
+
+VERDICT: the manuscript is numerically clean. Every quantitative claim (~50:
+counts, family-wise p-values re-run from saved sims, medians, ratios, thresholds,
+zone names, full Table 1, effect sizes, WorldPop/CBSA/masked/robustness numbers)
+reconciles with the committed artifacts. Em-dash count 0; no pre-CT numbers
+(597/585/261) anywhere. Citations: verify_references.py OK=33 WARN=0 FAIL=0
+(all live); 33 cited = 33 defined, none dangling/unused/malformed. Orchestration
+(main.nf->run_cz.R->run_hk_all), collate (3416 runs, 0 drops), _selftest, and
+the 262/336 + 5.2%/9-zone + 939-CBSA denominators all check out. Robustness
+alternatives are genuine (real 2nd-order Thomas clustering; true placement-desert;
+exact fixed-N rpoint null), Type-I estimated separately and near nominal. The
+reversal baseline=1 identity is mathematically valid (LandScan/GPW share the
+identical 30-arc-sec grid). typology.py key-join clean, no new bug.
+
+Resolved during this crawl:
+- Effect-size IQR "roughly 1.5 to 11": NOT an error -- Q3 = 11.22 under exclusive
+  quantiles (type 6); the alternative linear convention gives 8.53. "roughly"
+  covers it. Left as-is.
+- San Diego coverage: genuinely under-served in the headline (per-zone p=0.028,
+  999 sims); the buffer re-run reads "consistent" only because it uses nsim=499
+  (lower power). Manuscript already calls it "borderline." No contradiction.
+
+Fixed this round:
+- [x] Precision: "9 zones ... over half their beds unknown" -> "... over half
+  their HOSPITALS lacking a recorded bed count" (the metric is
+  n_missing_beds/n_hospitals, not a share of bed capacity). 03_data, 05_results,
+  06_conclusion.
+- [x] CLAUDE.md "31 verified citations" -> 33.
+- [x] Typology maps regenerated; byte-identical to committed figures (content was
+  already current, mtime only).
+
+Minor items left for author discretion (non-blocking, non-manuscript):
+- [ ] `csl/vancouver.csl` missing though Makefile/CLAUDE.md advertise
+  STYLE=vancouver (re-run `make styles` to fetch). apa/chicago/ieee/nature/
+  elsevier-harvard present.
+- [ ] `docs/window_choice.md` memo promises an HSA/HRR robustness arm that was
+  never run (only CBSA exists); trim the memo or run it.
+- [ ] cosmetic: `*_all_meta.json` filename for the facilities layer; `docs/
+  coverage_power.csv` is a San Diego duplicate.

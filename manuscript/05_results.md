@@ -42,7 +42,7 @@ Augusta, Jacksonville, Saginaw, where a few large hospitals concentrate capacity
 even where building locations are not over-clustered). Measuring capacity
 therefore flags zones a facility-count analysis would miss. The bed weighting
 imputes the 5.2% of hospitals with an unknown bed count; the 9 zones where more
-than half of beds are unknown are flagged and excluded from bed claims.
+than half of hospitals lack a bed count are flagged and excluded from bed claims.
 
 ## Coverage
 
